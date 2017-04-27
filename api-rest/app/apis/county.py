@@ -9,8 +9,8 @@ class County(Base):
 	table_name = 'tbl_county'
 	mapping_method = {
 		'GET': 'get',
-		'PUT': 'create',
-		'POST': 'modify',
+		'PUT': 'modify',
+		'POST': 'create',
 		'DELETE': 'remove',
 		'PATCH': '',
 	}

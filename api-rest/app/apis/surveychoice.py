@@ -8,8 +8,8 @@ class SurveyChoice(Base):
 	table_name = 'tbl_survey_choice'
 	mapping_method = {
 		'GET': 'get',
-		'PUT': 'create',
-		'POST': 'modify',
+		'PUT': 'modify',
+		'POST': 'create',
 		'DELETE': 'remove',
 		'PATCH': '',
 	}

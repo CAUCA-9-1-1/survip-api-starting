@@ -235,3 +235,23 @@ ImportError: No module named 'causeweb.utilities'
 2017-04-27 14:01:09,523:cherrypy.error/error()@219:INFO:[27/Apr/2017:14:01:09] ENGINE Started monitor thread '_TimeoutMonitor'.
 2017-04-27 14:01:09,626:cherrypy.error/error()@219:INFO:[27/Apr/2017:14:01:09] ENGINE Serving on http://127.0.0.1
 2017-04-27 14:01:09,627:cherrypy.error/error()@219:INFO:[27/Apr/2017:14:01:09] ENGINE Bus STARTED
+2017-04-27 14:46:29,134:cherrypy.error/error()@219:INFO:[27/Apr/2017:14:46:29] ENGINE Restarting because /home/michael.jolin/Programming/survip-api/api-rest/causeweb/site/token.py changed.
+2017-04-27 14:46:29,134:cherrypy.error/error()@219:INFO:[27/Apr/2017:14:46:29] ENGINE Stopped thread 'Autoreloader'.
+2017-04-27 14:46:29,134:cherrypy.error/error()@219:INFO:[27/Apr/2017:14:46:29] ENGINE Bus STOPPING
+2017-04-27 14:46:29,135:cherrypy.error/error()@219:INFO:[27/Apr/2017:14:46:29] ENGINE HTTP Server cherrypy._cpwsgi_server.CPWSGIServer(('127.0.0.1', 80)) shut down
+2017-04-27 14:46:29,136:cherrypy.error/error()@219:INFO:[27/Apr/2017:14:46:29] ENGINE Stopped thread '_TimeoutMonitor'.
+2017-04-27 14:46:29,136:cherrypy.error/error()@219:INFO:[27/Apr/2017:14:46:29] ENGINE Bus STOPPED
+2017-04-27 14:46:29,136:cherrypy.error/error()@219:INFO:[27/Apr/2017:14:46:29] ENGINE Bus EXITING
+2017-04-27 14:46:29,136:cherrypy.error/error()@219:INFO:[27/Apr/2017:14:46:29] ENGINE Bus EXITED
+2017-04-27 14:46:29,138:cherrypy.error/error()@219:INFO:[27/Apr/2017:14:46:29] ENGINE Bus STOPPING
+2017-04-27 14:46:29,138:cherrypy.error/error()@219:INFO:[27/Apr/2017:14:46:29] ENGINE HTTP Server cherrypy._cpwsgi_server.CPWSGIServer(('127.0.0.1', 80)) already shut down
+2017-04-27 14:46:29,138:cherrypy.error/error()@219:INFO:[27/Apr/2017:14:46:29] ENGINE No thread running for None.
+2017-04-27 14:46:29,138:cherrypy.error/error()@219:INFO:[27/Apr/2017:14:46:29] ENGINE No thread running for None.
+2017-04-27 14:46:29,138:cherrypy.error/error()@219:INFO:[27/Apr/2017:14:46:29] ENGINE Bus STOPPED
+2017-04-27 14:46:29,139:cherrypy.error/error()@219:INFO:[27/Apr/2017:14:46:29] ENGINE Bus EXITING
+2017-04-27 14:46:29,139:cherrypy.error/error()@219:INFO:[27/Apr/2017:14:46:29] ENGINE Bus EXITED
+2017-04-27 14:50:34,223:cherrypy.error/error()@219:INFO:[27/Apr/2017:14:50:34] ENGINE Bus STARTING
+2017-04-27 14:50:34,224:cherrypy.error/error()@219:INFO:[27/Apr/2017:14:50:34] ENGINE Started monitor thread '_TimeoutMonitor'.
+2017-04-27 14:50:34,224:cherrypy.error/error()@219:INFO:[27/Apr/2017:14:50:34] ENGINE Started monitor thread 'Autoreloader'.
+2017-04-27 14:50:34,328:cherrypy.error/error()@219:INFO:[27/Apr/2017:14:50:34] ENGINE Serving on http://127.0.0.1
+2017-04-27 14:50:34,329:cherrypy.error/error()@219:INFO:[27/Apr/2017:14:50:34] ENGINE Bus STARTED

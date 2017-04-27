@@ -9,8 +9,8 @@ class State(Base):
 	table_name = 'tbl_state'
 	mapping_method = {
 		'GET': 'get',
-		'PUT': 'create',
-		'POST': 'modify',
+		'PUT': 'modify',
+		'POST': 'create',
 		'DELETE': 'remove',
 		'PATCH': '',
 	}

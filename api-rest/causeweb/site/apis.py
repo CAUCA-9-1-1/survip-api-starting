@@ -78,8 +78,8 @@ class Apis:
 			Session.log(self.class_name, self.method_name, {
 				'application': config.PACKAGE_NAME,
 				'platform': cherrypy.request.headers.get('User-Agent', ''),
-				'sessionID': cherrypy.session.id,
-				'userIP': Session.get('userIP'),
+				'sessionId': cherrypy.session.id,
+				'userIp': Session.get('userIp'),
 				'arguments': args
 			})
 

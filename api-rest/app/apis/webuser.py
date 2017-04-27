@@ -7,8 +7,8 @@ from .building import Building
 class Webuser(Base):
 	mapping_method = {
 		'GET': 'get',
-		'PUT': 'create',
-		'POST': 'modify',
+		'PUT': 'modify',
+		'POST': 'create',
 		'DELETE': 'remove',
 		'PATCH': '',
 	}

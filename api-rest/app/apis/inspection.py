@@ -10,8 +10,8 @@ class Inspection(Base):
 	table_name = 'tbl_inspection'
 	mapping_method = {
 		'GET': 'get',
-		'PUT': 'complete',
-		'POST': 'assign',
+		'PUT': 'assign',
+		'POST': 'complete',
 		'DELETE': 'remove',
 		'PATCH': '',
 	}

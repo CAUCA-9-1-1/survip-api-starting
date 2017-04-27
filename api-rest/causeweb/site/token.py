@@ -83,7 +83,7 @@ class Token:
 		return False
 
 	def active_session(self, token):
-		cherrypy.session['userIP'] = cherrypy.request.headers["Remote-Addr"]
+		cherrypy.session['userIp'] = cherrypy.request.headers["Remote-Addr"]
 
 		with DB() as db:
 			user = db.get_row("""SELECT tbl_access_token.id_webuser, tbl_webuser.username

@@ -11,8 +11,8 @@ class Building(Base):
 	table_name = 'tbl_building'
 	mapping_method = {
 		'GET': 'get',
-		'PUT': '',
-		'POST': 'modify',
+		'PUT': 'modify',
+		'POST': '',
 		'DELETE': '',
 		'PATCH': '',
 	}

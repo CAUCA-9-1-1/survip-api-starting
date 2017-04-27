@@ -9,8 +9,8 @@ class Region(Base):
 	table_name = 'tbl_region'
 	mapping_method = {
 		'GET': 'get',
-		'PUT': 'create',
-		'POST': 'modify',
+		'PUT': 'modify',
+		'POST': 'create',
 		'DELETE': 'remove',
 		'PATCH': '',
 	}

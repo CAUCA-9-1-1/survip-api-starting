@@ -8,8 +8,8 @@ class InterventionPlan(Base):
 	table_name = 'tbl_intervention_plan'
 	mapping_method = {
 		'GET': 'get',
-		'PUT': '',
-		'POST': 'modify',
+		'PUT': 'modify',
+		'POST': '',
 		'DELETE': '',
 		'PATCH': '',
 	}

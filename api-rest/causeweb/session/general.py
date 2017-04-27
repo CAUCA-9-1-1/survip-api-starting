@@ -37,7 +37,7 @@ class Session(Static):
 	def logout(self):
 		cherrypy.session['user'] = None
 		cherrypy.session['userID'] = None
-		cherrypy.session['userIP'] = None
+		cherrypy.session['userIp'] = None
 		cherrypy.session['ldap-user'] = None
 		cherrypy.session['ldap-password'] = None
 		cherrypy.session['access-token'] = None
@@ -45,8 +45,8 @@ class Session(Static):
 
 		Session.log('causeweb.session.general', 'logout', {
 			'application': config.PACKAGE_NAME,
-			'sessionID': cherrypy.session.id,
-			'userIP': cherrypy.session['userIP'] if 'userIP' in cherrypy.session else '',
+			'sessionId': cherrypy.session.id,
+			'userIp': cherrypy.session['userIp'] if 'userIp' in cherrypy.session else '',
 		})
 
 	def logon(self, user, password=''):
@@ -58,12 +58,12 @@ class Session(Static):
 		"""
 		self.logout()
 
-		cherrypy.session['userIP'] = cherrypy.request.headers["Remote-Addr"]
+		cherrypy.session['userIp'] = cherrypy.request.headers["Remote-Addr"]
 		arguments = {
 			'application': config.PACKAGE_NAME,
 			'platform': cherrypy.request.headers.get('User-Agent', 'Unknown'),
-			'sessionID': cherrypy.session.id,
-			'userIP': cherrypy.session['userIP'],
+			'sessionId': cherrypy.session.id,
+			'userIp': cherrypy.session['userIp'],
 		}
 
 		if config.WEBSERVICE is not None:

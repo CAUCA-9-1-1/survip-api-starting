@@ -7,8 +7,8 @@ class FireSafetyDepartmentCityServing(Base):
 	table_name = 'tbl_fire_safety_department_city_serving'
 	mapping_method = {
 		'GET': 'get',
-		'PUT': 'create',
-		'POST': 'modify',
+		'PUT': 'modify',
+		'POST': 'create',
 		'DELETE': 'remove',
 		'PATCH': '',
 	}

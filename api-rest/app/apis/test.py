@@ -19,8 +19,8 @@ class Test(Base):
 class Test(Base):
 	mapping_method = {
 		'GET': 'get',
-		'PUT': '',
-		'POST': 'modify',
+		'PUT': 'modify',
+		'POST': '',
 		'DELETE': '',
 		'PATCH': '',
 	}

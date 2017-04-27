@@ -7,8 +7,8 @@ class WebuserFireSafetyDepartment(Base):
 	table_name = 'tbl_webuser_fire_safety_department'
 	mapping_method = {
 		'GET': 'get',
-		'PUT': 'create',
-		'POST': 'modify',
+		'PUT': 'modify',
+		'POST': 'create',
 		'DELETE': 'remove',
 		'PATCH': '',
 	}

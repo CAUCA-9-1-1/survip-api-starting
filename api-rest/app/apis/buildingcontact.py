@@ -5,8 +5,8 @@ from causeweb.apis.base import Base
 class BuildingContact(Base):
 	mapping_method = {
 		'GET': 'get',
-		'PUT': 'assign',
-		'POST': 'modify',
+		'PUT': 'modify',
+		'POST': 'assign',
 		'DELETE': 'remove',
 		'PATCH': '',
 	}

@@ -7,8 +7,8 @@ class Auth(Token, Base):
 	expires_in_minutes = 120
 	mapping_method = {
 		'GET': 'token',
-		'PUT': 'register',
-		'POST': 'logon',
+		'PUT': 'logon',
+		'POST': 'register',
 		'DELETE': '',
 		'PATCH': '',
 	}

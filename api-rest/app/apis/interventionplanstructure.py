@@ -6,8 +6,8 @@ from .constructiontype import ConstructionType
 class InterventionPlanStructure(Base):
 	mapping_method = {
 		'GET': 'get',
-		'PUT': '',
-		'POST': 'modify',
+		'PUT': 'modify',
+		'POST': '',
 		'DELETE': '',
 		'PATCH': '',
 	}

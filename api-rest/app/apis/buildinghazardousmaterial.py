@@ -5,8 +5,8 @@ from causeweb.apis.base import Base
 class BuildingHazardousMaterial(Base):
 	mapping_method = {
 		'GET': 'get',
-		'PUT': 'assign',
-		'POST': 'modify',
+		'PUT': 'modify',
+		'POST': 'assign',
 		'DELETE': '',
 		'PATCH': '',
 	}
