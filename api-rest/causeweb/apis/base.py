@@ -34,7 +34,7 @@ class Base():
 				db.execute("""INSERT INTO tbl_apis_action(
 								id_apis_update, action_table, action_table_id, id_webuser
 							  ) VALUES(uuid_generate_v4(), %s, %s, %s);""", (
-					self.table_name, args[0][table_id], Session.get('userID')
+					self.table_name, args[0][table_id], Session.get('userId')
 				))
 
 	def options(self):

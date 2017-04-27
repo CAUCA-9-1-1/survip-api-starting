@@ -23,7 +23,7 @@ class WithLDAP(Static):
 
 	def config_session(self, user):
 		cherrypy.session['user'] = user;
-		cherrypy.session['userID'] = 'ldap:%s' % cherrypy.session['user']['username']
+		cherrypy.session['userId'] = 'ldap:%s' % cherrypy.session['user']['username']
 
 	def change_password(self, password):
 		pass

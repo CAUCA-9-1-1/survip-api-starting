@@ -34,7 +34,7 @@ class Building(Base):
 									LEFT JOIN tbl_webuser_fire_safety_department ON tbl_webuser_fire_safety_department.id_fire_safety_department = tbl_fire_safety_department_city_serving.id_fire_safety_department
 									WHERE
 										tbl_building.is_active=True AND
-										tbl_webuser_fire_safety_department.id_webuser = %s;""", (Session.get('userID'),))
+										tbl_webuser_fire_safety_department.id_webuser = %s;""", (Session.get('userId'),))
 			elif id_building is None:
 				if self.has_permission('RightAdmin') is False:
 					return self.no_access()

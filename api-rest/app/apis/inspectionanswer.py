@@ -54,7 +54,7 @@ class InspectionAnswer(Base):
 			db.execute("""INSERT INTO
 						tbl_inspection_answer(id_inspection_answer, id_inspection, id_webuser, answered_on, has_refuse, reason_for_refusal, is_absent, is_seasonal, is_vacant)
 						VALUES(%s, %s, %s, NOW(), %s, %s, %s, %s, %s);""", (
-				id_inspection_answer, args['id_inspection'], Session.get('userID'), args['has_refuse'], args['reason_for_refusal'], args['is_absent'], args['is_seasonal'], args['is_vacant']
+				id_inspection_answer, args['id_inspection'], Session.get('userId'), args['has_refuse'], args['reason_for_refusal'], args['is_absent'], args['is_seasonal'], args['is_vacant']
 			))
 
 		if args['has_refuse'] is False and args['is_absent'] is False:

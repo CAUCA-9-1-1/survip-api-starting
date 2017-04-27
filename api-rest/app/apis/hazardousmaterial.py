@@ -19,7 +19,7 @@ class HazardousMaterial(Base):
 		"""
 		with DB() as db:
 			if id_hazardous_material is None:
-				data = db.get_all("""SELECT * FROM tbl_hazardous_material WHERE id_hazardous_material=%s AND is_active=%s""", (Session.get('userID'), True))
+				data = db.get_all("""SELECT * FROM tbl_hazardous_material WHERE id_hazardous_material=%s AND is_active=%s""", (Session.get('userId'), True))
 			else:
 				data = db.get_all("""SELECT * FROM tbl_hazardous_material
 	                                WHERE id_hazardous_material=%s;""", (id_hazardous_material))

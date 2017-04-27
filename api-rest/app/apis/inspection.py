@@ -26,7 +26,7 @@ class Inspection(Base):
 				data = db.get_all("SELECT * FROM tbl_inspection WHERE is_active=%s AND is_completed=%s", (True, False))
 			elif id_city is None:
 				data = db.get_all("SELECT * FROM tbl_inspection WHERE id_webuser=%s AND is_active=%s AND is_completed=%s", (
-					Session.get('userID'), True, False
+					Session.get('userId'), True, False
 				))
 			elif self.has_permission('RightTPI') is True:
 				data = db.get_all("""SELECT * FROM tbl_inspection i
@@ -40,7 +40,7 @@ class Inspection(Base):
 	                                LEFT JOIN tbl_building b ON b.id_building = i.id_building
 	                                LEFT JOIN tbl_street s ON s.id_street = b.id_street
 	                                WHERE i.id_webuser=%s AND i.is_active=%s AND i.is_completed=%s AND s.id_city=%s;""", (
-					Session.get('userID'), True, False, id_city
+					Session.get('userId'), True, False, id_city
 				))
 
 		for key, row in enumerate(data):
@@ -60,7 +60,7 @@ class Inspection(Base):
 		"""
 		with DB() as db:
 			db.execute("UPDATE tbl_inspection SET id_webuser=%s, is_completed=%s WHERE id_inspection=%s;", (
-				Session.get('userID'), True, args['id_inspection']
+				Session.get('userId'), True, args['id_inspection']
 			))
 
 		return {
@@ -83,7 +83,7 @@ class Inspection(Base):
 		with DB() as db:
 			db.execute("""INSERT INTO tbl_inspection(id_inspection, id_survey, id_building, id_webuser, created_by, is_active)
   						VALUES (%s, %s, %s, %s, %s, %s);""", (
-				id_inspection, args['id_survey'], args['id_building'], args['id_webuser'], Session.get('userID'), True
+				id_inspection, args['id_survey'], args['id_building'], args['id_webuser'], Session.get('userId'), True
 			))
 
 		return {

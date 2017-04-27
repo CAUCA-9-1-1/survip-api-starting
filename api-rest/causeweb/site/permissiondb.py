@@ -6,7 +6,7 @@ from ..storage.db import DB
 
 class PermissionDB:
 	def get(self, feature_name=None):
-		id_permission_object = self.get_id_permission_object('webuser', Session.get('userID'))
+		id_permission_object = self.get_id_permission_object('webuser', Session.get('userId'))
 		id_permission_object_parent = self.get_id_permission_object_parent(id_permission_object)
 
 		with DB() as db:

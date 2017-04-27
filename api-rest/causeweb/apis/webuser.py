@@ -71,7 +71,7 @@ class Webuser(Base):
 			db.execute("UPDATE tbl_webuser SET password=%s WHERE id_webuser=%s;", (self.encrypt_password(args['password']), args['id_webuser']))
 			db.execute(
 			    "UPDATE tbl_webuser_attributes SET attribute_value=%s WHERE id_webuser=%s and attribute_name=%s;",
-			    ('0', Session.get('userID'), 'reset_password')
+			    ('0', Session.get('userId'), 'reset_password')
 			)
 
 	def create(self, args):

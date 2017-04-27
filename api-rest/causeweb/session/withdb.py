@@ -26,11 +26,11 @@ class WithDB(Static):
 		})
 
 		cherrypy.session['user'] = user
-		cherrypy.session['userID'] = user_id
+		cherrypy.session['userId'] = user_id
 
 	def change_password(self, password):
 		if 'general' in config.DATABASE:
 			Webuser().change_password({
-				'id_webuser': Static.get('userID'),
+				'id_webuser': Static.get('userId'),
 				'password': password,
 			})

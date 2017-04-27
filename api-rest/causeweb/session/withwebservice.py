@@ -31,13 +31,13 @@ class WithWebService(Static):
 		cherrypy.session['access-token'] = data['access_token']
 		cherrypy.session['refresh-token'] = data['refresh_token'] if 'refresh_token' in data else ''
 		cherrypy.session['user'] = data['user'] if 'user' in data else {}
-		cherrypy.session['userID'] = data['user_id'] if 'user_id' in data else ''
+		cherrypy.session['userId'] = data['user_id'] if 'user_id' in data else ''
 
 	def change_password(self, password):
 		version = 'DEV' if config.PACKAGE_VERSION == '__package_version__' else config.PACKAGE_VERSION
 		user = cherrypy.session['user']
 		user.update({
-			'id_webuser': cherrypy.session['userID'],
+			'id_webuser': cherrypy.session['userId'],
 			'password': password,
 			'is_active': True,
 			'reset_password': '0'

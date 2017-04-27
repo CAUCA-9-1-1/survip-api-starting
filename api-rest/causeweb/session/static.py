@@ -22,14 +22,14 @@ class Static:
 
 	@staticmethod
 	def log(object=None, name=None, param=None):
-		if 'userID' in cherrypy.session and cherrypy.session['userID'] is not None:
+		if 'userId' in cherrypy.session and cherrypy.session['userId'] is not None:
 			param = param if isinstance(param, str) or param is None else json.dumps(param, cls=JsonEncoder)
 
 			if config.WEBSERVICE is not None:
 				version = 'DEV' if config.PACKAGE_VERSION == '__package_version__' else config.PACKAGE_VERSION
 				query = Request("http://%s/useraction/" % config.WEBSERVICE['host'], 'PUT')
 				query.send({
-					'id_webuser': cherrypy.session['userID'],
+					'id_webuser': cherrypy.session['userId'],
 					'object': object,
 					'name': name,
 					'param': param,
@@ -42,5 +42,5 @@ class Static:
 					db.execute("""INSERT INTO tbl_webuser_action(
 								id_webuser_action, id_webuser, action_time, action_object, action_name, action_param
 								) VALUES (uuid_generate_v4(), %s, NOW(), %s, %s, %s);""", (
-						cherrypy.session['userID'], object, name, param
+						cherrypy.session['userId'], object, name, param
 					))

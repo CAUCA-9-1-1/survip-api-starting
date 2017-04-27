@@ -1,3 +1,4 @@
+import re
 import json
 import logging
 import cherrypy
@@ -73,6 +74,8 @@ class Apis:
 			return_data = self.exec_method(name, args)
 
 			if isinstance(return_data, dict):
+				#for key in return_data:
+				#	return_data[key.upper()] = return_data.pop(key)
 				data.update(return_data)
 
 			Session.log(self.class_name, self.method_name, {
@@ -95,9 +98,9 @@ class Apis:
 			}, cls=JsonEncoder)
 
 	def get_argument(self, args, kwargs):
-		body = cherrypy.request.body.readlines()
-
 		try:
+			body = cherrypy.request.body.readlines()
+
 			if body[0] is not '':
 				return (json.loads(body[0].decode('utf-8')),)
 		except:

@@ -18,15 +18,15 @@ class Token:
 			with DB() as db:
 				db.execute("""INSERT INTO tbl_access_token(id_access_token, id_webuser, access_token, refresh_token, created_on, expires_in)
 							VALUES(%s, %s, %s, %s, NOW(), %s);""", (
-					id_access_token, WithDB.get('userID'), access_token, refresh_token, (self.expires_in_minutes * 60)
+					id_access_token, WithDB.get('userId'), access_token, refresh_token, (self.expires_in_minutes * 60)
 				))
 
 			return {
-				'authorization_type': 'Token',
-				'expires_in': (self.expires_in_minutes * 60),
-				'access_token': access_token,
-				'refresh_token': refresh_token,
-				'user_id': WithDB.get('userID'),
+				'authorizationType': 'Token',
+				'expiresIn': (self.expires_in_minutes * 60),
+				'accessToken': access_token,
+				'refreshToken': refresh_token,
+				'userId': WithDB.get('userId'),
 				'user': WithDB.get('user')
 			}
 		else:

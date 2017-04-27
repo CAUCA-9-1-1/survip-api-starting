@@ -36,7 +36,7 @@ class Session(Static):
 
 	def logout(self):
 		cherrypy.session['user'] = None
-		cherrypy.session['userID'] = None
+		cherrypy.session['userId'] = None
 		cherrypy.session['userIp'] = None
 		cherrypy.session['ldap-user'] = None
 		cherrypy.session['ldap-password'] = None
