@@ -74,9 +74,7 @@ class Apis:
 			return_data = self.exec_method(name, args)
 
 			if isinstance(return_data, dict):
-				#for key in return_data:
-				#	return_data[key.upper()] = return_data.pop(key)
-				data.update(return_data)
+				data.update(self.convert_to_camel_case(return_data))
 
 			Session.log(self.class_name, self.method_name, {
 				'application': config.PACKAGE_NAME,
@@ -117,6 +115,23 @@ class Apis:
 				return (kwargs,)
 
 		return ()
+
+	def convert_to_camel_case(self, data):
+		for old_key in data:
+			if '_' in old_key:
+				word = old_key.split('_')
+				key = word[0] + "".join(x.title() for x in word[1:])
+				data[key] = data.pop(old_key)
+			else:
+				key = old_key
+
+			if isinstance(data[key], list):
+				for pos, val in enumerate(data[key]):
+					data[key][pos] = self.convert_to_camel_case(val)
+			elif isinstance(data[key], dict):
+				data[key] = self.convert_to_camel_case(data[key])
+
+		return data
 
 	def convert_argument(self, val):
 		if val == '' or val == 'null':
