@@ -69,7 +69,6 @@ create table tbl_lane
 	id_language_content_name uuid,
 	id_city uuid,
 	direction varchar(10),
-	"___idsecteurresidentiel" integer,
 	lane_prefix varchar(30),
 	broke_up_generic_code varchar(2),
 	broke_up_lane_code varchar,
@@ -101,37 +100,19 @@ create table tbl_building
 	id_lane uuid,
 	postal_code varchar(6),
 	id_utilisation_code uuid,
-	"___x_rol" varchar(25),
-	"___y_rol" varchar(25),
-	"___x" double precision,
-	"___y" double precision,
-	"___x_modif" varchar(25),
-	"___y_modif" varchar(25),
 	id_sector uuid,
-	"___municipalitebatiment" varchar(50),
 	id_mutual_aid_sector uuid,
-	"___nomentraide" varchar(100),
 	id_jaws_extrication_sector uuid,
 	id_sled_sector uuid,
 	suite integer,
 	id_risk_level uuid,
 	source varchar(25),
-	"___daterole" varchar(20),
-	"___codemunsecteurincendie" varchar(15),
-	"___codemunmachoire" varchar(15),
-	"___codemunsauvetage" varchar(15),
-	"___codemunentraide" varchar(15),
-	"___datum" varchar(2),
-	"___secteurhydro" boolean,
 	is_parent boolean,
 	utilisation_description varchar(255),
-	"___reperagemaj" varchar(50),
 	show_in_resources boolean,
 	id_resource_category varchar(50),
-	"___infosuppbottin" text,
 	id_association_building varchar(50),
 	id_association_type varchar(50),
-	"___nomsubdivision" varchar(100),
 	id_unit_type varchar(50),
 	matricule varchar(18),
 	coordinates geography,
@@ -146,7 +127,6 @@ create index idx_tbl_building_coordinates
 	on tbl_building (coordinates)
 ;
 
-
 create table tbl_utilisation_code
 (
 	id_utilisation_code uuid not null
@@ -155,7 +135,6 @@ create table tbl_utilisation_code
 	cubf varchar(5),
 	scian varchar(10),
 	id_language_content_description uuid,
-	"___niveau" integer,
 	is_active boolean
 )
 ;
@@ -242,35 +221,16 @@ create table tbl_city
 )
 ;
 
-create table spatial_ref_sys
-(
-	srid integer not null
-		constraint spatial_ref_sys_pkey
-			primary key
-		constraint spatial_ref_sys_srid_check
-			check ((srid > 0) AND (srid <= 998999)),
-	auth_name varchar(256),
-	auth_srid integer,
-	srtext varchar(2048),
-	proj4text varchar(2048)
-)
-;
-
 create table tbl_building_hazardous_material
 (
 	id_building uuid not null,
 	id_hazardous_material uuid not null,
-	"___idbatmdpnappi" varchar(50),
-	"___etat" varchar(50),
 	quantity integer,
 	container varchar(100),
 	capacity_container varchar(7),
 	id_unit_of_measure uuid,
-	"___valeurlitres" double precision,
 	place varchar(150),
 	floor varchar(4),
-	"___partie" varchar(2),
-	"___mur" varchar(2),
 	id_image uuid,
 	gas_inlet varchar(100),
 	security_perimeter text,
@@ -343,7 +303,6 @@ create table tbl_building_person_requiring_assistance
 )
 ;
 
-
 create table tbl_intersection
 (
 	id_intersection uuid not null
@@ -357,10 +316,7 @@ create table tbl_intersection
 	id_mutual_aid_sector uuid,
 	id_rescue_sector uuid,
 	id_fire_sub_sector uuid,
-	x_coordinate varchar(20),
-	y_coordinate varchar(20),
 	coordinates geometry,
-	"___info" text,
 	create_on timestamp default now(),
 	is_active boolean
 )
@@ -382,7 +338,6 @@ create table tbl_intervention_plan
 	id_firestation_course1 uuid,
 	id_firestation_course2 uuid,
 	id_firestation_course3 uuid,
-	"___idsecteurelectoral" uuid,
 	other_information text,
 	created_on timestamp default now(),
 	revised_on timestamp,
@@ -397,7 +352,6 @@ create table tbl_firestation
 		constraint tbl_firestation_pkey
 			primary key,
 	id_fire_safety_department uuid,
-	"___idmunicipalitessi" uuid,
 	station_name varchar(30),
 	phone_number varchar(10),
 	fax_number varchar(10),
@@ -417,7 +371,6 @@ create table tbl_fire_hydrant
 	id_lane uuid,
 	id_intersection uuid,
 	id_fire_hydrant_type uuid,
-	"___activeborne" boolean,
 	coordinates geography,
 	altitude double precision,
 	fire_hydrant_number varchar(10),
@@ -432,12 +385,10 @@ create table tbl_fire_hydrant
 	color varchar(50),
 	comments text,
 	physical_position varchar(50),
-	"___modaliteacces" text,
 	created_on timestamp default now(),
 	is_active boolean
 )
 ;
-
 
 create table tbl_fire_hydrant_connection
 (
@@ -542,7 +493,6 @@ create table tbl_intervention_plan_structure
 	sprinkler_floor varchar(50),
 	sprinkler_wall varchar(50),
 	sprinkler_sector varchar(50),
-	"___gicleurpartiel" varchar(200),
 	id_construction_type uuid,
 	id_construction_type_for_joits uuid,
 	created_on timestamp default now(),
@@ -683,20 +633,11 @@ create table tbl_fire_safety_department
 		constraint tbl_fire_safety_department_pkey
 			primary key,
 	id_language_content_name uuid,
-	use_holiday boolean,
 	id_county uuid,
-	radio_alert_procedure varchar(100),
-	phone_pager_procedure varchar(100),
-	use_link_button_for_roip boolean,
-	channel_roip varchar(10),
 	language varchar(5),
 	created_on timestamp default now(),
 	is_active boolean
 )
-;
-
-create unique index tbl_fire_safety_department_id_fire_safety_department_uindex
-	on tbl_fire_safety_department (id_fire_safety_department)
 ;
 
 create table tbl_fire_safety_department_city_serving
@@ -707,8 +648,6 @@ create table tbl_fire_safety_department_city_serving
 	id_fire_safety_department uuid not null,
 	id_city uuid not null,
 	id_sector_type uuid,
-	all_sectors boolean default true not null,
-	all_codes boolean default true not null,
 	created_on timestamp default now(),
 	is_active boolean default true not null
 )
@@ -722,10 +661,7 @@ create table tbl_hazardous_material
 	material_number varchar(50),
 	material_name varchar(150),
 	guide_number varchar(255),
-	"___nomsansvirgule" varchar(150),
-	"___tih" boolean,
 	reaction_to_water boolean,
-	line_excel integer,
 	created_on timestamp default now(),
 	is_active boolean
 )
@@ -806,8 +742,6 @@ create table tbl_unit_of_measure
 			primary key,
 	id_language_content_name uuid,
 	abbreviation varchar(5),
-	"___codemesureexcel" integer,
-	"___multiplierpar" double precision,
 	created_on timestamp default now(),
 	is_active boolean
 )
@@ -852,5 +786,4 @@ create table tbl_apis_action
 create unique index tbl_field_update_id_field_update_uindex
 	on tbl_apis_action (id_apis_update)
 ;
-
 
