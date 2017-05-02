@@ -20,17 +20,18 @@ class InterventionPlan(Base):
 		:param id_intervention_plan: UUID
 		"""
 		with DB() as db:
-			data = db.get_row("""SELECT * FROM tbl_intervention_plan
+			data = db.get_all("""SELECT * FROM tbl_intervention_plan
                                 WHERE id_intervention_plan=%s;""", (id_intervention_plan,))
 
-		data['city'] = City().get(data['id_city'])['data']
-		data['firestation_course1'] = Firestation().get(data['id_firestation_course1'])['data']
-		data['firestation_course2'] = Firestation().get(data['id_firestation_course2'])['data']
-		data['firestation_course3'] = Firestation().get(data['id_firestation_course3'])['data']
+		#for key, row in enumerate(data):
+			#data[key]['city'] = City().get(row['id_city'])
+			#data[key]['firestation_course1'] = Firestation().get(row['id_firestation_course1'])['data']
+			#data[key]['firestation_course2'] = Firestation().get(row['id_firestation_course2'])['data']
+			#data[key]['firestation_course3'] = Firestation().get(row['id_firestation_course3'])['data']
 
 		return {
 			'data': data
-		}
+		} if id_intervention_plan is None else data[0]
 
 	def modify(self, args):
 		""" Modify all information for intervention plan
