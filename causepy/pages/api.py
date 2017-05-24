@@ -1,29 +1,35 @@
-import re
 import json
 import logging
 import cherrypy
-import importlib
-from causeweb import config
-from causeweb.site.token import Token
-from causeweb.html.json import JsonEncoder
-from causeweb.session.general import Session
+import importlib.util
+from sqlalchemy.ext.declarative import DeclarativeMeta
+from ..auth.token import Token
+from ..json import JsonEncoder
+from ..config import setup as config
 
 
-class Apis:
+class Api:
 	class_name = ''
 	method_name = ''
 
+	@cherrypy.expose
+	def index(self):
+		return json.dumps({
+			'name': config.PACKAGE_NAME,
+			'version': config.PACKAGE_VERSION
+		})
+
 	def load_class(self, name):
 		try:
-			self.class_name = "app.apis.%s" % name.lower()
-			class_load = importlib.import_module(self.class_name, 'app.apis')
+			self.class_name = "apirest.app.urls.%s" % name.lower()
+			class_load = importlib.import_module(self.class_name, 'apirest.app.urls')
 			class_object = getattr(class_load, name)
 
 			return class_object
 		except:
 			try:
-				self.class_name = "causeweb.apis.%s" % name.lower()
-				class_load = importlib.import_module(self.class_name, 'causeweb.apis')
+				self.class_name = "causepy.urls.%s" % name.lower()
+				class_load = importlib.import_module(self.class_name, 'causepy.urls')
 				class_object = getattr(class_load, name)
 
 				return class_object
@@ -51,7 +57,6 @@ class Apis:
 			return api_method(class_object(), *args)
 		else:
 			return {
-				'name': self.name,
 				'success': False,
 				'login': False,
 				'error': "Login failed",
@@ -60,28 +65,23 @@ class Apis:
 	def call_method(self, name, args):
 		if cherrypy.request.method == 'OPTIONS':
 			return json.dumps({
-				'name': self.name,
 				'success': True,
 				'error': '',
 			})
 
 		try:
 			data = {
-				'name': self.name,
 				'success': True,
 				'error': '',
+				'data': None
 			}
 			return_data = self.exec_method(name, args)
 
-			if isinstance(return_data, dict):
-				data.update(self.convert_to_camel_case(return_data))
+			if isinstance(return_data, dict) and config.FORCE_CAMELCASE:
+				return_data = self.convert_to_camel_case(return_data)
 
-			Session.log(self.class_name, self.method_name, {
-				'application': config.PACKAGE_NAME,
-				'platform': cherrypy.request.headers.get('User-Agent', ''),
-				'sessionId': cherrypy.session.id,
-				'userIp': Session.get('userIp'),
-				'arguments': args
+			data.update({
+				'data': return_data
 			})
 
 			return json.dumps(data, cls=JsonEncoder)
@@ -89,7 +89,6 @@ class Apis:
 			logging.exception("Error from api class")
 
 			return json.dumps({
-				'name': self.name,
 				'success': False,
 				'error': e,
 				'data': ''
@@ -117,6 +116,9 @@ class Apis:
 		return ()
 
 	def convert_to_camel_case(self, data):
+		if isinstance(data, object) and isinstance(data.__class__, DeclarativeMeta):
+			data = JsonEncoder.sqlalchemy_to_dict(data)
+
 		for old_key in data:
 			if '_' in old_key:
 				word = old_key.split('_')
