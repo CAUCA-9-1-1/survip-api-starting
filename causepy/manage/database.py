@@ -37,6 +37,11 @@ class Database:
 
 		return query
 
+	def add(self, item):
+		self.db.add(item)
+
+		return True
+
 	def commit(self):
 		self.db.commit()
 

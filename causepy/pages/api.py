@@ -1,10 +1,12 @@
+import importlib.util
 import json
 import logging
+
 import cherrypy
-import importlib.util
 from sqlalchemy.ext.declarative import DeclarativeMeta
+
+from causepy.manage.json import JsonEncoder
 from ..auth.token import Token
-from ..json import JsonEncoder
 from ..config import setup as config
 
 
@@ -80,9 +82,7 @@ class Api:
 			if isinstance(return_data, dict) and config.FORCE_CAMELCASE:
 				return_data = self.convert_to_camel_case(return_data)
 
-			data.update({
-				'data': return_data
-			})
+			data.update(return_data)
 
 			return json.dumps(data, cls=JsonEncoder)
 		except Exception as e:
@@ -91,7 +91,7 @@ class Api:
 			return json.dumps({
 				'success': False,
 				'error': e,
-				'data': ''
+				'data': None
 			}, cls=JsonEncoder)
 
 	def get_argument(self, args, kwargs):

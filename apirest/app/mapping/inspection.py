@@ -2,9 +2,8 @@ from datetime import datetime
 from sqlalchemy import Column, Boolean, DateTime, String, ForeignKey
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.ext.hybrid import hybrid_property
-from sqlalchemy.orm import relationship
+from causepy.manage.database import Database
 from .building import Building
-
 
 Base = declarative_base()
 
@@ -22,8 +21,6 @@ class Inspection(Base):
 	is_active = Column(Boolean, default=True)
 	is_completed = Column(Boolean, default=False)
 
-	building = relationship(Building, lazy='joined')
-
 	def __init__(self, id_inspection, id_survey, id_building, id_webuser):
 		self.id_inspection = id_inspection
 		self.id_survey = id_survey
@@ -32,4 +29,15 @@ class Inspection(Base):
 
 	@hybrid_property
 	def address(self):
-		return self.building.address
+		with Database() as db:
+			return db.query(Building).get(self.id_building).address
+
+	@hybrid_property
+	def id_risk_level(self):
+		with Database() as db:
+			return db.query(Building).get(self.id_building).id_risk_level
+
+	@hybrid_property
+	def matricule(self):
+		with Database() as db:
+			return db.query(Building).get(self.id_building).matricule

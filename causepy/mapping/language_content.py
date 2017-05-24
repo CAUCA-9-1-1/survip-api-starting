@@ -10,3 +10,8 @@ class LanguageContent(Base):
 	id_language_content = Column(String(36), primary_key=True)
 	language_code = Column(String(5), primary_key=True)
 	description = Column(String(250))
+
+	def __init__(self, id_language_content, language_code, description):
+		self.id_language_content = id_language_content
+		self.language_code = language_code
+		self.description = description

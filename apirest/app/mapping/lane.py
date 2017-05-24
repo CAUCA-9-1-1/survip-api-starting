@@ -1,7 +1,7 @@
 from sqlalchemy import Column, Boolean, DateTime, String, ForeignKey
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship
-from .language_content import LanguageContent
+from causepy.mapping.language_content import LanguageContent
 
 
 Base = declarative_base()

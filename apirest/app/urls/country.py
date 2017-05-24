@@ -1,4 +1,4 @@
-from causepy.database import Database
+from causepy.manage.database import Database
 from causepy.urls.base import Base
 from ..mapping.country import Country as Table
 
@@ -27,7 +27,9 @@ class Country(Base):
 			else:
 				data = db.query(Table).get(id_country)
 
-		return data
+		return {
+			'data': data
+		}
 
 	def create(self, args):
 		""" Create a new country

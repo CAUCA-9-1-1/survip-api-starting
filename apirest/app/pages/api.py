@@ -1,9 +1,10 @@
 import cherrypy
+from apirest.app.classes.url_for_building import UrlForBuilding
+from apirest.app.classes.url_for_address import UrlForAddress
 from causepy.pages.api import Api as BaseApi
-from apirest.classes.url_for_address import UrlForAddress
 
 
-class Api(UrlForAddress, BaseApi):
+class Api(UrlForAddress, UrlForBuilding, BaseApi):
 	@cherrypy.expose
 	def auth(self, *args, **kwargs):
 		return self.call_method('Auth', self.get_argument(args, kwargs))
@@ -67,22 +68,6 @@ class Api(UrlForAddress, BaseApi):
 	@cherrypy.expose
 	def search(self, *args, **kwargs):
 		return self.call_method('Search', self.get_argument(args, kwargs))
-
-	@cherrypy.expose
-	def building(self, *args, **kwargs):
-		return self.call_method('Building', self.get_argument(args, kwargs))
-
-	@cherrypy.expose
-	def buildingcontact(self, *args, **kwargs):
-		return self.call_method('BuildingContact', self.get_argument(args, kwargs))
-
-	@cherrypy.expose
-	def buildingpersonrequiringassistance(self, *args, **kwargs):
-		return self.call_method('BuildingPersonRequiringAssistance', self.get_argument(args, kwargs))
-
-	@cherrypy.expose
-	def buildinghazardousmaterial(self, *args, **kwargs):
-		return self.call_method('BuildingHazardousMaterial', self.get_argument(args, kwargs))
 
 	@cherrypy.expose
 	def interventionplan(self, *args, **kwargs):

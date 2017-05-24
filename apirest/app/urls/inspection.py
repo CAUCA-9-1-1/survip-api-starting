@@ -1,8 +1,8 @@
 import uuid
-from causepy.database import Database
+
+from causepy.manage.database import Database
 from causepy.urls.base import Base
 from ..mapping.inspection import Inspection as Table
-
 
 
 class Inspection(Base):
@@ -28,7 +28,9 @@ class Inspection(Base):
 			else:
 				data = db.query(Table).get(id_inspection)
 
-		return data
+		return {
+			'data': data
+		}
 
 	def complete(self, args):
 		""" Mark inspection as done

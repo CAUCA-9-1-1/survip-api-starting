@@ -1,8 +1,11 @@
+import json
 from sqlalchemy import Column, Boolean, DateTime, Float, Numeric, String, Text, ForeignKey
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.ext.hybrid import hybrid_property
 from sqlalchemy.orm import relationship
-from .language_content import LanguageContent
+from geoalchemy2 import Geometry, functions
+from causepy.manage.database import Database
+from causepy.mapping.language_content import LanguageContent
 from .lane import Lane
 
 
@@ -27,7 +30,7 @@ class Building(Base):
 	vacant_land = Column(Boolean)
 	year_of_construction = Column(Numeric)
 	building_value = Column(Float)
-	id_lane = Column(String(36), ForeignKey(Lane.id_lane), nullable=False)
+	id_lane = Column(String(36), nullable=False)
 	postal_code = Column(String(6))
 	id_utilisation_code = Column(String(36))
 	id_sector = Column(String(36))
@@ -43,18 +46,31 @@ class Building(Base):
 	id_association_building = Column(String(50))
 	id_association_type = Column(String(50))
 	id_unit_type = Column(String(50))
-	coordinates = Column(String)
+	coordinates = Column(Geometry())
 	coordinates_source = Column(String(50))
 	details = Column(Text)
 	created_on = Column(DateTime)
 	is_active = Column(Boolean)
 
 	name = relationship(LanguageContent, lazy='joined')
-	lane = relationship(Lane, lazy='joined')
 
 	@hybrid_property
 	def address(self):
-		if isinstance(self.lane.name, object):
-			return self.civic_number + ' ' + self.lane.name.description
+		with Database() as db:
+			lane = db.query(Lane).get(self.id_lane)
+
+		if isinstance(lane.name, object):
+			return self.civic_number + ', ' + lane.name.description
 		else:
-			return self.civic_number + ' ' + self.lane.name[0].description
+			return self.civic_number + ', ' + lane.name[0].description
+
+	@hybrid_property
+	def geojson(self):
+		with Database() as db:
+			points = db.query(functions.ST_AsGeoJSON(self.coordinates)).first()
+
+		geojson = ()
+		for pos, val in enumerate(points):
+			geojson = geojson + (json.loads(val),)
+
+		return geojson
