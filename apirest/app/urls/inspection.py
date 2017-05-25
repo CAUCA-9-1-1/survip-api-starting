@@ -2,7 +2,7 @@ import uuid
 
 from causepy.manage.database import Database
 from causepy.urls.base import Base
-from ..mapping.inspection import Inspection as Table
+from ..models.inspection import Inspection as Table
 
 
 class Inspection(Base):
@@ -16,9 +16,10 @@ class Inspection(Base):
 	}
 
 	def get(self, id_inspection=None, is_active=None):
-		""" Return all inspection for the connected user
+		""" Return all inspection information
 
 		:param id_inspection: UUID
+		:param is_active: Boolean
 		"""
 		with Database() as db:
 			if id_inspection is None and is_active is None:
@@ -62,7 +63,7 @@ class Inspection(Base):
 
 		id_inspection = uuid.uuid4()
 		with Database() as db:
-			db.add(Table(id_inspection, args['id_survey'], args['id_building'], args['id_webuser']))
+			db.insert(Table(id_inspection, args['id_survey'], args['id_building'], args['id_webuser']))
 			db.commit()
 
 		return {

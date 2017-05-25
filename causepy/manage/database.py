@@ -4,45 +4,41 @@ from causepy.config import setup as config
 
 
 class Database:
-	db = None
+	engine = None
+	session = None
 	metadata = None
 
 	def __init__(self, db_name='general'):
-		engine = create_engine('%s://%s:%s@%s/%s' % (
+		self.engine = create_engine('%s://%s:%s@%s/%s' % (
 			config.DATABASE[db_name]['engine'],
 			config.DATABASE[db_name]['username'],
 			config.DATABASE[db_name]['password'],
 			config.DATABASE[db_name]['host'],
 			config.DATABASE[db_name]['dbname'],
-		))
-		session = sessionmaker()
-		session.configure(bind=engine)
+		), echo=config.IS_DEV)
 
-		self.db = session()
-		self.metadata = MetaData(bind=engine)
+		Session = sessionmaker()
+		Session.configure(bind=self.engine)
+
+		self.session = Session()
+		self.metadata = MetaData(bind=self.engine)
 
 	def __enter__(self):
 		return self
 
 	def __exit__(self, exc_type, exc_val, exc_tb):
-		self.db.expunge_all()
-		self.db.close()
+		self.session.expunge_all()
+		self.session.close()
 
 	def query(self, *args):
-		return self.db.query(*args)
+		return self.session.query(*args)
 
-	def select(self, class_table, fields):
-		query = self.db.query(class_table)
-		query.options(*fields)
-
-		return query
-
-	def add(self, item):
-		self.db.add(item)
+	def insert(self, item):
+		self.session.add(item)
 
 		return True
 
 	def commit(self):
-		self.db.commit()
+		self.session.commit()
 
 		return True

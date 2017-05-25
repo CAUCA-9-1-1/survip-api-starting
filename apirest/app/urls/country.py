@@ -1,6 +1,6 @@
 from causepy.manage.database import Database
 from causepy.urls.base import Base
-from ..mapping.country import Country as Table
+from ..models.country import Country as Table
 
 
 class Country(Base):

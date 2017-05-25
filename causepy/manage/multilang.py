@@ -2,7 +2,7 @@ import json
 import uuid
 from .database import Database
 from .utilities import Utilities
-from ..mapping.language_content import LanguageContent
+from ..models.language_content import LanguageContent
 
 class MultiLang:
 	@staticmethod
@@ -12,7 +12,7 @@ class MultiLang:
 		try:
 			with Database() as db:
 				data = db.query(LanguageContent).get(id_language_content)
-			print(data)
+
 			json_data = {'id_language_content': id_language_content}
 			json_data.update(Utilities.list_to_dict(data, 'language_code', 'description'))
 		except:

@@ -1,8 +1,8 @@
 import uuid
-from causeweb.storage.db import DB
-from causeweb.site.multilang import MultiLang
-from causeweb.apis.base import Base
-from .city import City
+from causepy.manage.database import Database
+from causepy.manage.multilang import MultiLang
+from causepy.urls.base import Base
+from ..models.lane import Lane as Table
 
 
 class Lane(Base):
@@ -19,22 +19,19 @@ class Lane(Base):
 		""" Return all lane information
 
 		:param id_lane: UUID
+		:param is_active: Boolean
 		"""
-		with DB() as db:
+		with Database() as db:
 			if id_lane is None and is_active is None:
-				data = db.get_all("SELECT * FROM tbl_lane;")
+				data = db.query(Table).all()
 			elif id_lane is None:
-				data = db.get_all("SELECT * FROM tbl_lane WHERE is_active=%s;", (is_active,))
+				data = db.query(Table).filter(Table.is_active == is_active).all()
 			else:
-				data = db.get_all("SELECT * FROM tbl_lane WHERE id_lane=%s;", (id_lane,))
-
-		for key, row in enumerate(data):
-			data[key]['name'] = MultiLang.get(row['id_language_content_name'])
-			data[key]['city'] = City().get(row['id_city'])
+				data = db.query(Table).get(id_lane)
 
 		return {
 			'data': data
-		} if id_lane is None else data[0]
+		}
 
 	def create(self, args):
 		""" Create a new lane
@@ -50,12 +47,9 @@ class Lane(Base):
 		id_lane = uuid.uuid4()
 		id_language_content = MultiLang.set(args['name'], True)
 
-		with DB() as db:
-			db.execute("""INSERT INTO tbl_lane(
-							id_lane, id_language_content_name, id_city, is_active
-						  ) VALUES (%s, %s, %s, True);""", (
-				id_lane, id_language_content, args['id_city']
-			))
+		with Database() as db:
+			db.insert(Table(id_lane, id_language_content, args['id_city']))
+			db.commit()
 
 		return {
 			'id_lane': id_lane,
@@ -69,7 +63,6 @@ class Lane(Base):
 			id_lane: UUID,
 			name: JSON,
 			id_city: UUID,
-			is_active: BOOLEAN,
 		}
 		"""
 		if self.has_permission('RightAdmin') is False:
@@ -78,14 +71,15 @@ class Lane(Base):
 		if 'id_lane' not in args:
 			raise Exception("You need to pass a id_lane")
 
-		id_language_content = MultiLang.set(args['name'])
+		with Database() as db:
+			data = db.query(Table).filter(Table.id_lane == args['id_lane']).first()
 
-		with DB() as db:
-			db.execute("""UPDATE tbl_lane SET
-			           	id_language_content_name=%s, id_city=%s, is_active=%s
-			           WHERE id_city=%s;""", (
-				id_language_content, args['id_city'], args['is_active'], args['id_lane']
-			))
+			if 'name' in args:
+				id_language_content = MultiLang.set(args['name'])
+				data.id_language_content_name = id_language_content
+
+			if 'id_city' in args:
+				data.id_city = args['id_city']
 
 		return {
 			'message': 'lane successfully modify'
@@ -99,10 +93,10 @@ class Lane(Base):
 		if self.has_permission('RightAdmin') is False:
 			return self.no_access()
 
-		with DB() as db:
-			db.execute("UPDATE tbl_lane SET is_active=%s WHERE id_lane=%s;", (
-				False, id_lane
-			))
+		with Database() as db:
+			data = db.query(Table).filter(Table.id_lane == id_lane).first()
+			data.is_active = False
+			db.commit()
 
 		return {
 			'message': 'lane successfully removed'

@@ -29,12 +29,12 @@ class JsonEncoder(json.JSONEncoder):
 		fields = {}
 
 		for field in [x for x in dir(obj) if not x.startswith('_') and x != 'metadata']:
-			data = obj.__getattribute__(field)
-
 			try:
+				data = obj.__getattribute__(field)
+
 				json.dumps(data, cls=JsonEncoder)
 				fields[field] = data
-			except TypeError:
+			except:
 				fields[field] = None
 
 		return fields

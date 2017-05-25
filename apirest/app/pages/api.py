@@ -1,10 +1,11 @@
 import cherrypy
 from apirest.app.classes.url_for_building import UrlForBuilding
 from apirest.app.classes.url_for_address import UrlForAddress
+from apirest.app.classes.url_for_inspection import UrlForInspection
 from causepy.pages.api import Api as BaseApi
 
 
-class Api(UrlForAddress, UrlForBuilding, BaseApi):
+class Api(UrlForInspection, UrlForAddress, UrlForBuilding, BaseApi):
 	@cherrypy.expose
 	def auth(self, *args, **kwargs):
 		return self.call_method('Auth', self.get_argument(args, kwargs))
@@ -36,22 +37,6 @@ class Api(UrlForAddress, UrlForBuilding, BaseApi):
 	@cherrypy.expose
 	def permissionuser(self, *args, **kwargs):
 		return self.call_method('PermissionUser', self.get_argument(args, kwargs))
-
-	@cherrypy.expose
-	def inspection(self, *args, **kwargs):
-		return self.call_method('Inspection', self.get_argument(args, kwargs))
-
-	@cherrypy.expose
-	def inspectionanswer(self, *args, **kwargs):
-		return self.call_method('InspectionAnswer', self.get_argument(args, kwargs))
-
-	@cherrypy.expose
-	def inspectionreport(self, *args, **kwargs):
-		return self.call_method('InspectionReport', self.get_argument(args, kwargs))
-
-	@cherrypy.expose
-	def inspectionstatistics(self, *args, **kwargs):
-		return self.call_method('InspectionStatistics', self.get_argument(args, kwargs))
 
 	@cherrypy.expose
 	def survey(self, *args, **kwargs):

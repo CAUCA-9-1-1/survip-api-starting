@@ -1,11 +1,11 @@
 import json
+from datetime import datetime
 from sqlalchemy import Column, Boolean, DateTime, Float, Numeric, String, Text, ForeignKey
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.ext.hybrid import hybrid_property
-from sqlalchemy.orm import relationship
 from geoalchemy2 import Geometry, functions
 from causepy.manage.database import Database
-from causepy.mapping.language_content import LanguageContent
+from causepy.models.language_content import LanguageContent
 from .lane import Lane
 
 
@@ -49,20 +49,23 @@ class Building(Base):
 	coordinates = Column(Geometry())
 	coordinates_source = Column(String(50))
 	details = Column(Text)
-	created_on = Column(DateTime)
-	is_active = Column(Boolean)
+	created_on = Column(DateTime, default=datetime.now)
+	is_active = Column(Boolean, default=True)
 
-	name = relationship(LanguageContent, lazy='joined')
+	@hybrid_property
+	def name(self):
+		with Database() as db:
+			data = db.query(LanguageContent).filter(
+				LanguageContent.id_language_content == self.id_language_content_name)
+
+		return data[0].description
 
 	@hybrid_property
 	def address(self):
 		with Database() as db:
 			lane = db.query(Lane).get(self.id_lane)
 
-		if isinstance(lane.name, object):
-			return self.civic_number + ', ' + lane.name.description
-		else:
-			return self.civic_number + ', ' + lane.name[0].description
+		return self.civic_number + ', ' + lane.name
 
 	@hybrid_property
 	def geojson(self):

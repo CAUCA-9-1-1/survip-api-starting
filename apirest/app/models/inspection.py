@@ -5,6 +5,7 @@ from sqlalchemy.ext.hybrid import hybrid_property
 from causepy.manage.database import Database
 from .building import Building
 
+
 Base = declarative_base()
 
 

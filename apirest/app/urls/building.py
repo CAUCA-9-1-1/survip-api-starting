@@ -1,7 +1,7 @@
 from causepy.manage.database import Database
 from causepy.manage.multilang import MultiLang
 from causepy.urls.base import Base
-from ..mapping.building import Building as Table
+from ..models.building import Building as Table
 
 
 class Building(Base):
@@ -14,17 +14,21 @@ class Building(Base):
 		'PATCH': '',
 	}
 
-	def get(self, id_building=None):
+	def get(self, id_building=None, is_active=None):
 		""" Return all building information
 
 		:param id_building: UUID
+		:param is_active: Boolean
 		"""
 		with Database() as db:
 			if id_building is None:
 				if self.has_permission('RightAdmin') is False:
 					return self.no_access()
 
-				data = db.query(Table).all()
+				if is_active is None:
+					data = db.query(Table).all()
+				else:
+					data = db.query(Table).filter(Table.is_active == is_active).all()
 			else:
 				data = db.query(Table).get(id_building)
 
