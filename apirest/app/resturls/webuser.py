@@ -1,7 +1,7 @@
-from causeweb.storage.db import DB
-from causeweb.apis.webuser import Webuser as CausewebWebuser
-from causeweb.apis.base import Base
-from .building import Building
+from causepy.manage.database import Database
+from causepy.resturls.base import Base
+from apirest.app.models.webuser import Webuser as Table
+from apirest.app.models.webuserattributes import WebuserAttributes
 
 
 class Webuser(Base):
@@ -14,7 +14,7 @@ class Webuser(Base):
 	}
 
 	def get(self, id_webuser=None, id_city=None):
-		""" Return all user information
+		""" Return all webuser information
 
 		:param id_webuser: UUID
 		"""
@@ -22,18 +22,22 @@ class Webuser(Base):
 			if self.has_permission('RightTPI') is False:
 				return self.no_access()
 
-			with DB() as db:
-				data = db.get_all("""SELECT wu.id_webuser, attr1.attribute_value AS first_name, attr2.attribute_value AS last_name, wu.username, wu.is_active
-							FROM tbl_webuser wu
-							LEFT JOIN tbl_webuser_attributes attr1 ON attr1.id_webuser = wu.id_webuser AND attr1.attribute_name='first_name'
-							LEFT JOIN tbl_webuser_attributes attr2 ON attr2.id_webuser = wu.id_webuser AND attr2.attribute_name='last_name'
-							LEFT JOIN tbl_webuser_fire_safety_department ON tbl_webuser_fire_safety_department.id_webuser = wu.id_webuser
-							LEFT JOIN tbl_fire_safety_department_city_serving ON tbl_fire_safety_department_city_serving.id_fire_safety_department = tbl_webuser_fire_safety_department.id_fire_safety_department
-							WHERE tbl_fire_safety_department_city_serving.id_city = %s
-							ORDER BY attr1.attribute_value, attr2.attribute_value;""", (id_city,))
+			with Database() as db:
+				data = db.query(Table).join(
+					WebuserAttributes.id_webuser == Table.id_webuser,
+					WebuserAttributes.attribute_name == 'first_name'
+				).join(
+					WebuserAttributes.id_webuser == Table.id_webuser,
+					WebuserAttributes.attribute_name == 'last_name'
+				).join(
+					WebuserAttributes.id_webuser == Table.id_webuser,
+					WebuserAttributes.attribute_name == 'last_name'
+				).filter().all()
 
-			for key, user in enumerate(data):
-				data[key].update(CausewebWebuser().get_webuser_attributes(user['id_webuser']))
+				#LEFT JOIN tbl_webuser_fire_safety_department ON tbl_webuser_fire_safety_department.id_webuser = wu.id_webuser
+				#LEFT JOIN tbl_fire_safety_department_city_serving ON tbl_fire_safety_department_city_serving.id_fire_safety_department = tbl_webuser_fire_safety_department.id_fire_safety_department
+				#WHERE tbl_fire_safety_department_city_serving.id_city = %s
+				#ORDER BY attr1.attribute_value, attr2.attribute_value;""", (id_city,))
 
 			return {
 				'data': data

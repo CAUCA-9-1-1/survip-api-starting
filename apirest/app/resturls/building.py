@@ -1,6 +1,7 @@
+import uuid
 from causepy.manage.database import Database
 from causepy.manage.multilang import MultiLang
-from causepy.urls.base import Base
+from causepy.resturls.base import Base
 from ..models.building import Building as Table
 
 
@@ -36,12 +37,37 @@ class Building(Base):
 			'data': data
 		}
 
+	def create(self, args):
+		""" Create a new building
+
+		:param args: {
+			name: JSON,
+			id_lane: UUID
+			civic_number: STRING
+		}
+		"""
+		if self.has_permission('RightAdmin') is False:
+			return self.no_access()
+
+		id_building = uuid.uuid4()
+		id_language_content = MultiLang.set(args['name'], True)
+
+		with Database() as db:
+			db.insert(Table(id_building, id_language_content, args['civic_number']))
+			db.commit()
+
+		return {
+			'id_building': id_building,
+			'message': 'building successfully created'
+		}
+
 	def modify(self, args):
 		""" Modify all information for building
 
 		:param args: {
 			id_building: UUID,
-			name: JSON
+			name: JSON,
+			civic_number: STRING
 		}
 		"""
 		if self.has_permission('RightAdmin') is False:
@@ -54,6 +80,8 @@ class Building(Base):
 				id_language_content = MultiLang.set(args['name'])
 				data.id_language_content_name = id_language_content
 
+			if 'civic_number' in args:
+				data.civic_number = args['civic_number']
 			if 'year_of_construction' in args:
 				data.year_of_construction = args['year_of_construction']
 			if 'building_value' in args:
@@ -67,4 +95,21 @@ class Building(Base):
 
 		return {
 			'message': 'building successfully modified'
+		}
+
+	def remove(self, id_building):
+		""" Remove building
+
+		:param id_building: UUID
+		"""
+		if self.has_permission('RightTPI') is False:
+			return self.no_access()
+
+		with Database() as db:
+			data = db.query(Table).filter(Table.id_building == id_building).first()
+			data.is_active = False
+			db.commit()
+
+		return {
+			'message': 'building successfully removed'
 		}

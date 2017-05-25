@@ -1,7 +1,7 @@
 import uuid
 from causepy.manage.database import Database
 from causepy.manage.multilang import MultiLang
-from causepy.urls.base import Base
+from causepy.resturls.base import Base
 from ..models.lane import Lane as Table
 
 

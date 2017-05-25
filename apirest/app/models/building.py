@@ -77,3 +77,8 @@ class Building(Base):
 			geojson = geojson + (json.loads(val),)
 
 		return geojson
+
+	def __init__(self, id_building, id_language_content, civic_number):
+		self.id_building = id_building
+		self.id_language_content_name = id_language_content
+		self.civic_number = civic_number

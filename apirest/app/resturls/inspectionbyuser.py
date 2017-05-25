@@ -1,5 +1,5 @@
 from causepy.manage.database import Database
-from causepy.urls.base import Base
+from causepy.resturls.base import Base
 from ..models.inspection import Inspection as Table
 from ..models.building import Building
 from ..models.lane import Lane

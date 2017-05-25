@@ -16186,3 +16186,520 @@ WHERE tbl_building.id_building = %(param_1)s
 2017-05-25 12:03:29,403:sqlalchemy.engine.base.Engine/info()@109:INFO:{'param_1': UUID('b618acd6-dd0f-4839-b0b5-f47fc14c435e')}
 2017-05-25 12:03:29,499:sqlalchemy.engine.base.Engine/info()@109:INFO:ROLLBACK
 2017-05-25 12:03:29,503:cherrypy.access.140397616518648/access()@285:INFO:127.0.0.1 - - [25/May/2017:12:03:29] "GET /inspectionbyuser/ HTTP/1.1" 200 2996 "" ""
+2017-05-25 15:03:31,276:cherrypy.error/error()@219:INFO:[25/May/2017:15:03:31] ENGINE Bus STARTING
+2017-05-25 15:03:31,283:cherrypy.error/error()@219:INFO:[25/May/2017:15:03:31] ENGINE Started monitor thread '_TimeoutMonitor'.
+2017-05-25 15:03:31,286:cherrypy.error/error()@219:INFO:[25/May/2017:15:03:31] ENGINE Started monitor thread 'Autoreloader'.
+2017-05-25 15:03:31,418:cherrypy.error/error()@219:INFO:[25/May/2017:15:03:31] ENGINE Serving on http://127.0.0.1:8080
+2017-05-25 15:03:31,418:cherrypy.error/error()@219:INFO:[25/May/2017:15:03:31] ENGINE Bus STARTED
+2017-05-25 15:03:32,076:sqlalchemy.engine.base.Engine/info()@109:INFO:select version()
+2017-05-25 15:03:32,081:sqlalchemy.engine.base.Engine/info()@109:INFO:{}
+2017-05-25 15:03:32,095:sqlalchemy.engine.base.Engine/info()@109:INFO:select current_schema()
+2017-05-25 15:03:32,097:sqlalchemy.engine.base.Engine/info()@109:INFO:{}
+2017-05-25 15:03:32,108:sqlalchemy.engine.base.Engine/info()@109:INFO:SELECT CAST('test plain returns' AS VARCHAR(60)) AS anon_1
+2017-05-25 15:03:32,109:sqlalchemy.engine.base.Engine/info()@109:INFO:{}
+2017-05-25 15:03:32,117:sqlalchemy.engine.base.Engine/info()@109:INFO:SELECT CAST('test unicode returns' AS VARCHAR(60)) AS anon_1
+2017-05-25 15:03:32,117:sqlalchemy.engine.base.Engine/info()@109:INFO:{}
+2017-05-25 15:03:32,122:sqlalchemy.engine.base.Engine/info()@109:INFO:show standard_conforming_strings
+2017-05-25 15:03:32,123:sqlalchemy.engine.base.Engine/info()@109:INFO:{}
+2017-05-25 15:03:32,135:sqlalchemy.engine.base.Engine/info()@109:INFO:BEGIN (implicit)
+2017-05-25 15:03:32,143:sqlalchemy.engine.base.Engine/info()@109:INFO:SELECT tbl_inspection.id_inspection AS tbl_inspection_id_inspection, tbl_inspection.id_building AS tbl_inspection_id_building, tbl_inspection.id_survey AS tbl_inspection_id_survey, tbl_inspection.id_intervention_plan AS tbl_inspection_id_intervention_plan, tbl_inspection.id_webuser AS tbl_inspection_id_webuser, tbl_inspection.created_on AS tbl_inspection_created_on, tbl_inspection.created_by AS tbl_inspection_created_by, tbl_inspection.is_active AS tbl_inspection_is_active, tbl_inspection.is_completed AS tbl_inspection_is_completed 
+FROM tbl_inspection 
+WHERE tbl_inspection.is_active = true AND tbl_inspection.is_completed = false
+2017-05-25 15:03:32,145:sqlalchemy.engine.base.Engine/info()@109:INFO:{}
+2017-05-25 15:03:32,168:sqlalchemy.engine.base.Engine/info()@109:INFO:ROLLBACK
+2017-05-25 15:03:32,230:sqlalchemy.engine.base.Engine/info()@109:INFO:select version()
+2017-05-25 15:03:32,233:sqlalchemy.engine.base.Engine/info()@109:INFO:{}
+2017-05-25 15:03:32,241:sqlalchemy.engine.base.Engine/info()@109:INFO:select current_schema()
+2017-05-25 15:03:32,242:sqlalchemy.engine.base.Engine/info()@109:INFO:{}
+2017-05-25 15:03:32,251:sqlalchemy.engine.base.Engine/info()@109:INFO:SELECT CAST('test plain returns' AS VARCHAR(60)) AS anon_1
+2017-05-25 15:03:32,251:sqlalchemy.engine.base.Engine/info()@109:INFO:{}
+2017-05-25 15:03:32,256:sqlalchemy.engine.base.Engine/info()@109:INFO:SELECT CAST('test unicode returns' AS VARCHAR(60)) AS anon_1
+2017-05-25 15:03:32,258:sqlalchemy.engine.base.Engine/info()@109:INFO:{}
+2017-05-25 15:03:32,262:sqlalchemy.engine.base.Engine/info()@109:INFO:show standard_conforming_strings
+2017-05-25 15:03:32,264:sqlalchemy.engine.base.Engine/info()@109:INFO:{}
+2017-05-25 15:03:32,269:sqlalchemy.engine.base.Engine/info()@109:INFO:BEGIN (implicit)
+2017-05-25 15:03:32,286:sqlalchemy.engine.base.Engine/info()@109:INFO:SELECT tbl_building.id_building AS tbl_building_id_building, tbl_building.id_language_content_name AS tbl_building_id_language_content_name, tbl_building.matricule AS tbl_building_matricule, tbl_building.civic_number AS tbl_building_civic_number, tbl_building.civic_letter AS tbl_building_civic_letter, tbl_building.civic_supp AS tbl_building_civic_supp, tbl_building.civic_letter_supp AS tbl_building_civic_letter_supp, tbl_building.appartment_number AS tbl_building_appartment_number, tbl_building.floor AS tbl_building_floor, tbl_building.suite AS tbl_building_suite, tbl_building.number_of_appartment AS tbl_building_number_of_appartment, tbl_building.number_of_building AS tbl_building_number_of_building, tbl_building.vacant_land AS tbl_building_vacant_land, tbl_building.year_of_construction AS tbl_building_year_of_construction, tbl_building.building_value AS tbl_building_building_value, tbl_building.id_lane AS tbl_building_id_lane, tbl_building.postal_code AS tbl_building_postal_code, tbl_building.id_utilisation_code AS tbl_building_id_utilisation_code, tbl_building.id_sector AS tbl_building_id_sector, tbl_building.id_mutual_aid_sector AS tbl_building_id_mutual_aid_sector, tbl_building.id_jaws_extrication_sector AS tbl_building_id_jaws_extrication_sector, tbl_building.id_sled_sector AS tbl_building_id_sled_sector, tbl_building.id_risk_level AS tbl_building_id_risk_level, tbl_building.source AS tbl_building_source, tbl_building.is_parent AS tbl_building_is_parent, tbl_building.utilisation_description AS tbl_building_utilisation_description, tbl_building.show_in_resources AS tbl_building_show_in_resources, tbl_building.id_resource_category AS tbl_building_id_resource_category, tbl_building.id_association_building AS tbl_building_id_association_building, tbl_building.id_association_type AS tbl_building_id_association_type, tbl_building.id_unit_type AS tbl_building_id_unit_type, ST_AsEWKB(tbl_building.coordinates) AS tbl_building_coordinates, tbl_building.coordinates_source AS tbl_building_coordinates_source, tbl_building.details AS tbl_building_details, tbl_building.created_on AS tbl_building_created_on, tbl_building.is_active AS tbl_building_is_active 
+FROM tbl_building 
+WHERE tbl_building.id_building = %(param_1)s
+2017-05-25 15:03:32,287:sqlalchemy.engine.base.Engine/info()@109:INFO:{'param_1': UUID('24588314-4149-4cb3-a7ce-d74991177eab')}
+2017-05-25 15:03:32,447:sqlalchemy.engine.base.Engine/info()@109:INFO:select version()
+2017-05-25 15:03:32,448:sqlalchemy.engine.base.Engine/info()@109:INFO:{}
+2017-05-25 15:03:32,453:sqlalchemy.engine.base.Engine/info()@109:INFO:select current_schema()
+2017-05-25 15:03:32,454:sqlalchemy.engine.base.Engine/info()@109:INFO:{}
+2017-05-25 15:03:32,465:sqlalchemy.engine.base.Engine/info()@109:INFO:SELECT CAST('test plain returns' AS VARCHAR(60)) AS anon_1
+2017-05-25 15:03:32,466:sqlalchemy.engine.base.Engine/info()@109:INFO:{}
+2017-05-25 15:03:32,470:sqlalchemy.engine.base.Engine/info()@109:INFO:SELECT CAST('test unicode returns' AS VARCHAR(60)) AS anon_1
+2017-05-25 15:03:32,472:sqlalchemy.engine.base.Engine/info()@109:INFO:{}
+2017-05-25 15:03:32,476:sqlalchemy.engine.base.Engine/info()@109:INFO:show standard_conforming_strings
+2017-05-25 15:03:32,480:sqlalchemy.engine.base.Engine/info()@109:INFO:{}
+2017-05-25 15:03:32,486:sqlalchemy.engine.base.Engine/info()@109:INFO:BEGIN (implicit)
+2017-05-25 15:03:32,494:sqlalchemy.engine.base.Engine/info()@109:INFO:SELECT tbl_lane.id_lane AS tbl_lane_id_lane, tbl_lane.id_language_content_name AS tbl_lane_id_language_content_name, tbl_lane.id_city AS tbl_lane_id_city, tbl_lane.public_lane_code AS tbl_lane_public_lane_code, tbl_lane.generic_code AS tbl_lane_generic_code, tbl_lane.created_on AS tbl_lane_created_on, tbl_lane.is_valid AS tbl_lane_is_valid, tbl_lane.is_active AS tbl_lane_is_active 
+FROM tbl_lane 
+WHERE tbl_lane.id_lane = %(param_1)s
+2017-05-25 15:03:32,497:sqlalchemy.engine.base.Engine/info()@109:INFO:{'param_1': UUID('19bc676f-03ec-4b24-ba0d-7a92332ed457')}
+2017-05-25 15:03:32,506:sqlalchemy.engine.base.Engine/info()@109:INFO:ROLLBACK
+2017-05-25 15:03:32,558:sqlalchemy.engine.base.Engine/info()@109:INFO:select version()
+2017-05-25 15:03:32,561:sqlalchemy.engine.base.Engine/info()@109:INFO:{}
+2017-05-25 15:03:32,567:sqlalchemy.engine.base.Engine/info()@109:INFO:select current_schema()
+2017-05-25 15:03:32,568:sqlalchemy.engine.base.Engine/info()@109:INFO:{}
+2017-05-25 15:03:32,574:sqlalchemy.engine.base.Engine/info()@109:INFO:SELECT CAST('test plain returns' AS VARCHAR(60)) AS anon_1
+2017-05-25 15:03:32,576:sqlalchemy.engine.base.Engine/info()@109:INFO:{}
+2017-05-25 15:03:32,582:sqlalchemy.engine.base.Engine/info()@109:INFO:SELECT CAST('test unicode returns' AS VARCHAR(60)) AS anon_1
+2017-05-25 15:03:32,584:sqlalchemy.engine.base.Engine/info()@109:INFO:{}
+2017-05-25 15:03:32,589:sqlalchemy.engine.base.Engine/info()@109:INFO:show standard_conforming_strings
+2017-05-25 15:03:32,592:sqlalchemy.engine.base.Engine/info()@109:INFO:{}
+2017-05-25 15:03:32,599:sqlalchemy.engine.base.Engine/info()@109:INFO:BEGIN (implicit)
+2017-05-25 15:03:32,604:sqlalchemy.engine.base.Engine/info()@109:INFO:SELECT tbl_language_content.id_language_content AS tbl_language_content_id_language_content, tbl_language_content.language_code AS tbl_language_content_language_code, tbl_language_content.description AS tbl_language_content_description 
+FROM tbl_language_content 
+WHERE tbl_language_content.id_language_content = %(id_language_content_1)s 
+ LIMIT %(param_1)s
+2017-05-25 15:03:32,604:sqlalchemy.engine.base.Engine/info()@109:INFO:{'id_language_content_1': UUID('e925083a-c640-4ce7-8fae-dc647f36d9f0'), 'param_1': 1}
+2017-05-25 15:03:32,615:sqlalchemy.engine.base.Engine/info()@109:INFO:ROLLBACK
+2017-05-25 15:03:32,668:sqlalchemy.engine.base.Engine/info()@109:INFO:select version()
+2017-05-25 15:03:32,670:sqlalchemy.engine.base.Engine/info()@109:INFO:{}
+2017-05-25 15:03:32,673:sqlalchemy.engine.base.Engine/info()@109:INFO:select current_schema()
+2017-05-25 15:03:32,674:sqlalchemy.engine.base.Engine/info()@109:INFO:{}
+2017-05-25 15:03:32,681:sqlalchemy.engine.base.Engine/info()@109:INFO:SELECT CAST('test plain returns' AS VARCHAR(60)) AS anon_1
+2017-05-25 15:03:32,683:sqlalchemy.engine.base.Engine/info()@109:INFO:{}
+2017-05-25 15:03:32,686:sqlalchemy.engine.base.Engine/info()@109:INFO:SELECT CAST('test unicode returns' AS VARCHAR(60)) AS anon_1
+2017-05-25 15:03:32,687:sqlalchemy.engine.base.Engine/info()@109:INFO:{}
+2017-05-25 15:03:32,690:sqlalchemy.engine.base.Engine/info()@109:INFO:show standard_conforming_strings
+2017-05-25 15:03:32,690:sqlalchemy.engine.base.Engine/info()@109:INFO:{}
+2017-05-25 15:03:32,696:sqlalchemy.engine.base.Engine/info()@109:INFO:BEGIN (implicit)
+2017-05-25 15:03:32,707:sqlalchemy.engine.base.Engine/info()@109:INFO:SELECT tbl_building.id_building AS tbl_building_id_building, tbl_building.id_language_content_name AS tbl_building_id_language_content_name, tbl_building.matricule AS tbl_building_matricule, tbl_building.civic_number AS tbl_building_civic_number, tbl_building.civic_letter AS tbl_building_civic_letter, tbl_building.civic_supp AS tbl_building_civic_supp, tbl_building.civic_letter_supp AS tbl_building_civic_letter_supp, tbl_building.appartment_number AS tbl_building_appartment_number, tbl_building.floor AS tbl_building_floor, tbl_building.suite AS tbl_building_suite, tbl_building.number_of_appartment AS tbl_building_number_of_appartment, tbl_building.number_of_building AS tbl_building_number_of_building, tbl_building.vacant_land AS tbl_building_vacant_land, tbl_building.year_of_construction AS tbl_building_year_of_construction, tbl_building.building_value AS tbl_building_building_value, tbl_building.id_lane AS tbl_building_id_lane, tbl_building.postal_code AS tbl_building_postal_code, tbl_building.id_utilisation_code AS tbl_building_id_utilisation_code, tbl_building.id_sector AS tbl_building_id_sector, tbl_building.id_mutual_aid_sector AS tbl_building_id_mutual_aid_sector, tbl_building.id_jaws_extrication_sector AS tbl_building_id_jaws_extrication_sector, tbl_building.id_sled_sector AS tbl_building_id_sled_sector, tbl_building.id_risk_level AS tbl_building_id_risk_level, tbl_building.source AS tbl_building_source, tbl_building.is_parent AS tbl_building_is_parent, tbl_building.utilisation_description AS tbl_building_utilisation_description, tbl_building.show_in_resources AS tbl_building_show_in_resources, tbl_building.id_resource_category AS tbl_building_id_resource_category, tbl_building.id_association_building AS tbl_building_id_association_building, tbl_building.id_association_type AS tbl_building_id_association_type, tbl_building.id_unit_type AS tbl_building_id_unit_type, ST_AsEWKB(tbl_building.coordinates) AS tbl_building_coordinates, tbl_building.coordinates_source AS tbl_building_coordinates_source, tbl_building.details AS tbl_building_details, tbl_building.created_on AS tbl_building_created_on, tbl_building.is_active AS tbl_building_is_active 
+FROM tbl_building 
+WHERE tbl_building.id_building = %(param_1)s
+2017-05-25 15:03:32,709:sqlalchemy.engine.base.Engine/info()@109:INFO:{'param_1': UUID('24588314-4149-4cb3-a7ce-d74991177eab')}
+2017-05-25 15:03:32,816:sqlalchemy.engine.base.Engine/info()@109:INFO:ROLLBACK
+2017-05-25 15:03:32,867:sqlalchemy.engine.base.Engine/info()@109:INFO:select version()
+2017-05-25 15:03:32,868:sqlalchemy.engine.base.Engine/info()@109:INFO:{}
+2017-05-25 15:03:32,873:sqlalchemy.engine.base.Engine/info()@109:INFO:select current_schema()
+2017-05-25 15:03:32,875:sqlalchemy.engine.base.Engine/info()@109:INFO:{}
+2017-05-25 15:03:32,884:sqlalchemy.engine.base.Engine/info()@109:INFO:SELECT CAST('test plain returns' AS VARCHAR(60)) AS anon_1
+2017-05-25 15:03:32,885:sqlalchemy.engine.base.Engine/info()@109:INFO:{}
+2017-05-25 15:03:32,891:sqlalchemy.engine.base.Engine/info()@109:INFO:SELECT CAST('test unicode returns' AS VARCHAR(60)) AS anon_1
+2017-05-25 15:03:32,891:sqlalchemy.engine.base.Engine/info()@109:INFO:{}
+2017-05-25 15:03:32,896:sqlalchemy.engine.base.Engine/info()@109:INFO:show standard_conforming_strings
+2017-05-25 15:03:32,898:sqlalchemy.engine.base.Engine/info()@109:INFO:{}
+2017-05-25 15:03:32,901:sqlalchemy.engine.base.Engine/info()@109:INFO:BEGIN (implicit)
+2017-05-25 15:03:32,908:sqlalchemy.engine.base.Engine/info()@109:INFO:SELECT tbl_building.id_building AS tbl_building_id_building, tbl_building.id_language_content_name AS tbl_building_id_language_content_name, tbl_building.matricule AS tbl_building_matricule, tbl_building.civic_number AS tbl_building_civic_number, tbl_building.civic_letter AS tbl_building_civic_letter, tbl_building.civic_supp AS tbl_building_civic_supp, tbl_building.civic_letter_supp AS tbl_building_civic_letter_supp, tbl_building.appartment_number AS tbl_building_appartment_number, tbl_building.floor AS tbl_building_floor, tbl_building.suite AS tbl_building_suite, tbl_building.number_of_appartment AS tbl_building_number_of_appartment, tbl_building.number_of_building AS tbl_building_number_of_building, tbl_building.vacant_land AS tbl_building_vacant_land, tbl_building.year_of_construction AS tbl_building_year_of_construction, tbl_building.building_value AS tbl_building_building_value, tbl_building.id_lane AS tbl_building_id_lane, tbl_building.postal_code AS tbl_building_postal_code, tbl_building.id_utilisation_code AS tbl_building_id_utilisation_code, tbl_building.id_sector AS tbl_building_id_sector, tbl_building.id_mutual_aid_sector AS tbl_building_id_mutual_aid_sector, tbl_building.id_jaws_extrication_sector AS tbl_building_id_jaws_extrication_sector, tbl_building.id_sled_sector AS tbl_building_id_sled_sector, tbl_building.id_risk_level AS tbl_building_id_risk_level, tbl_building.source AS tbl_building_source, tbl_building.is_parent AS tbl_building_is_parent, tbl_building.utilisation_description AS tbl_building_utilisation_description, tbl_building.show_in_resources AS tbl_building_show_in_resources, tbl_building.id_resource_category AS tbl_building_id_resource_category, tbl_building.id_association_building AS tbl_building_id_association_building, tbl_building.id_association_type AS tbl_building_id_association_type, tbl_building.id_unit_type AS tbl_building_id_unit_type, ST_AsEWKB(tbl_building.coordinates) AS tbl_building_coordinates, tbl_building.coordinates_source AS tbl_building_coordinates_source, tbl_building.details AS tbl_building_details, tbl_building.created_on AS tbl_building_created_on, tbl_building.is_active AS tbl_building_is_active 
+FROM tbl_building 
+WHERE tbl_building.id_building = %(param_1)s
+2017-05-25 15:03:32,910:sqlalchemy.engine.base.Engine/info()@109:INFO:{'param_1': UUID('24588314-4149-4cb3-a7ce-d74991177eab')}
+2017-05-25 15:03:33,007:sqlalchemy.engine.base.Engine/info()@109:INFO:ROLLBACK
+2017-05-25 15:03:33,058:sqlalchemy.engine.base.Engine/info()@109:INFO:select version()
+2017-05-25 15:03:33,060:sqlalchemy.engine.base.Engine/info()@109:INFO:{}
+2017-05-25 15:03:33,066:sqlalchemy.engine.base.Engine/info()@109:INFO:select current_schema()
+2017-05-25 15:03:33,067:sqlalchemy.engine.base.Engine/info()@109:INFO:{}
+2017-05-25 15:03:33,074:sqlalchemy.engine.base.Engine/info()@109:INFO:SELECT CAST('test plain returns' AS VARCHAR(60)) AS anon_1
+2017-05-25 15:03:33,074:sqlalchemy.engine.base.Engine/info()@109:INFO:{}
+2017-05-25 15:03:33,078:sqlalchemy.engine.base.Engine/info()@109:INFO:SELECT CAST('test unicode returns' AS VARCHAR(60)) AS anon_1
+2017-05-25 15:03:33,080:sqlalchemy.engine.base.Engine/info()@109:INFO:{}
+2017-05-25 15:03:33,083:sqlalchemy.engine.base.Engine/info()@109:INFO:show standard_conforming_strings
+2017-05-25 15:03:33,083:sqlalchemy.engine.base.Engine/info()@109:INFO:{}
+2017-05-25 15:03:33,088:sqlalchemy.engine.base.Engine/info()@109:INFO:BEGIN (implicit)
+2017-05-25 15:03:33,098:sqlalchemy.engine.base.Engine/info()@109:INFO:SELECT tbl_building.id_building AS tbl_building_id_building, tbl_building.id_language_content_name AS tbl_building_id_language_content_name, tbl_building.matricule AS tbl_building_matricule, tbl_building.civic_number AS tbl_building_civic_number, tbl_building.civic_letter AS tbl_building_civic_letter, tbl_building.civic_supp AS tbl_building_civic_supp, tbl_building.civic_letter_supp AS tbl_building_civic_letter_supp, tbl_building.appartment_number AS tbl_building_appartment_number, tbl_building.floor AS tbl_building_floor, tbl_building.suite AS tbl_building_suite, tbl_building.number_of_appartment AS tbl_building_number_of_appartment, tbl_building.number_of_building AS tbl_building_number_of_building, tbl_building.vacant_land AS tbl_building_vacant_land, tbl_building.year_of_construction AS tbl_building_year_of_construction, tbl_building.building_value AS tbl_building_building_value, tbl_building.id_lane AS tbl_building_id_lane, tbl_building.postal_code AS tbl_building_postal_code, tbl_building.id_utilisation_code AS tbl_building_id_utilisation_code, tbl_building.id_sector AS tbl_building_id_sector, tbl_building.id_mutual_aid_sector AS tbl_building_id_mutual_aid_sector, tbl_building.id_jaws_extrication_sector AS tbl_building_id_jaws_extrication_sector, tbl_building.id_sled_sector AS tbl_building_id_sled_sector, tbl_building.id_risk_level AS tbl_building_id_risk_level, tbl_building.source AS tbl_building_source, tbl_building.is_parent AS tbl_building_is_parent, tbl_building.utilisation_description AS tbl_building_utilisation_description, tbl_building.show_in_resources AS tbl_building_show_in_resources, tbl_building.id_resource_category AS tbl_building_id_resource_category, tbl_building.id_association_building AS tbl_building_id_association_building, tbl_building.id_association_type AS tbl_building_id_association_type, tbl_building.id_unit_type AS tbl_building_id_unit_type, ST_AsEWKB(tbl_building.coordinates) AS tbl_building_coordinates, tbl_building.coordinates_source AS tbl_building_coordinates_source, tbl_building.details AS tbl_building_details, tbl_building.created_on AS tbl_building_created_on, tbl_building.is_active AS tbl_building_is_active 
+FROM tbl_building 
+WHERE tbl_building.id_building = %(param_1)s
+2017-05-25 15:03:33,100:sqlalchemy.engine.base.Engine/info()@109:INFO:{'param_1': UUID('bd717551-d04c-4638-a8c0-020476c17713')}
+2017-05-25 15:03:33,252:sqlalchemy.engine.base.Engine/info()@109:INFO:select version()
+2017-05-25 15:03:33,254:sqlalchemy.engine.base.Engine/info()@109:INFO:{}
+2017-05-25 15:03:33,262:sqlalchemy.engine.base.Engine/info()@109:INFO:select current_schema()
+2017-05-25 15:03:33,264:sqlalchemy.engine.base.Engine/info()@109:INFO:{}
+2017-05-25 15:03:33,271:sqlalchemy.engine.base.Engine/info()@109:INFO:SELECT CAST('test plain returns' AS VARCHAR(60)) AS anon_1
+2017-05-25 15:03:33,274:sqlalchemy.engine.base.Engine/info()@109:INFO:{}
+2017-05-25 15:03:33,282:sqlalchemy.engine.base.Engine/info()@109:INFO:SELECT CAST('test unicode returns' AS VARCHAR(60)) AS anon_1
+2017-05-25 15:03:33,284:sqlalchemy.engine.base.Engine/info()@109:INFO:{}
+2017-05-25 15:03:33,288:sqlalchemy.engine.base.Engine/info()@109:INFO:show standard_conforming_strings
+2017-05-25 15:03:33,290:sqlalchemy.engine.base.Engine/info()@109:INFO:{}
+2017-05-25 15:03:33,298:sqlalchemy.engine.base.Engine/info()@109:INFO:BEGIN (implicit)
+2017-05-25 15:03:33,304:sqlalchemy.engine.base.Engine/info()@109:INFO:SELECT tbl_lane.id_lane AS tbl_lane_id_lane, tbl_lane.id_language_content_name AS tbl_lane_id_language_content_name, tbl_lane.id_city AS tbl_lane_id_city, tbl_lane.public_lane_code AS tbl_lane_public_lane_code, tbl_lane.generic_code AS tbl_lane_generic_code, tbl_lane.created_on AS tbl_lane_created_on, tbl_lane.is_valid AS tbl_lane_is_valid, tbl_lane.is_active AS tbl_lane_is_active 
+FROM tbl_lane 
+WHERE tbl_lane.id_lane = %(param_1)s
+2017-05-25 15:03:33,317:sqlalchemy.engine.base.Engine/info()@109:INFO:{'param_1': UUID('19bc676f-03ec-4b24-ba0d-7a92332ed457')}
+2017-05-25 15:03:33,326:sqlalchemy.engine.base.Engine/info()@109:INFO:ROLLBACK
+2017-05-25 15:03:33,379:sqlalchemy.engine.base.Engine/info()@109:INFO:select version()
+2017-05-25 15:03:33,380:sqlalchemy.engine.base.Engine/info()@109:INFO:{}
+2017-05-25 15:03:33,386:sqlalchemy.engine.base.Engine/info()@109:INFO:select current_schema()
+2017-05-25 15:03:33,387:sqlalchemy.engine.base.Engine/info()@109:INFO:{}
+2017-05-25 15:03:33,397:sqlalchemy.engine.base.Engine/info()@109:INFO:SELECT CAST('test plain returns' AS VARCHAR(60)) AS anon_1
+2017-05-25 15:03:33,399:sqlalchemy.engine.base.Engine/info()@109:INFO:{}
+2017-05-25 15:03:33,402:sqlalchemy.engine.base.Engine/info()@109:INFO:SELECT CAST('test unicode returns' AS VARCHAR(60)) AS anon_1
+2017-05-25 15:03:33,403:sqlalchemy.engine.base.Engine/info()@109:INFO:{}
+2017-05-25 15:03:33,407:sqlalchemy.engine.base.Engine/info()@109:INFO:show standard_conforming_strings
+2017-05-25 15:03:33,408:sqlalchemy.engine.base.Engine/info()@109:INFO:{}
+2017-05-25 15:03:33,415:sqlalchemy.engine.base.Engine/info()@109:INFO:BEGIN (implicit)
+2017-05-25 15:03:33,419:sqlalchemy.engine.base.Engine/info()@109:INFO:SELECT tbl_language_content.id_language_content AS tbl_language_content_id_language_content, tbl_language_content.language_code AS tbl_language_content_language_code, tbl_language_content.description AS tbl_language_content_description 
+FROM tbl_language_content 
+WHERE tbl_language_content.id_language_content = %(id_language_content_1)s 
+ LIMIT %(param_1)s
+2017-05-25 15:03:33,419:sqlalchemy.engine.base.Engine/info()@109:INFO:{'id_language_content_1': UUID('e925083a-c640-4ce7-8fae-dc647f36d9f0'), 'param_1': 1}
+2017-05-25 15:03:33,426:sqlalchemy.engine.base.Engine/info()@109:INFO:ROLLBACK
+2017-05-25 15:03:33,482:sqlalchemy.engine.base.Engine/info()@109:INFO:select version()
+2017-05-25 15:03:33,485:sqlalchemy.engine.base.Engine/info()@109:INFO:{}
+2017-05-25 15:03:33,494:sqlalchemy.engine.base.Engine/info()@109:INFO:select current_schema()
+2017-05-25 15:03:33,497:sqlalchemy.engine.base.Engine/info()@109:INFO:{}
+2017-05-25 15:03:33,506:sqlalchemy.engine.base.Engine/info()@109:INFO:SELECT CAST('test plain returns' AS VARCHAR(60)) AS anon_1
+2017-05-25 15:03:33,508:sqlalchemy.engine.base.Engine/info()@109:INFO:{}
+2017-05-25 15:03:33,514:sqlalchemy.engine.base.Engine/info()@109:INFO:SELECT CAST('test unicode returns' AS VARCHAR(60)) AS anon_1
+2017-05-25 15:03:33,515:sqlalchemy.engine.base.Engine/info()@109:INFO:{}
+2017-05-25 15:03:33,520:sqlalchemy.engine.base.Engine/info()@109:INFO:show standard_conforming_strings
+2017-05-25 15:03:33,521:sqlalchemy.engine.base.Engine/info()@109:INFO:{}
+2017-05-25 15:03:33,525:sqlalchemy.engine.base.Engine/info()@109:INFO:BEGIN (implicit)
+2017-05-25 15:03:33,541:sqlalchemy.engine.base.Engine/info()@109:INFO:SELECT tbl_building.id_building AS tbl_building_id_building, tbl_building.id_language_content_name AS tbl_building_id_language_content_name, tbl_building.matricule AS tbl_building_matricule, tbl_building.civic_number AS tbl_building_civic_number, tbl_building.civic_letter AS tbl_building_civic_letter, tbl_building.civic_supp AS tbl_building_civic_supp, tbl_building.civic_letter_supp AS tbl_building_civic_letter_supp, tbl_building.appartment_number AS tbl_building_appartment_number, tbl_building.floor AS tbl_building_floor, tbl_building.suite AS tbl_building_suite, tbl_building.number_of_appartment AS tbl_building_number_of_appartment, tbl_building.number_of_building AS tbl_building_number_of_building, tbl_building.vacant_land AS tbl_building_vacant_land, tbl_building.year_of_construction AS tbl_building_year_of_construction, tbl_building.building_value AS tbl_building_building_value, tbl_building.id_lane AS tbl_building_id_lane, tbl_building.postal_code AS tbl_building_postal_code, tbl_building.id_utilisation_code AS tbl_building_id_utilisation_code, tbl_building.id_sector AS tbl_building_id_sector, tbl_building.id_mutual_aid_sector AS tbl_building_id_mutual_aid_sector, tbl_building.id_jaws_extrication_sector AS tbl_building_id_jaws_extrication_sector, tbl_building.id_sled_sector AS tbl_building_id_sled_sector, tbl_building.id_risk_level AS tbl_building_id_risk_level, tbl_building.source AS tbl_building_source, tbl_building.is_parent AS tbl_building_is_parent, tbl_building.utilisation_description AS tbl_building_utilisation_description, tbl_building.show_in_resources AS tbl_building_show_in_resources, tbl_building.id_resource_category AS tbl_building_id_resource_category, tbl_building.id_association_building AS tbl_building_id_association_building, tbl_building.id_association_type AS tbl_building_id_association_type, tbl_building.id_unit_type AS tbl_building_id_unit_type, ST_AsEWKB(tbl_building.coordinates) AS tbl_building_coordinates, tbl_building.coordinates_source AS tbl_building_coordinates_source, tbl_building.details AS tbl_building_details, tbl_building.created_on AS tbl_building_created_on, tbl_building.is_active AS tbl_building_is_active 
+FROM tbl_building 
+WHERE tbl_building.id_building = %(param_1)s
+2017-05-25 15:03:33,542:sqlalchemy.engine.base.Engine/info()@109:INFO:{'param_1': UUID('bd717551-d04c-4638-a8c0-020476c17713')}
+2017-05-25 15:03:33,643:sqlalchemy.engine.base.Engine/info()@109:INFO:ROLLBACK
+2017-05-25 15:03:33,709:sqlalchemy.engine.base.Engine/info()@109:INFO:select version()
+2017-05-25 15:03:33,713:sqlalchemy.engine.base.Engine/info()@109:INFO:{}
+2017-05-25 15:03:33,721:sqlalchemy.engine.base.Engine/info()@109:INFO:select current_schema()
+2017-05-25 15:03:33,722:sqlalchemy.engine.base.Engine/info()@109:INFO:{}
+2017-05-25 15:03:33,737:sqlalchemy.engine.base.Engine/info()@109:INFO:SELECT CAST('test plain returns' AS VARCHAR(60)) AS anon_1
+2017-05-25 15:03:33,739:sqlalchemy.engine.base.Engine/info()@109:INFO:{}
+2017-05-25 15:03:33,744:sqlalchemy.engine.base.Engine/info()@109:INFO:SELECT CAST('test unicode returns' AS VARCHAR(60)) AS anon_1
+2017-05-25 15:03:33,746:sqlalchemy.engine.base.Engine/info()@109:INFO:{}
+2017-05-25 15:03:33,751:sqlalchemy.engine.base.Engine/info()@109:INFO:show standard_conforming_strings
+2017-05-25 15:03:33,753:sqlalchemy.engine.base.Engine/info()@109:INFO:{}
+2017-05-25 15:03:33,757:sqlalchemy.engine.base.Engine/info()@109:INFO:BEGIN (implicit)
+2017-05-25 15:03:33,770:sqlalchemy.engine.base.Engine/info()@109:INFO:SELECT tbl_building.id_building AS tbl_building_id_building, tbl_building.id_language_content_name AS tbl_building_id_language_content_name, tbl_building.matricule AS tbl_building_matricule, tbl_building.civic_number AS tbl_building_civic_number, tbl_building.civic_letter AS tbl_building_civic_letter, tbl_building.civic_supp AS tbl_building_civic_supp, tbl_building.civic_letter_supp AS tbl_building_civic_letter_supp, tbl_building.appartment_number AS tbl_building_appartment_number, tbl_building.floor AS tbl_building_floor, tbl_building.suite AS tbl_building_suite, tbl_building.number_of_appartment AS tbl_building_number_of_appartment, tbl_building.number_of_building AS tbl_building_number_of_building, tbl_building.vacant_land AS tbl_building_vacant_land, tbl_building.year_of_construction AS tbl_building_year_of_construction, tbl_building.building_value AS tbl_building_building_value, tbl_building.id_lane AS tbl_building_id_lane, tbl_building.postal_code AS tbl_building_postal_code, tbl_building.id_utilisation_code AS tbl_building_id_utilisation_code, tbl_building.id_sector AS tbl_building_id_sector, tbl_building.id_mutual_aid_sector AS tbl_building_id_mutual_aid_sector, tbl_building.id_jaws_extrication_sector AS tbl_building_id_jaws_extrication_sector, tbl_building.id_sled_sector AS tbl_building_id_sled_sector, tbl_building.id_risk_level AS tbl_building_id_risk_level, tbl_building.source AS tbl_building_source, tbl_building.is_parent AS tbl_building_is_parent, tbl_building.utilisation_description AS tbl_building_utilisation_description, tbl_building.show_in_resources AS tbl_building_show_in_resources, tbl_building.id_resource_category AS tbl_building_id_resource_category, tbl_building.id_association_building AS tbl_building_id_association_building, tbl_building.id_association_type AS tbl_building_id_association_type, tbl_building.id_unit_type AS tbl_building_id_unit_type, ST_AsEWKB(tbl_building.coordinates) AS tbl_building_coordinates, tbl_building.coordinates_source AS tbl_building_coordinates_source, tbl_building.details AS tbl_building_details, tbl_building.created_on AS tbl_building_created_on, tbl_building.is_active AS tbl_building_is_active 
+FROM tbl_building 
+WHERE tbl_building.id_building = %(param_1)s
+2017-05-25 15:03:33,772:sqlalchemy.engine.base.Engine/info()@109:INFO:{'param_1': UUID('bd717551-d04c-4638-a8c0-020476c17713')}
+2017-05-25 15:03:33,871:sqlalchemy.engine.base.Engine/info()@109:INFO:ROLLBACK
+2017-05-25 15:03:33,932:sqlalchemy.engine.base.Engine/info()@109:INFO:select version()
+2017-05-25 15:03:33,933:sqlalchemy.engine.base.Engine/info()@109:INFO:{}
+2017-05-25 15:03:33,939:sqlalchemy.engine.base.Engine/info()@109:INFO:select current_schema()
+2017-05-25 15:03:33,941:sqlalchemy.engine.base.Engine/info()@109:INFO:{}
+2017-05-25 15:03:33,951:sqlalchemy.engine.base.Engine/info()@109:INFO:SELECT CAST('test plain returns' AS VARCHAR(60)) AS anon_1
+2017-05-25 15:03:33,952:sqlalchemy.engine.base.Engine/info()@109:INFO:{}
+2017-05-25 15:03:33,959:sqlalchemy.engine.base.Engine/info()@109:INFO:SELECT CAST('test unicode returns' AS VARCHAR(60)) AS anon_1
+2017-05-25 15:03:33,961:sqlalchemy.engine.base.Engine/info()@109:INFO:{}
+2017-05-25 15:03:33,968:sqlalchemy.engine.base.Engine/info()@109:INFO:show standard_conforming_strings
+2017-05-25 15:03:33,970:sqlalchemy.engine.base.Engine/info()@109:INFO:{}
+2017-05-25 15:03:33,974:sqlalchemy.engine.base.Engine/info()@109:INFO:BEGIN (implicit)
+2017-05-25 15:03:33,987:sqlalchemy.engine.base.Engine/info()@109:INFO:SELECT tbl_building.id_building AS tbl_building_id_building, tbl_building.id_language_content_name AS tbl_building_id_language_content_name, tbl_building.matricule AS tbl_building_matricule, tbl_building.civic_number AS tbl_building_civic_number, tbl_building.civic_letter AS tbl_building_civic_letter, tbl_building.civic_supp AS tbl_building_civic_supp, tbl_building.civic_letter_supp AS tbl_building_civic_letter_supp, tbl_building.appartment_number AS tbl_building_appartment_number, tbl_building.floor AS tbl_building_floor, tbl_building.suite AS tbl_building_suite, tbl_building.number_of_appartment AS tbl_building_number_of_appartment, tbl_building.number_of_building AS tbl_building_number_of_building, tbl_building.vacant_land AS tbl_building_vacant_land, tbl_building.year_of_construction AS tbl_building_year_of_construction, tbl_building.building_value AS tbl_building_building_value, tbl_building.id_lane AS tbl_building_id_lane, tbl_building.postal_code AS tbl_building_postal_code, tbl_building.id_utilisation_code AS tbl_building_id_utilisation_code, tbl_building.id_sector AS tbl_building_id_sector, tbl_building.id_mutual_aid_sector AS tbl_building_id_mutual_aid_sector, tbl_building.id_jaws_extrication_sector AS tbl_building_id_jaws_extrication_sector, tbl_building.id_sled_sector AS tbl_building_id_sled_sector, tbl_building.id_risk_level AS tbl_building_id_risk_level, tbl_building.source AS tbl_building_source, tbl_building.is_parent AS tbl_building_is_parent, tbl_building.utilisation_description AS tbl_building_utilisation_description, tbl_building.show_in_resources AS tbl_building_show_in_resources, tbl_building.id_resource_category AS tbl_building_id_resource_category, tbl_building.id_association_building AS tbl_building_id_association_building, tbl_building.id_association_type AS tbl_building_id_association_type, tbl_building.id_unit_type AS tbl_building_id_unit_type, ST_AsEWKB(tbl_building.coordinates) AS tbl_building_coordinates, tbl_building.coordinates_source AS tbl_building_coordinates_source, tbl_building.details AS tbl_building_details, tbl_building.created_on AS tbl_building_created_on, tbl_building.is_active AS tbl_building_is_active 
+FROM tbl_building 
+WHERE tbl_building.id_building = %(param_1)s
+2017-05-25 15:03:33,987:sqlalchemy.engine.base.Engine/info()@109:INFO:{'param_1': UUID('17e8d346-f956-4cc1-bae2-f50066c19a66')}
+2017-05-25 15:03:34,133:sqlalchemy.engine.base.Engine/info()@109:INFO:select version()
+2017-05-25 15:03:34,134:sqlalchemy.engine.base.Engine/info()@109:INFO:{}
+2017-05-25 15:03:34,140:sqlalchemy.engine.base.Engine/info()@109:INFO:select current_schema()
+2017-05-25 15:03:34,142:sqlalchemy.engine.base.Engine/info()@109:INFO:{}
+2017-05-25 15:03:34,149:sqlalchemy.engine.base.Engine/info()@109:INFO:SELECT CAST('test plain returns' AS VARCHAR(60)) AS anon_1
+2017-05-25 15:03:34,151:sqlalchemy.engine.base.Engine/info()@109:INFO:{}
+2017-05-25 15:03:34,156:sqlalchemy.engine.base.Engine/info()@109:INFO:SELECT CAST('test unicode returns' AS VARCHAR(60)) AS anon_1
+2017-05-25 15:03:34,157:sqlalchemy.engine.base.Engine/info()@109:INFO:{}
+2017-05-25 15:03:34,161:sqlalchemy.engine.base.Engine/info()@109:INFO:show standard_conforming_strings
+2017-05-25 15:03:34,163:sqlalchemy.engine.base.Engine/info()@109:INFO:{}
+2017-05-25 15:03:34,171:sqlalchemy.engine.base.Engine/info()@109:INFO:BEGIN (implicit)
+2017-05-25 15:03:34,179:sqlalchemy.engine.base.Engine/info()@109:INFO:SELECT tbl_lane.id_lane AS tbl_lane_id_lane, tbl_lane.id_language_content_name AS tbl_lane_id_language_content_name, tbl_lane.id_city AS tbl_lane_id_city, tbl_lane.public_lane_code AS tbl_lane_public_lane_code, tbl_lane.generic_code AS tbl_lane_generic_code, tbl_lane.created_on AS tbl_lane_created_on, tbl_lane.is_valid AS tbl_lane_is_valid, tbl_lane.is_active AS tbl_lane_is_active 
+FROM tbl_lane 
+WHERE tbl_lane.id_lane = %(param_1)s
+2017-05-25 15:03:34,181:sqlalchemy.engine.base.Engine/info()@109:INFO:{'param_1': UUID('19bc676f-03ec-4b24-ba0d-7a92332ed457')}
+2017-05-25 15:03:34,189:sqlalchemy.engine.base.Engine/info()@109:INFO:ROLLBACK
+2017-05-25 15:03:34,241:sqlalchemy.engine.base.Engine/info()@109:INFO:select version()
+2017-05-25 15:03:34,243:sqlalchemy.engine.base.Engine/info()@109:INFO:{}
+2017-05-25 15:03:34,250:sqlalchemy.engine.base.Engine/info()@109:INFO:select current_schema()
+2017-05-25 15:03:34,252:sqlalchemy.engine.base.Engine/info()@109:INFO:{}
+2017-05-25 15:03:34,286:sqlalchemy.engine.base.Engine/info()@109:INFO:SELECT CAST('test plain returns' AS VARCHAR(60)) AS anon_1
+2017-05-25 15:03:34,289:sqlalchemy.engine.base.Engine/info()@109:INFO:{}
+2017-05-25 15:03:34,298:sqlalchemy.engine.base.Engine/info()@109:INFO:SELECT CAST('test unicode returns' AS VARCHAR(60)) AS anon_1
+2017-05-25 15:03:34,301:sqlalchemy.engine.base.Engine/info()@109:INFO:{}
+2017-05-25 15:03:34,306:sqlalchemy.engine.base.Engine/info()@109:INFO:show standard_conforming_strings
+2017-05-25 15:03:34,307:sqlalchemy.engine.base.Engine/info()@109:INFO:{}
+2017-05-25 15:03:34,319:sqlalchemy.engine.base.Engine/info()@109:INFO:BEGIN (implicit)
+2017-05-25 15:03:34,324:sqlalchemy.engine.base.Engine/info()@109:INFO:SELECT tbl_language_content.id_language_content AS tbl_language_content_id_language_content, tbl_language_content.language_code AS tbl_language_content_language_code, tbl_language_content.description AS tbl_language_content_description 
+FROM tbl_language_content 
+WHERE tbl_language_content.id_language_content = %(id_language_content_1)s 
+ LIMIT %(param_1)s
+2017-05-25 15:03:34,325:sqlalchemy.engine.base.Engine/info()@109:INFO:{'id_language_content_1': UUID('e925083a-c640-4ce7-8fae-dc647f36d9f0'), 'param_1': 1}
+2017-05-25 15:03:34,344:sqlalchemy.engine.base.Engine/info()@109:INFO:ROLLBACK
+2017-05-25 15:03:34,400:sqlalchemy.engine.base.Engine/info()@109:INFO:select version()
+2017-05-25 15:03:34,403:sqlalchemy.engine.base.Engine/info()@109:INFO:{}
+2017-05-25 15:03:34,410:sqlalchemy.engine.base.Engine/info()@109:INFO:select current_schema()
+2017-05-25 15:03:34,411:sqlalchemy.engine.base.Engine/info()@109:INFO:{}
+2017-05-25 15:03:34,424:sqlalchemy.engine.base.Engine/info()@109:INFO:SELECT CAST('test plain returns' AS VARCHAR(60)) AS anon_1
+2017-05-25 15:03:34,427:sqlalchemy.engine.base.Engine/info()@109:INFO:{}
+2017-05-25 15:03:34,435:sqlalchemy.engine.base.Engine/info()@109:INFO:SELECT CAST('test unicode returns' AS VARCHAR(60)) AS anon_1
+2017-05-25 15:03:34,436:sqlalchemy.engine.base.Engine/info()@109:INFO:{}
+2017-05-25 15:03:34,441:sqlalchemy.engine.base.Engine/info()@109:INFO:show standard_conforming_strings
+2017-05-25 15:03:34,443:sqlalchemy.engine.base.Engine/info()@109:INFO:{}
+2017-05-25 15:03:34,450:sqlalchemy.engine.base.Engine/info()@109:INFO:BEGIN (implicit)
+2017-05-25 15:03:34,461:sqlalchemy.engine.base.Engine/info()@109:INFO:SELECT tbl_building.id_building AS tbl_building_id_building, tbl_building.id_language_content_name AS tbl_building_id_language_content_name, tbl_building.matricule AS tbl_building_matricule, tbl_building.civic_number AS tbl_building_civic_number, tbl_building.civic_letter AS tbl_building_civic_letter, tbl_building.civic_supp AS tbl_building_civic_supp, tbl_building.civic_letter_supp AS tbl_building_civic_letter_supp, tbl_building.appartment_number AS tbl_building_appartment_number, tbl_building.floor AS tbl_building_floor, tbl_building.suite AS tbl_building_suite, tbl_building.number_of_appartment AS tbl_building_number_of_appartment, tbl_building.number_of_building AS tbl_building_number_of_building, tbl_building.vacant_land AS tbl_building_vacant_land, tbl_building.year_of_construction AS tbl_building_year_of_construction, tbl_building.building_value AS tbl_building_building_value, tbl_building.id_lane AS tbl_building_id_lane, tbl_building.postal_code AS tbl_building_postal_code, tbl_building.id_utilisation_code AS tbl_building_id_utilisation_code, tbl_building.id_sector AS tbl_building_id_sector, tbl_building.id_mutual_aid_sector AS tbl_building_id_mutual_aid_sector, tbl_building.id_jaws_extrication_sector AS tbl_building_id_jaws_extrication_sector, tbl_building.id_sled_sector AS tbl_building_id_sled_sector, tbl_building.id_risk_level AS tbl_building_id_risk_level, tbl_building.source AS tbl_building_source, tbl_building.is_parent AS tbl_building_is_parent, tbl_building.utilisation_description AS tbl_building_utilisation_description, tbl_building.show_in_resources AS tbl_building_show_in_resources, tbl_building.id_resource_category AS tbl_building_id_resource_category, tbl_building.id_association_building AS tbl_building_id_association_building, tbl_building.id_association_type AS tbl_building_id_association_type, tbl_building.id_unit_type AS tbl_building_id_unit_type, ST_AsEWKB(tbl_building.coordinates) AS tbl_building_coordinates, tbl_building.coordinates_source AS tbl_building_coordinates_source, tbl_building.details AS tbl_building_details, tbl_building.created_on AS tbl_building_created_on, tbl_building.is_active AS tbl_building_is_active 
+FROM tbl_building 
+WHERE tbl_building.id_building = %(param_1)s
+2017-05-25 15:03:34,462:sqlalchemy.engine.base.Engine/info()@109:INFO:{'param_1': UUID('17e8d346-f956-4cc1-bae2-f50066c19a66')}
+2017-05-25 15:03:34,565:sqlalchemy.engine.base.Engine/info()@109:INFO:ROLLBACK
+2017-05-25 15:03:34,635:sqlalchemy.engine.base.Engine/info()@109:INFO:select version()
+2017-05-25 15:03:34,636:sqlalchemy.engine.base.Engine/info()@109:INFO:{}
+2017-05-25 15:03:34,647:sqlalchemy.engine.base.Engine/info()@109:INFO:select current_schema()
+2017-05-25 15:03:34,650:sqlalchemy.engine.base.Engine/info()@109:INFO:{}
+2017-05-25 15:03:34,658:sqlalchemy.engine.base.Engine/info()@109:INFO:SELECT CAST('test plain returns' AS VARCHAR(60)) AS anon_1
+2017-05-25 15:03:34,659:sqlalchemy.engine.base.Engine/info()@109:INFO:{}
+2017-05-25 15:03:34,664:sqlalchemy.engine.base.Engine/info()@109:INFO:SELECT CAST('test unicode returns' AS VARCHAR(60)) AS anon_1
+2017-05-25 15:03:34,666:sqlalchemy.engine.base.Engine/info()@109:INFO:{}
+2017-05-25 15:03:34,671:sqlalchemy.engine.base.Engine/info()@109:INFO:show standard_conforming_strings
+2017-05-25 15:03:34,672:sqlalchemy.engine.base.Engine/info()@109:INFO:{}
+2017-05-25 15:03:34,678:sqlalchemy.engine.base.Engine/info()@109:INFO:BEGIN (implicit)
+2017-05-25 15:03:34,690:sqlalchemy.engine.base.Engine/info()@109:INFO:SELECT tbl_building.id_building AS tbl_building_id_building, tbl_building.id_language_content_name AS tbl_building_id_language_content_name, tbl_building.matricule AS tbl_building_matricule, tbl_building.civic_number AS tbl_building_civic_number, tbl_building.civic_letter AS tbl_building_civic_letter, tbl_building.civic_supp AS tbl_building_civic_supp, tbl_building.civic_letter_supp AS tbl_building_civic_letter_supp, tbl_building.appartment_number AS tbl_building_appartment_number, tbl_building.floor AS tbl_building_floor, tbl_building.suite AS tbl_building_suite, tbl_building.number_of_appartment AS tbl_building_number_of_appartment, tbl_building.number_of_building AS tbl_building_number_of_building, tbl_building.vacant_land AS tbl_building_vacant_land, tbl_building.year_of_construction AS tbl_building_year_of_construction, tbl_building.building_value AS tbl_building_building_value, tbl_building.id_lane AS tbl_building_id_lane, tbl_building.postal_code AS tbl_building_postal_code, tbl_building.id_utilisation_code AS tbl_building_id_utilisation_code, tbl_building.id_sector AS tbl_building_id_sector, tbl_building.id_mutual_aid_sector AS tbl_building_id_mutual_aid_sector, tbl_building.id_jaws_extrication_sector AS tbl_building_id_jaws_extrication_sector, tbl_building.id_sled_sector AS tbl_building_id_sled_sector, tbl_building.id_risk_level AS tbl_building_id_risk_level, tbl_building.source AS tbl_building_source, tbl_building.is_parent AS tbl_building_is_parent, tbl_building.utilisation_description AS tbl_building_utilisation_description, tbl_building.show_in_resources AS tbl_building_show_in_resources, tbl_building.id_resource_category AS tbl_building_id_resource_category, tbl_building.id_association_building AS tbl_building_id_association_building, tbl_building.id_association_type AS tbl_building_id_association_type, tbl_building.id_unit_type AS tbl_building_id_unit_type, ST_AsEWKB(tbl_building.coordinates) AS tbl_building_coordinates, tbl_building.coordinates_source AS tbl_building_coordinates_source, tbl_building.details AS tbl_building_details, tbl_building.created_on AS tbl_building_created_on, tbl_building.is_active AS tbl_building_is_active 
+FROM tbl_building 
+WHERE tbl_building.id_building = %(param_1)s
+2017-05-25 15:03:34,690:sqlalchemy.engine.base.Engine/info()@109:INFO:{'param_1': UUID('17e8d346-f956-4cc1-bae2-f50066c19a66')}
+2017-05-25 15:03:34,793:sqlalchemy.engine.base.Engine/info()@109:INFO:ROLLBACK
+2017-05-25 15:03:34,857:sqlalchemy.engine.base.Engine/info()@109:INFO:select version()
+2017-05-25 15:03:34,859:sqlalchemy.engine.base.Engine/info()@109:INFO:{}
+2017-05-25 15:03:34,866:sqlalchemy.engine.base.Engine/info()@109:INFO:select current_schema()
+2017-05-25 15:03:34,868:sqlalchemy.engine.base.Engine/info()@109:INFO:{}
+2017-05-25 15:03:34,876:sqlalchemy.engine.base.Engine/info()@109:INFO:SELECT CAST('test plain returns' AS VARCHAR(60)) AS anon_1
+2017-05-25 15:03:34,877:sqlalchemy.engine.base.Engine/info()@109:INFO:{}
+2017-05-25 15:03:34,883:sqlalchemy.engine.base.Engine/info()@109:INFO:SELECT CAST('test unicode returns' AS VARCHAR(60)) AS anon_1
+2017-05-25 15:03:34,884:sqlalchemy.engine.base.Engine/info()@109:INFO:{}
+2017-05-25 15:03:34,887:sqlalchemy.engine.base.Engine/info()@109:INFO:show standard_conforming_strings
+2017-05-25 15:03:34,890:sqlalchemy.engine.base.Engine/info()@109:INFO:{}
+2017-05-25 15:03:34,899:sqlalchemy.engine.base.Engine/info()@109:INFO:BEGIN (implicit)
+2017-05-25 15:03:34,907:sqlalchemy.engine.base.Engine/info()@109:INFO:SELECT tbl_building.id_building AS tbl_building_id_building, tbl_building.id_language_content_name AS tbl_building_id_language_content_name, tbl_building.matricule AS tbl_building_matricule, tbl_building.civic_number AS tbl_building_civic_number, tbl_building.civic_letter AS tbl_building_civic_letter, tbl_building.civic_supp AS tbl_building_civic_supp, tbl_building.civic_letter_supp AS tbl_building_civic_letter_supp, tbl_building.appartment_number AS tbl_building_appartment_number, tbl_building.floor AS tbl_building_floor, tbl_building.suite AS tbl_building_suite, tbl_building.number_of_appartment AS tbl_building_number_of_appartment, tbl_building.number_of_building AS tbl_building_number_of_building, tbl_building.vacant_land AS tbl_building_vacant_land, tbl_building.year_of_construction AS tbl_building_year_of_construction, tbl_building.building_value AS tbl_building_building_value, tbl_building.id_lane AS tbl_building_id_lane, tbl_building.postal_code AS tbl_building_postal_code, tbl_building.id_utilisation_code AS tbl_building_id_utilisation_code, tbl_building.id_sector AS tbl_building_id_sector, tbl_building.id_mutual_aid_sector AS tbl_building_id_mutual_aid_sector, tbl_building.id_jaws_extrication_sector AS tbl_building_id_jaws_extrication_sector, tbl_building.id_sled_sector AS tbl_building_id_sled_sector, tbl_building.id_risk_level AS tbl_building_id_risk_level, tbl_building.source AS tbl_building_source, tbl_building.is_parent AS tbl_building_is_parent, tbl_building.utilisation_description AS tbl_building_utilisation_description, tbl_building.show_in_resources AS tbl_building_show_in_resources, tbl_building.id_resource_category AS tbl_building_id_resource_category, tbl_building.id_association_building AS tbl_building_id_association_building, tbl_building.id_association_type AS tbl_building_id_association_type, tbl_building.id_unit_type AS tbl_building_id_unit_type, ST_AsEWKB(tbl_building.coordinates) AS tbl_building_coordinates, tbl_building.coordinates_source AS tbl_building_coordinates_source, tbl_building.details AS tbl_building_details, tbl_building.created_on AS tbl_building_created_on, tbl_building.is_active AS tbl_building_is_active 
+FROM tbl_building 
+WHERE tbl_building.id_building = %(param_1)s
+2017-05-25 15:03:34,909:sqlalchemy.engine.base.Engine/info()@109:INFO:{'param_1': UUID('ab4417e3-008c-48a6-80e9-990d6c73b204')}
+2017-05-25 15:03:35,051:sqlalchemy.engine.base.Engine/info()@109:INFO:select version()
+2017-05-25 15:03:35,053:sqlalchemy.engine.base.Engine/info()@109:INFO:{}
+2017-05-25 15:03:35,058:sqlalchemy.engine.base.Engine/info()@109:INFO:select current_schema()
+2017-05-25 15:03:35,059:sqlalchemy.engine.base.Engine/info()@109:INFO:{}
+2017-05-25 15:03:35,067:sqlalchemy.engine.base.Engine/info()@109:INFO:SELECT CAST('test plain returns' AS VARCHAR(60)) AS anon_1
+2017-05-25 15:03:35,068:sqlalchemy.engine.base.Engine/info()@109:INFO:{}
+2017-05-25 15:03:35,072:sqlalchemy.engine.base.Engine/info()@109:INFO:SELECT CAST('test unicode returns' AS VARCHAR(60)) AS anon_1
+2017-05-25 15:03:35,074:sqlalchemy.engine.base.Engine/info()@109:INFO:{}
+2017-05-25 15:03:35,079:sqlalchemy.engine.base.Engine/info()@109:INFO:show standard_conforming_strings
+2017-05-25 15:03:35,082:sqlalchemy.engine.base.Engine/info()@109:INFO:{}
+2017-05-25 15:03:35,086:sqlalchemy.engine.base.Engine/info()@109:INFO:BEGIN (implicit)
+2017-05-25 15:03:35,094:sqlalchemy.engine.base.Engine/info()@109:INFO:SELECT tbl_lane.id_lane AS tbl_lane_id_lane, tbl_lane.id_language_content_name AS tbl_lane_id_language_content_name, tbl_lane.id_city AS tbl_lane_id_city, tbl_lane.public_lane_code AS tbl_lane_public_lane_code, tbl_lane.generic_code AS tbl_lane_generic_code, tbl_lane.created_on AS tbl_lane_created_on, tbl_lane.is_valid AS tbl_lane_is_valid, tbl_lane.is_active AS tbl_lane_is_active 
+FROM tbl_lane 
+WHERE tbl_lane.id_lane = %(param_1)s
+2017-05-25 15:03:35,095:sqlalchemy.engine.base.Engine/info()@109:INFO:{'param_1': UUID('cd569e20-6119-456d-840f-b416a60be2f3')}
+2017-05-25 15:03:35,104:sqlalchemy.engine.base.Engine/info()@109:INFO:ROLLBACK
+2017-05-25 15:03:35,154:sqlalchemy.engine.base.Engine/info()@109:INFO:select version()
+2017-05-25 15:03:35,154:sqlalchemy.engine.base.Engine/info()@109:INFO:{}
+2017-05-25 15:03:35,161:sqlalchemy.engine.base.Engine/info()@109:INFO:select current_schema()
+2017-05-25 15:03:35,164:sqlalchemy.engine.base.Engine/info()@109:INFO:{}
+2017-05-25 15:03:35,171:sqlalchemy.engine.base.Engine/info()@109:INFO:SELECT CAST('test plain returns' AS VARCHAR(60)) AS anon_1
+2017-05-25 15:03:35,173:sqlalchemy.engine.base.Engine/info()@109:INFO:{}
+2017-05-25 15:03:35,179:sqlalchemy.engine.base.Engine/info()@109:INFO:SELECT CAST('test unicode returns' AS VARCHAR(60)) AS anon_1
+2017-05-25 15:03:35,181:sqlalchemy.engine.base.Engine/info()@109:INFO:{}
+2017-05-25 15:03:35,186:sqlalchemy.engine.base.Engine/info()@109:INFO:show standard_conforming_strings
+2017-05-25 15:03:35,187:sqlalchemy.engine.base.Engine/info()@109:INFO:{}
+2017-05-25 15:03:35,190:sqlalchemy.engine.base.Engine/info()@109:INFO:BEGIN (implicit)
+2017-05-25 15:03:35,194:sqlalchemy.engine.base.Engine/info()@109:INFO:SELECT tbl_language_content.id_language_content AS tbl_language_content_id_language_content, tbl_language_content.language_code AS tbl_language_content_language_code, tbl_language_content.description AS tbl_language_content_description 
+FROM tbl_language_content 
+WHERE tbl_language_content.id_language_content = %(id_language_content_1)s 
+ LIMIT %(param_1)s
+2017-05-25 15:03:35,196:sqlalchemy.engine.base.Engine/info()@109:INFO:{'id_language_content_1': UUID('e0b82f24-7c4b-4780-958e-be07be240555'), 'param_1': 1}
+2017-05-25 15:03:35,204:sqlalchemy.engine.base.Engine/info()@109:INFO:ROLLBACK
+2017-05-25 15:03:35,253:sqlalchemy.engine.base.Engine/info()@109:INFO:select version()
+2017-05-25 15:03:35,254:sqlalchemy.engine.base.Engine/info()@109:INFO:{}
+2017-05-25 15:03:35,257:sqlalchemy.engine.base.Engine/info()@109:INFO:select current_schema()
+2017-05-25 15:03:35,258:sqlalchemy.engine.base.Engine/info()@109:INFO:{}
+2017-05-25 15:03:35,268:sqlalchemy.engine.base.Engine/info()@109:INFO:SELECT CAST('test plain returns' AS VARCHAR(60)) AS anon_1
+2017-05-25 15:03:35,270:sqlalchemy.engine.base.Engine/info()@109:INFO:{}
+2017-05-25 15:03:35,274:sqlalchemy.engine.base.Engine/info()@109:INFO:SELECT CAST('test unicode returns' AS VARCHAR(60)) AS anon_1
+2017-05-25 15:03:35,274:sqlalchemy.engine.base.Engine/info()@109:INFO:{}
+2017-05-25 15:03:35,280:sqlalchemy.engine.base.Engine/info()@109:INFO:show standard_conforming_strings
+2017-05-25 15:03:35,282:sqlalchemy.engine.base.Engine/info()@109:INFO:{}
+2017-05-25 15:03:35,289:sqlalchemy.engine.base.Engine/info()@109:INFO:BEGIN (implicit)
+2017-05-25 15:03:35,299:sqlalchemy.engine.base.Engine/info()@109:INFO:SELECT tbl_building.id_building AS tbl_building_id_building, tbl_building.id_language_content_name AS tbl_building_id_language_content_name, tbl_building.matricule AS tbl_building_matricule, tbl_building.civic_number AS tbl_building_civic_number, tbl_building.civic_letter AS tbl_building_civic_letter, tbl_building.civic_supp AS tbl_building_civic_supp, tbl_building.civic_letter_supp AS tbl_building_civic_letter_supp, tbl_building.appartment_number AS tbl_building_appartment_number, tbl_building.floor AS tbl_building_floor, tbl_building.suite AS tbl_building_suite, tbl_building.number_of_appartment AS tbl_building_number_of_appartment, tbl_building.number_of_building AS tbl_building_number_of_building, tbl_building.vacant_land AS tbl_building_vacant_land, tbl_building.year_of_construction AS tbl_building_year_of_construction, tbl_building.building_value AS tbl_building_building_value, tbl_building.id_lane AS tbl_building_id_lane, tbl_building.postal_code AS tbl_building_postal_code, tbl_building.id_utilisation_code AS tbl_building_id_utilisation_code, tbl_building.id_sector AS tbl_building_id_sector, tbl_building.id_mutual_aid_sector AS tbl_building_id_mutual_aid_sector, tbl_building.id_jaws_extrication_sector AS tbl_building_id_jaws_extrication_sector, tbl_building.id_sled_sector AS tbl_building_id_sled_sector, tbl_building.id_risk_level AS tbl_building_id_risk_level, tbl_building.source AS tbl_building_source, tbl_building.is_parent AS tbl_building_is_parent, tbl_building.utilisation_description AS tbl_building_utilisation_description, tbl_building.show_in_resources AS tbl_building_show_in_resources, tbl_building.id_resource_category AS tbl_building_id_resource_category, tbl_building.id_association_building AS tbl_building_id_association_building, tbl_building.id_association_type AS tbl_building_id_association_type, tbl_building.id_unit_type AS tbl_building_id_unit_type, ST_AsEWKB(tbl_building.coordinates) AS tbl_building_coordinates, tbl_building.coordinates_source AS tbl_building_coordinates_source, tbl_building.details AS tbl_building_details, tbl_building.created_on AS tbl_building_created_on, tbl_building.is_active AS tbl_building_is_active 
+FROM tbl_building 
+WHERE tbl_building.id_building = %(param_1)s
+2017-05-25 15:03:35,301:sqlalchemy.engine.base.Engine/info()@109:INFO:{'param_1': UUID('ab4417e3-008c-48a6-80e9-990d6c73b204')}
+2017-05-25 15:03:35,399:sqlalchemy.engine.base.Engine/info()@109:INFO:ROLLBACK
+2017-05-25 15:03:35,448:sqlalchemy.engine.base.Engine/info()@109:INFO:select version()
+2017-05-25 15:03:35,451:sqlalchemy.engine.base.Engine/info()@109:INFO:{}
+2017-05-25 15:03:35,460:sqlalchemy.engine.base.Engine/info()@109:INFO:select current_schema()
+2017-05-25 15:03:35,463:sqlalchemy.engine.base.Engine/info()@109:INFO:{}
+2017-05-25 15:03:35,471:sqlalchemy.engine.base.Engine/info()@109:INFO:SELECT CAST('test plain returns' AS VARCHAR(60)) AS anon_1
+2017-05-25 15:03:35,472:sqlalchemy.engine.base.Engine/info()@109:INFO:{}
+2017-05-25 15:03:35,477:sqlalchemy.engine.base.Engine/info()@109:INFO:SELECT CAST('test unicode returns' AS VARCHAR(60)) AS anon_1
+2017-05-25 15:03:35,480:sqlalchemy.engine.base.Engine/info()@109:INFO:{}
+2017-05-25 15:03:35,486:sqlalchemy.engine.base.Engine/info()@109:INFO:show standard_conforming_strings
+2017-05-25 15:03:35,486:sqlalchemy.engine.base.Engine/info()@109:INFO:{}
+2017-05-25 15:03:35,490:sqlalchemy.engine.base.Engine/info()@109:INFO:BEGIN (implicit)
+2017-05-25 15:03:35,501:sqlalchemy.engine.base.Engine/info()@109:INFO:SELECT tbl_building.id_building AS tbl_building_id_building, tbl_building.id_language_content_name AS tbl_building_id_language_content_name, tbl_building.matricule AS tbl_building_matricule, tbl_building.civic_number AS tbl_building_civic_number, tbl_building.civic_letter AS tbl_building_civic_letter, tbl_building.civic_supp AS tbl_building_civic_supp, tbl_building.civic_letter_supp AS tbl_building_civic_letter_supp, tbl_building.appartment_number AS tbl_building_appartment_number, tbl_building.floor AS tbl_building_floor, tbl_building.suite AS tbl_building_suite, tbl_building.number_of_appartment AS tbl_building_number_of_appartment, tbl_building.number_of_building AS tbl_building_number_of_building, tbl_building.vacant_land AS tbl_building_vacant_land, tbl_building.year_of_construction AS tbl_building_year_of_construction, tbl_building.building_value AS tbl_building_building_value, tbl_building.id_lane AS tbl_building_id_lane, tbl_building.postal_code AS tbl_building_postal_code, tbl_building.id_utilisation_code AS tbl_building_id_utilisation_code, tbl_building.id_sector AS tbl_building_id_sector, tbl_building.id_mutual_aid_sector AS tbl_building_id_mutual_aid_sector, tbl_building.id_jaws_extrication_sector AS tbl_building_id_jaws_extrication_sector, tbl_building.id_sled_sector AS tbl_building_id_sled_sector, tbl_building.id_risk_level AS tbl_building_id_risk_level, tbl_building.source AS tbl_building_source, tbl_building.is_parent AS tbl_building_is_parent, tbl_building.utilisation_description AS tbl_building_utilisation_description, tbl_building.show_in_resources AS tbl_building_show_in_resources, tbl_building.id_resource_category AS tbl_building_id_resource_category, tbl_building.id_association_building AS tbl_building_id_association_building, tbl_building.id_association_type AS tbl_building_id_association_type, tbl_building.id_unit_type AS tbl_building_id_unit_type, ST_AsEWKB(tbl_building.coordinates) AS tbl_building_coordinates, tbl_building.coordinates_source AS tbl_building_coordinates_source, tbl_building.details AS tbl_building_details, tbl_building.created_on AS tbl_building_created_on, tbl_building.is_active AS tbl_building_is_active 
+FROM tbl_building 
+WHERE tbl_building.id_building = %(param_1)s
+2017-05-25 15:03:35,502:sqlalchemy.engine.base.Engine/info()@109:INFO:{'param_1': UUID('ab4417e3-008c-48a6-80e9-990d6c73b204')}
+2017-05-25 15:03:35,598:sqlalchemy.engine.base.Engine/info()@109:INFO:ROLLBACK
+2017-05-25 15:03:35,645:sqlalchemy.engine.base.Engine/info()@109:INFO:select version()
+2017-05-25 15:03:35,646:sqlalchemy.engine.base.Engine/info()@109:INFO:{}
+2017-05-25 15:03:35,651:sqlalchemy.engine.base.Engine/info()@109:INFO:select current_schema()
+2017-05-25 15:03:35,654:sqlalchemy.engine.base.Engine/info()@109:INFO:{}
+2017-05-25 15:03:35,662:sqlalchemy.engine.base.Engine/info()@109:INFO:SELECT CAST('test plain returns' AS VARCHAR(60)) AS anon_1
+2017-05-25 15:03:35,662:sqlalchemy.engine.base.Engine/info()@109:INFO:{}
+2017-05-25 15:03:35,665:sqlalchemy.engine.base.Engine/info()@109:INFO:SELECT CAST('test unicode returns' AS VARCHAR(60)) AS anon_1
+2017-05-25 15:03:35,666:sqlalchemy.engine.base.Engine/info()@109:INFO:{}
+2017-05-25 15:03:35,672:sqlalchemy.engine.base.Engine/info()@109:INFO:show standard_conforming_strings
+2017-05-25 15:03:35,673:sqlalchemy.engine.base.Engine/info()@109:INFO:{}
+2017-05-25 15:03:35,681:sqlalchemy.engine.base.Engine/info()@109:INFO:BEGIN (implicit)
+2017-05-25 15:03:35,694:sqlalchemy.engine.base.Engine/info()@109:INFO:SELECT tbl_building.id_building AS tbl_building_id_building, tbl_building.id_language_content_name AS tbl_building_id_language_content_name, tbl_building.matricule AS tbl_building_matricule, tbl_building.civic_number AS tbl_building_civic_number, tbl_building.civic_letter AS tbl_building_civic_letter, tbl_building.civic_supp AS tbl_building_civic_supp, tbl_building.civic_letter_supp AS tbl_building_civic_letter_supp, tbl_building.appartment_number AS tbl_building_appartment_number, tbl_building.floor AS tbl_building_floor, tbl_building.suite AS tbl_building_suite, tbl_building.number_of_appartment AS tbl_building_number_of_appartment, tbl_building.number_of_building AS tbl_building_number_of_building, tbl_building.vacant_land AS tbl_building_vacant_land, tbl_building.year_of_construction AS tbl_building_year_of_construction, tbl_building.building_value AS tbl_building_building_value, tbl_building.id_lane AS tbl_building_id_lane, tbl_building.postal_code AS tbl_building_postal_code, tbl_building.id_utilisation_code AS tbl_building_id_utilisation_code, tbl_building.id_sector AS tbl_building_id_sector, tbl_building.id_mutual_aid_sector AS tbl_building_id_mutual_aid_sector, tbl_building.id_jaws_extrication_sector AS tbl_building_id_jaws_extrication_sector, tbl_building.id_sled_sector AS tbl_building_id_sled_sector, tbl_building.id_risk_level AS tbl_building_id_risk_level, tbl_building.source AS tbl_building_source, tbl_building.is_parent AS tbl_building_is_parent, tbl_building.utilisation_description AS tbl_building_utilisation_description, tbl_building.show_in_resources AS tbl_building_show_in_resources, tbl_building.id_resource_category AS tbl_building_id_resource_category, tbl_building.id_association_building AS tbl_building_id_association_building, tbl_building.id_association_type AS tbl_building_id_association_type, tbl_building.id_unit_type AS tbl_building_id_unit_type, ST_AsEWKB(tbl_building.coordinates) AS tbl_building_coordinates, tbl_building.coordinates_source AS tbl_building_coordinates_source, tbl_building.details AS tbl_building_details, tbl_building.created_on AS tbl_building_created_on, tbl_building.is_active AS tbl_building_is_active 
+FROM tbl_building 
+WHERE tbl_building.id_building = %(param_1)s
+2017-05-25 15:03:35,697:sqlalchemy.engine.base.Engine/info()@109:INFO:{'param_1': UUID('2e922d74-72b3-4312-8976-c1778aa79541')}
+2017-05-25 15:03:35,841:sqlalchemy.engine.base.Engine/info()@109:INFO:select version()
+2017-05-25 15:03:35,843:sqlalchemy.engine.base.Engine/info()@109:INFO:{}
+2017-05-25 15:03:35,851:sqlalchemy.engine.base.Engine/info()@109:INFO:select current_schema()
+2017-05-25 15:03:35,852:sqlalchemy.engine.base.Engine/info()@109:INFO:{}
+2017-05-25 15:03:35,861:sqlalchemy.engine.base.Engine/info()@109:INFO:SELECT CAST('test plain returns' AS VARCHAR(60)) AS anon_1
+2017-05-25 15:03:35,864:sqlalchemy.engine.base.Engine/info()@109:INFO:{}
+2017-05-25 15:03:35,869:sqlalchemy.engine.base.Engine/info()@109:INFO:SELECT CAST('test unicode returns' AS VARCHAR(60)) AS anon_1
+2017-05-25 15:03:35,871:sqlalchemy.engine.base.Engine/info()@109:INFO:{}
+2017-05-25 15:03:35,876:sqlalchemy.engine.base.Engine/info()@109:INFO:show standard_conforming_strings
+2017-05-25 15:03:35,878:sqlalchemy.engine.base.Engine/info()@109:INFO:{}
+2017-05-25 15:03:35,885:sqlalchemy.engine.base.Engine/info()@109:INFO:BEGIN (implicit)
+2017-05-25 15:03:35,887:sqlalchemy.engine.base.Engine/info()@109:INFO:SELECT tbl_lane.id_lane AS tbl_lane_id_lane, tbl_lane.id_language_content_name AS tbl_lane_id_language_content_name, tbl_lane.id_city AS tbl_lane_id_city, tbl_lane.public_lane_code AS tbl_lane_public_lane_code, tbl_lane.generic_code AS tbl_lane_generic_code, tbl_lane.created_on AS tbl_lane_created_on, tbl_lane.is_valid AS tbl_lane_is_valid, tbl_lane.is_active AS tbl_lane_is_active 
+FROM tbl_lane 
+WHERE tbl_lane.id_lane = %(param_1)s
+2017-05-25 15:03:35,888:sqlalchemy.engine.base.Engine/info()@109:INFO:{'param_1': UUID('cd569e20-6119-456d-840f-b416a60be2f3')}
+2017-05-25 15:03:35,898:sqlalchemy.engine.base.Engine/info()@109:INFO:ROLLBACK
+2017-05-25 15:03:35,958:sqlalchemy.engine.base.Engine/info()@109:INFO:select version()
+2017-05-25 15:03:35,961:sqlalchemy.engine.base.Engine/info()@109:INFO:{}
+2017-05-25 15:03:35,967:sqlalchemy.engine.base.Engine/info()@109:INFO:select current_schema()
+2017-05-25 15:03:35,969:sqlalchemy.engine.base.Engine/info()@109:INFO:{}
+2017-05-25 15:03:35,976:sqlalchemy.engine.base.Engine/info()@109:INFO:SELECT CAST('test plain returns' AS VARCHAR(60)) AS anon_1
+2017-05-25 15:03:35,977:sqlalchemy.engine.base.Engine/info()@109:INFO:{}
+2017-05-25 15:03:35,981:sqlalchemy.engine.base.Engine/info()@109:INFO:SELECT CAST('test unicode returns' AS VARCHAR(60)) AS anon_1
+2017-05-25 15:03:35,983:sqlalchemy.engine.base.Engine/info()@109:INFO:{}
+2017-05-25 15:03:35,986:sqlalchemy.engine.base.Engine/info()@109:INFO:show standard_conforming_strings
+2017-05-25 15:03:35,986:sqlalchemy.engine.base.Engine/info()@109:INFO:{}
+2017-05-25 15:03:35,991:sqlalchemy.engine.base.Engine/info()@109:INFO:BEGIN (implicit)
+2017-05-25 15:03:35,995:sqlalchemy.engine.base.Engine/info()@109:INFO:SELECT tbl_language_content.id_language_content AS tbl_language_content_id_language_content, tbl_language_content.language_code AS tbl_language_content_language_code, tbl_language_content.description AS tbl_language_content_description 
+FROM tbl_language_content 
+WHERE tbl_language_content.id_language_content = %(id_language_content_1)s 
+ LIMIT %(param_1)s
+2017-05-25 15:03:35,997:sqlalchemy.engine.base.Engine/info()@109:INFO:{'id_language_content_1': UUID('e0b82f24-7c4b-4780-958e-be07be240555'), 'param_1': 1}
+2017-05-25 15:03:36,003:sqlalchemy.engine.base.Engine/info()@109:INFO:ROLLBACK
+2017-05-25 15:03:36,050:sqlalchemy.engine.base.Engine/info()@109:INFO:select version()
+2017-05-25 15:03:36,052:sqlalchemy.engine.base.Engine/info()@109:INFO:{}
+2017-05-25 15:03:36,057:sqlalchemy.engine.base.Engine/info()@109:INFO:select current_schema()
+2017-05-25 15:03:36,058:sqlalchemy.engine.base.Engine/info()@109:INFO:{}
+2017-05-25 15:03:36,067:sqlalchemy.engine.base.Engine/info()@109:INFO:SELECT CAST('test plain returns' AS VARCHAR(60)) AS anon_1
+2017-05-25 15:03:36,069:sqlalchemy.engine.base.Engine/info()@109:INFO:{}
+2017-05-25 15:03:36,075:sqlalchemy.engine.base.Engine/info()@109:INFO:SELECT CAST('test unicode returns' AS VARCHAR(60)) AS anon_1
+2017-05-25 15:03:36,077:sqlalchemy.engine.base.Engine/info()@109:INFO:{}
+2017-05-25 15:03:36,083:sqlalchemy.engine.base.Engine/info()@109:INFO:show standard_conforming_strings
+2017-05-25 15:03:36,085:sqlalchemy.engine.base.Engine/info()@109:INFO:{}
+2017-05-25 15:03:36,090:sqlalchemy.engine.base.Engine/info()@109:INFO:BEGIN (implicit)
+2017-05-25 15:03:36,101:sqlalchemy.engine.base.Engine/info()@109:INFO:SELECT tbl_building.id_building AS tbl_building_id_building, tbl_building.id_language_content_name AS tbl_building_id_language_content_name, tbl_building.matricule AS tbl_building_matricule, tbl_building.civic_number AS tbl_building_civic_number, tbl_building.civic_letter AS tbl_building_civic_letter, tbl_building.civic_supp AS tbl_building_civic_supp, tbl_building.civic_letter_supp AS tbl_building_civic_letter_supp, tbl_building.appartment_number AS tbl_building_appartment_number, tbl_building.floor AS tbl_building_floor, tbl_building.suite AS tbl_building_suite, tbl_building.number_of_appartment AS tbl_building_number_of_appartment, tbl_building.number_of_building AS tbl_building_number_of_building, tbl_building.vacant_land AS tbl_building_vacant_land, tbl_building.year_of_construction AS tbl_building_year_of_construction, tbl_building.building_value AS tbl_building_building_value, tbl_building.id_lane AS tbl_building_id_lane, tbl_building.postal_code AS tbl_building_postal_code, tbl_building.id_utilisation_code AS tbl_building_id_utilisation_code, tbl_building.id_sector AS tbl_building_id_sector, tbl_building.id_mutual_aid_sector AS tbl_building_id_mutual_aid_sector, tbl_building.id_jaws_extrication_sector AS tbl_building_id_jaws_extrication_sector, tbl_building.id_sled_sector AS tbl_building_id_sled_sector, tbl_building.id_risk_level AS tbl_building_id_risk_level, tbl_building.source AS tbl_building_source, tbl_building.is_parent AS tbl_building_is_parent, tbl_building.utilisation_description AS tbl_building_utilisation_description, tbl_building.show_in_resources AS tbl_building_show_in_resources, tbl_building.id_resource_category AS tbl_building_id_resource_category, tbl_building.id_association_building AS tbl_building_id_association_building, tbl_building.id_association_type AS tbl_building_id_association_type, tbl_building.id_unit_type AS tbl_building_id_unit_type, ST_AsEWKB(tbl_building.coordinates) AS tbl_building_coordinates, tbl_building.coordinates_source AS tbl_building_coordinates_source, tbl_building.details AS tbl_building_details, tbl_building.created_on AS tbl_building_created_on, tbl_building.is_active AS tbl_building_is_active 
+FROM tbl_building 
+WHERE tbl_building.id_building = %(param_1)s
+2017-05-25 15:03:36,101:sqlalchemy.engine.base.Engine/info()@109:INFO:{'param_1': UUID('2e922d74-72b3-4312-8976-c1778aa79541')}
+2017-05-25 15:03:36,209:sqlalchemy.engine.base.Engine/info()@109:INFO:ROLLBACK
+2017-05-25 15:03:36,268:sqlalchemy.engine.base.Engine/info()@109:INFO:select version()
+2017-05-25 15:03:36,269:sqlalchemy.engine.base.Engine/info()@109:INFO:{}
+2017-05-25 15:03:36,276:sqlalchemy.engine.base.Engine/info()@109:INFO:select current_schema()
+2017-05-25 15:03:36,278:sqlalchemy.engine.base.Engine/info()@109:INFO:{}
+2017-05-25 15:03:36,291:sqlalchemy.engine.base.Engine/info()@109:INFO:SELECT CAST('test plain returns' AS VARCHAR(60)) AS anon_1
+2017-05-25 15:03:36,293:sqlalchemy.engine.base.Engine/info()@109:INFO:{}
+2017-05-25 15:03:36,300:sqlalchemy.engine.base.Engine/info()@109:INFO:SELECT CAST('test unicode returns' AS VARCHAR(60)) AS anon_1
+2017-05-25 15:03:36,301:sqlalchemy.engine.base.Engine/info()@109:INFO:{}
+2017-05-25 15:03:36,305:sqlalchemy.engine.base.Engine/info()@109:INFO:show standard_conforming_strings
+2017-05-25 15:03:36,308:sqlalchemy.engine.base.Engine/info()@109:INFO:{}
+2017-05-25 15:03:36,318:sqlalchemy.engine.base.Engine/info()@109:INFO:BEGIN (implicit)
+2017-05-25 15:03:36,334:sqlalchemy.engine.base.Engine/info()@109:INFO:SELECT tbl_building.id_building AS tbl_building_id_building, tbl_building.id_language_content_name AS tbl_building_id_language_content_name, tbl_building.matricule AS tbl_building_matricule, tbl_building.civic_number AS tbl_building_civic_number, tbl_building.civic_letter AS tbl_building_civic_letter, tbl_building.civic_supp AS tbl_building_civic_supp, tbl_building.civic_letter_supp AS tbl_building_civic_letter_supp, tbl_building.appartment_number AS tbl_building_appartment_number, tbl_building.floor AS tbl_building_floor, tbl_building.suite AS tbl_building_suite, tbl_building.number_of_appartment AS tbl_building_number_of_appartment, tbl_building.number_of_building AS tbl_building_number_of_building, tbl_building.vacant_land AS tbl_building_vacant_land, tbl_building.year_of_construction AS tbl_building_year_of_construction, tbl_building.building_value AS tbl_building_building_value, tbl_building.id_lane AS tbl_building_id_lane, tbl_building.postal_code AS tbl_building_postal_code, tbl_building.id_utilisation_code AS tbl_building_id_utilisation_code, tbl_building.id_sector AS tbl_building_id_sector, tbl_building.id_mutual_aid_sector AS tbl_building_id_mutual_aid_sector, tbl_building.id_jaws_extrication_sector AS tbl_building_id_jaws_extrication_sector, tbl_building.id_sled_sector AS tbl_building_id_sled_sector, tbl_building.id_risk_level AS tbl_building_id_risk_level, tbl_building.source AS tbl_building_source, tbl_building.is_parent AS tbl_building_is_parent, tbl_building.utilisation_description AS tbl_building_utilisation_description, tbl_building.show_in_resources AS tbl_building_show_in_resources, tbl_building.id_resource_category AS tbl_building_id_resource_category, tbl_building.id_association_building AS tbl_building_id_association_building, tbl_building.id_association_type AS tbl_building_id_association_type, tbl_building.id_unit_type AS tbl_building_id_unit_type, ST_AsEWKB(tbl_building.coordinates) AS tbl_building_coordinates, tbl_building.coordinates_source AS tbl_building_coordinates_source, tbl_building.details AS tbl_building_details, tbl_building.created_on AS tbl_building_created_on, tbl_building.is_active AS tbl_building_is_active 
+FROM tbl_building 
+WHERE tbl_building.id_building = %(param_1)s
+2017-05-25 15:03:36,335:sqlalchemy.engine.base.Engine/info()@109:INFO:{'param_1': UUID('2e922d74-72b3-4312-8976-c1778aa79541')}
+2017-05-25 15:03:36,434:sqlalchemy.engine.base.Engine/info()@109:INFO:ROLLBACK
+2017-05-25 15:03:36,487:sqlalchemy.engine.base.Engine/info()@109:INFO:select version()
+2017-05-25 15:03:36,490:sqlalchemy.engine.base.Engine/info()@109:INFO:{}
+2017-05-25 15:03:36,499:sqlalchemy.engine.base.Engine/info()@109:INFO:select current_schema()
+2017-05-25 15:03:36,500:sqlalchemy.engine.base.Engine/info()@109:INFO:{}
+2017-05-25 15:03:36,508:sqlalchemy.engine.base.Engine/info()@109:INFO:SELECT CAST('test plain returns' AS VARCHAR(60)) AS anon_1
+2017-05-25 15:03:36,513:sqlalchemy.engine.base.Engine/info()@109:INFO:{}
+2017-05-25 15:03:36,519:sqlalchemy.engine.base.Engine/info()@109:INFO:SELECT CAST('test unicode returns' AS VARCHAR(60)) AS anon_1
+2017-05-25 15:03:36,520:sqlalchemy.engine.base.Engine/info()@109:INFO:{}
+2017-05-25 15:03:36,524:sqlalchemy.engine.base.Engine/info()@109:INFO:show standard_conforming_strings
+2017-05-25 15:03:36,528:sqlalchemy.engine.base.Engine/info()@109:INFO:{}
+2017-05-25 15:03:36,535:sqlalchemy.engine.base.Engine/info()@109:INFO:BEGIN (implicit)
+2017-05-25 15:03:36,546:sqlalchemy.engine.base.Engine/info()@109:INFO:SELECT tbl_building.id_building AS tbl_building_id_building, tbl_building.id_language_content_name AS tbl_building_id_language_content_name, tbl_building.matricule AS tbl_building_matricule, tbl_building.civic_number AS tbl_building_civic_number, tbl_building.civic_letter AS tbl_building_civic_letter, tbl_building.civic_supp AS tbl_building_civic_supp, tbl_building.civic_letter_supp AS tbl_building_civic_letter_supp, tbl_building.appartment_number AS tbl_building_appartment_number, tbl_building.floor AS tbl_building_floor, tbl_building.suite AS tbl_building_suite, tbl_building.number_of_appartment AS tbl_building_number_of_appartment, tbl_building.number_of_building AS tbl_building_number_of_building, tbl_building.vacant_land AS tbl_building_vacant_land, tbl_building.year_of_construction AS tbl_building_year_of_construction, tbl_building.building_value AS tbl_building_building_value, tbl_building.id_lane AS tbl_building_id_lane, tbl_building.postal_code AS tbl_building_postal_code, tbl_building.id_utilisation_code AS tbl_building_id_utilisation_code, tbl_building.id_sector AS tbl_building_id_sector, tbl_building.id_mutual_aid_sector AS tbl_building_id_mutual_aid_sector, tbl_building.id_jaws_extrication_sector AS tbl_building_id_jaws_extrication_sector, tbl_building.id_sled_sector AS tbl_building_id_sled_sector, tbl_building.id_risk_level AS tbl_building_id_risk_level, tbl_building.source AS tbl_building_source, tbl_building.is_parent AS tbl_building_is_parent, tbl_building.utilisation_description AS tbl_building_utilisation_description, tbl_building.show_in_resources AS tbl_building_show_in_resources, tbl_building.id_resource_category AS tbl_building_id_resource_category, tbl_building.id_association_building AS tbl_building_id_association_building, tbl_building.id_association_type AS tbl_building_id_association_type, tbl_building.id_unit_type AS tbl_building_id_unit_type, ST_AsEWKB(tbl_building.coordinates) AS tbl_building_coordinates, tbl_building.coordinates_source AS tbl_building_coordinates_source, tbl_building.details AS tbl_building_details, tbl_building.created_on AS tbl_building_created_on, tbl_building.is_active AS tbl_building_is_active 
+FROM tbl_building 
+WHERE tbl_building.id_building = %(param_1)s
+2017-05-25 15:03:36,547:sqlalchemy.engine.base.Engine/info()@109:INFO:{'param_1': UUID('b618acd6-dd0f-4839-b0b5-f47fc14c435e')}
+2017-05-25 15:03:36,698:sqlalchemy.engine.base.Engine/info()@109:INFO:select version()
+2017-05-25 15:03:36,700:sqlalchemy.engine.base.Engine/info()@109:INFO:{}
+2017-05-25 15:03:36,704:sqlalchemy.engine.base.Engine/info()@109:INFO:select current_schema()
+2017-05-25 15:03:36,705:sqlalchemy.engine.base.Engine/info()@109:INFO:{}
+2017-05-25 15:03:36,713:sqlalchemy.engine.base.Engine/info()@109:INFO:SELECT CAST('test plain returns' AS VARCHAR(60)) AS anon_1
+2017-05-25 15:03:36,715:sqlalchemy.engine.base.Engine/info()@109:INFO:{}
+2017-05-25 15:03:36,720:sqlalchemy.engine.base.Engine/info()@109:INFO:SELECT CAST('test unicode returns' AS VARCHAR(60)) AS anon_1
+2017-05-25 15:03:36,721:sqlalchemy.engine.base.Engine/info()@109:INFO:{}
+2017-05-25 15:03:36,726:sqlalchemy.engine.base.Engine/info()@109:INFO:show standard_conforming_strings
+2017-05-25 15:03:36,727:sqlalchemy.engine.base.Engine/info()@109:INFO:{}
+2017-05-25 15:03:36,733:sqlalchemy.engine.base.Engine/info()@109:INFO:BEGIN (implicit)
+2017-05-25 15:03:36,737:sqlalchemy.engine.base.Engine/info()@109:INFO:SELECT tbl_lane.id_lane AS tbl_lane_id_lane, tbl_lane.id_language_content_name AS tbl_lane_id_language_content_name, tbl_lane.id_city AS tbl_lane_id_city, tbl_lane.public_lane_code AS tbl_lane_public_lane_code, tbl_lane.generic_code AS tbl_lane_generic_code, tbl_lane.created_on AS tbl_lane_created_on, tbl_lane.is_valid AS tbl_lane_is_valid, tbl_lane.is_active AS tbl_lane_is_active 
+FROM tbl_lane 
+WHERE tbl_lane.id_lane = %(param_1)s
+2017-05-25 15:03:36,737:sqlalchemy.engine.base.Engine/info()@109:INFO:{'param_1': UUID('1d14f67d-a9bf-4797-a0a7-bc78e087629b')}
+2017-05-25 15:03:36,748:sqlalchemy.engine.base.Engine/info()@109:INFO:ROLLBACK
+2017-05-25 15:03:36,802:sqlalchemy.engine.base.Engine/info()@109:INFO:select version()
+2017-05-25 15:03:36,804:sqlalchemy.engine.base.Engine/info()@109:INFO:{}
+2017-05-25 15:03:36,813:sqlalchemy.engine.base.Engine/info()@109:INFO:select current_schema()
+2017-05-25 15:03:36,815:sqlalchemy.engine.base.Engine/info()@109:INFO:{}
+2017-05-25 15:03:36,823:sqlalchemy.engine.base.Engine/info()@109:INFO:SELECT CAST('test plain returns' AS VARCHAR(60)) AS anon_1
+2017-05-25 15:03:36,824:sqlalchemy.engine.base.Engine/info()@109:INFO:{}
+2017-05-25 15:03:36,830:sqlalchemy.engine.base.Engine/info()@109:INFO:SELECT CAST('test unicode returns' AS VARCHAR(60)) AS anon_1
+2017-05-25 15:03:36,832:sqlalchemy.engine.base.Engine/info()@109:INFO:{}
+2017-05-25 15:03:36,836:sqlalchemy.engine.base.Engine/info()@109:INFO:show standard_conforming_strings
+2017-05-25 15:03:36,837:sqlalchemy.engine.base.Engine/info()@109:INFO:{}
+2017-05-25 15:03:36,841:sqlalchemy.engine.base.Engine/info()@109:INFO:BEGIN (implicit)
+2017-05-25 15:03:36,846:sqlalchemy.engine.base.Engine/info()@109:INFO:SELECT tbl_language_content.id_language_content AS tbl_language_content_id_language_content, tbl_language_content.language_code AS tbl_language_content_language_code, tbl_language_content.description AS tbl_language_content_description 
+FROM tbl_language_content 
+WHERE tbl_language_content.id_language_content = %(id_language_content_1)s 
+ LIMIT %(param_1)s
+2017-05-25 15:03:36,847:sqlalchemy.engine.base.Engine/info()@109:INFO:{'id_language_content_1': UUID('d6c4e14e-528e-43ac-9baa-d1c2b23d309a'), 'param_1': 1}
+2017-05-25 15:03:36,851:sqlalchemy.engine.base.Engine/info()@109:INFO:ROLLBACK
+2017-05-25 15:03:36,905:sqlalchemy.engine.base.Engine/info()@109:INFO:select version()
+2017-05-25 15:03:36,908:sqlalchemy.engine.base.Engine/info()@109:INFO:{}
+2017-05-25 15:03:36,916:sqlalchemy.engine.base.Engine/info()@109:INFO:select current_schema()
+2017-05-25 15:03:36,918:sqlalchemy.engine.base.Engine/info()@109:INFO:{}
+2017-05-25 15:03:36,927:sqlalchemy.engine.base.Engine/info()@109:INFO:SELECT CAST('test plain returns' AS VARCHAR(60)) AS anon_1
+2017-05-25 15:03:36,928:sqlalchemy.engine.base.Engine/info()@109:INFO:{}
+2017-05-25 15:03:36,935:sqlalchemy.engine.base.Engine/info()@109:INFO:SELECT CAST('test unicode returns' AS VARCHAR(60)) AS anon_1
+2017-05-25 15:03:36,936:sqlalchemy.engine.base.Engine/info()@109:INFO:{}
+2017-05-25 15:03:36,939:sqlalchemy.engine.base.Engine/info()@109:INFO:show standard_conforming_strings
+2017-05-25 15:03:36,941:sqlalchemy.engine.base.Engine/info()@109:INFO:{}
+2017-05-25 15:03:36,948:sqlalchemy.engine.base.Engine/info()@109:INFO:BEGIN (implicit)
+2017-05-25 15:03:36,958:sqlalchemy.engine.base.Engine/info()@109:INFO:SELECT tbl_building.id_building AS tbl_building_id_building, tbl_building.id_language_content_name AS tbl_building_id_language_content_name, tbl_building.matricule AS tbl_building_matricule, tbl_building.civic_number AS tbl_building_civic_number, tbl_building.civic_letter AS tbl_building_civic_letter, tbl_building.civic_supp AS tbl_building_civic_supp, tbl_building.civic_letter_supp AS tbl_building_civic_letter_supp, tbl_building.appartment_number AS tbl_building_appartment_number, tbl_building.floor AS tbl_building_floor, tbl_building.suite AS tbl_building_suite, tbl_building.number_of_appartment AS tbl_building_number_of_appartment, tbl_building.number_of_building AS tbl_building_number_of_building, tbl_building.vacant_land AS tbl_building_vacant_land, tbl_building.year_of_construction AS tbl_building_year_of_construction, tbl_building.building_value AS tbl_building_building_value, tbl_building.id_lane AS tbl_building_id_lane, tbl_building.postal_code AS tbl_building_postal_code, tbl_building.id_utilisation_code AS tbl_building_id_utilisation_code, tbl_building.id_sector AS tbl_building_id_sector, tbl_building.id_mutual_aid_sector AS tbl_building_id_mutual_aid_sector, tbl_building.id_jaws_extrication_sector AS tbl_building_id_jaws_extrication_sector, tbl_building.id_sled_sector AS tbl_building_id_sled_sector, tbl_building.id_risk_level AS tbl_building_id_risk_level, tbl_building.source AS tbl_building_source, tbl_building.is_parent AS tbl_building_is_parent, tbl_building.utilisation_description AS tbl_building_utilisation_description, tbl_building.show_in_resources AS tbl_building_show_in_resources, tbl_building.id_resource_category AS tbl_building_id_resource_category, tbl_building.id_association_building AS tbl_building_id_association_building, tbl_building.id_association_type AS tbl_building_id_association_type, tbl_building.id_unit_type AS tbl_building_id_unit_type, ST_AsEWKB(tbl_building.coordinates) AS tbl_building_coordinates, tbl_building.coordinates_source AS tbl_building_coordinates_source, tbl_building.details AS tbl_building_details, tbl_building.created_on AS tbl_building_created_on, tbl_building.is_active AS tbl_building_is_active 
+FROM tbl_building 
+WHERE tbl_building.id_building = %(param_1)s
+2017-05-25 15:03:36,959:sqlalchemy.engine.base.Engine/info()@109:INFO:{'param_1': UUID('b618acd6-dd0f-4839-b0b5-f47fc14c435e')}
+2017-05-25 15:03:37,067:sqlalchemy.engine.base.Engine/info()@109:INFO:ROLLBACK
+2017-05-25 15:03:37,121:sqlalchemy.engine.base.Engine/info()@109:INFO:select version()
+2017-05-25 15:03:37,123:sqlalchemy.engine.base.Engine/info()@109:INFO:{}
+2017-05-25 15:03:37,131:sqlalchemy.engine.base.Engine/info()@109:INFO:select current_schema()
+2017-05-25 15:03:37,134:sqlalchemy.engine.base.Engine/info()@109:INFO:{}
+2017-05-25 15:03:37,146:sqlalchemy.engine.base.Engine/info()@109:INFO:SELECT CAST('test plain returns' AS VARCHAR(60)) AS anon_1
+2017-05-25 15:03:37,150:sqlalchemy.engine.base.Engine/info()@109:INFO:{}
+2017-05-25 15:03:37,158:sqlalchemy.engine.base.Engine/info()@109:INFO:SELECT CAST('test unicode returns' AS VARCHAR(60)) AS anon_1
+2017-05-25 15:03:37,159:sqlalchemy.engine.base.Engine/info()@109:INFO:{}
+2017-05-25 15:03:37,165:sqlalchemy.engine.base.Engine/info()@109:INFO:show standard_conforming_strings
+2017-05-25 15:03:37,167:sqlalchemy.engine.base.Engine/info()@109:INFO:{}
+2017-05-25 15:03:37,173:sqlalchemy.engine.base.Engine/info()@109:INFO:BEGIN (implicit)
+2017-05-25 15:03:37,185:sqlalchemy.engine.base.Engine/info()@109:INFO:SELECT tbl_building.id_building AS tbl_building_id_building, tbl_building.id_language_content_name AS tbl_building_id_language_content_name, tbl_building.matricule AS tbl_building_matricule, tbl_building.civic_number AS tbl_building_civic_number, tbl_building.civic_letter AS tbl_building_civic_letter, tbl_building.civic_supp AS tbl_building_civic_supp, tbl_building.civic_letter_supp AS tbl_building_civic_letter_supp, tbl_building.appartment_number AS tbl_building_appartment_number, tbl_building.floor AS tbl_building_floor, tbl_building.suite AS tbl_building_suite, tbl_building.number_of_appartment AS tbl_building_number_of_appartment, tbl_building.number_of_building AS tbl_building_number_of_building, tbl_building.vacant_land AS tbl_building_vacant_land, tbl_building.year_of_construction AS tbl_building_year_of_construction, tbl_building.building_value AS tbl_building_building_value, tbl_building.id_lane AS tbl_building_id_lane, tbl_building.postal_code AS tbl_building_postal_code, tbl_building.id_utilisation_code AS tbl_building_id_utilisation_code, tbl_building.id_sector AS tbl_building_id_sector, tbl_building.id_mutual_aid_sector AS tbl_building_id_mutual_aid_sector, tbl_building.id_jaws_extrication_sector AS tbl_building_id_jaws_extrication_sector, tbl_building.id_sled_sector AS tbl_building_id_sled_sector, tbl_building.id_risk_level AS tbl_building_id_risk_level, tbl_building.source AS tbl_building_source, tbl_building.is_parent AS tbl_building_is_parent, tbl_building.utilisation_description AS tbl_building_utilisation_description, tbl_building.show_in_resources AS tbl_building_show_in_resources, tbl_building.id_resource_category AS tbl_building_id_resource_category, tbl_building.id_association_building AS tbl_building_id_association_building, tbl_building.id_association_type AS tbl_building_id_association_type, tbl_building.id_unit_type AS tbl_building_id_unit_type, ST_AsEWKB(tbl_building.coordinates) AS tbl_building_coordinates, tbl_building.coordinates_source AS tbl_building_coordinates_source, tbl_building.details AS tbl_building_details, tbl_building.created_on AS tbl_building_created_on, tbl_building.is_active AS tbl_building_is_active 
+FROM tbl_building 
+WHERE tbl_building.id_building = %(param_1)s
+2017-05-25 15:03:37,186:sqlalchemy.engine.base.Engine/info()@109:INFO:{'param_1': UUID('b618acd6-dd0f-4839-b0b5-f47fc14c435e')}
+2017-05-25 15:03:37,287:sqlalchemy.engine.base.Engine/info()@109:INFO:ROLLBACK
+2017-05-25 15:03:37,297:cherrypy.access.140699597521864/access()@285:INFO:127.0.0.1 - - [25/May/2017:15:03:37] "GET /inspectionbyuser/ HTTP/1.1" 200 2996 "" ""
+2017-05-25 15:09:47,695:cherrypy.error/error()@219:INFO:[25/May/2017:15:09:47] ENGINE Restarting because /home/michael.jolin/Programming/survip-api/apirest/app/models/building.py changed.
+2017-05-25 15:09:47,697:cherrypy.error/error()@219:INFO:[25/May/2017:15:09:47] ENGINE Stopped thread 'Autoreloader'.
+2017-05-25 15:09:47,698:cherrypy.error/error()@219:INFO:[25/May/2017:15:09:47] ENGINE Bus STOPPING
+2017-05-25 15:09:47,702:cherrypy.error/error()@219:INFO:[25/May/2017:15:09:47] ENGINE HTTP Server cherrypy._cpwsgi_server.CPWSGIServer(('127.0.0.1', 8080)) shut down
+2017-05-25 15:09:47,703:cherrypy.error/error()@219:INFO:[25/May/2017:15:09:47] ENGINE Stopped thread '_TimeoutMonitor'.
+2017-05-25 15:09:47,704:cherrypy.error/error()@219:INFO:[25/May/2017:15:09:47] ENGINE Bus STOPPED
+2017-05-25 15:09:47,705:cherrypy.error/error()@219:INFO:[25/May/2017:15:09:47] ENGINE Bus EXITING
+2017-05-25 15:09:47,706:cherrypy.error/error()@219:INFO:[25/May/2017:15:09:47] ENGINE Bus EXITED
+2017-05-25 15:09:47,707:cherrypy.error/error()@219:INFO:[25/May/2017:15:09:47] ENGINE Bus STOPPING
+2017-05-25 15:09:47,708:cherrypy.error/error()@219:INFO:[25/May/2017:15:09:47] ENGINE HTTP Server cherrypy._cpwsgi_server.CPWSGIServer(('127.0.0.1', 8080)) already shut down
+2017-05-25 15:09:47,709:cherrypy.error/error()@219:INFO:[25/May/2017:15:09:47] ENGINE No thread running for None.
+2017-05-25 15:09:47,709:cherrypy.error/error()@219:INFO:[25/May/2017:15:09:47] ENGINE No thread running for None.
+2017-05-25 15:09:47,709:cherrypy.error/error()@219:INFO:[25/May/2017:15:09:47] ENGINE Bus STOPPED
+2017-05-25 15:09:47,710:cherrypy.error/error()@219:INFO:[25/May/2017:15:09:47] ENGINE Bus EXITING
+2017-05-25 15:09:47,710:cherrypy.error/error()@219:INFO:[25/May/2017:15:09:47] ENGINE Bus EXITED

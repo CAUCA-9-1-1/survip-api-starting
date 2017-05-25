@@ -1,5 +1,6 @@
+import os
 from sqlalchemy import create_engine, MetaData
-from sqlalchemy.orm import sessionmaker, load_only
+from sqlalchemy.orm import sessionmaker
 from causepy.config import setup as config
 
 
@@ -9,13 +10,19 @@ class Database:
 	metadata = None
 
 	def __init__(self, db_name='general'):
-		self.engine = create_engine('%s://%s:%s@%s/%s' % (
-			config.DATABASE[db_name]['engine'],
-			config.DATABASE[db_name]['username'],
-			config.DATABASE[db_name]['password'],
-			config.DATABASE[db_name]['host'],
-			config.DATABASE[db_name]['dbname'],
-		), echo=config.IS_DEV)
+		if 'username' in config.DATABASE[db_name]:
+			self.engine = create_engine('%s://%s:%s@%s/%s' % (
+				config.DATABASE[db_name]['engine'],
+				config.DATABASE[db_name]['username'],
+				config.DATABASE[db_name]['password'],
+				config.DATABASE[db_name]['host'],
+				config.DATABASE[db_name]['dbname'],
+			), echo=config.IS_DEV)
+		else:
+			self.engine = create_engine('%s:///%s' % (
+				config.DATABASE[db_name]['engine'],
+				config.DATABASE[db_name]['dbname'],
+			), echo=config.IS_DEV)
 
 		Session = sessionmaker()
 		Session.configure(bind=self.engine)

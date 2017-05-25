@@ -43,7 +43,7 @@ class MultiLang:
 		with Database() as db:
 			for language_code in description:
 				if language_code != 'id_language_content':
-					db.add(LanguageContent(id_language_content, language_code, description[language_code]))
+					db.insert(LanguageContent(id_language_content, language_code, description[language_code]))
 					db.commit()
 
 	@staticmethod
