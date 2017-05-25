@@ -23,15 +23,15 @@ class Api:
 
 	def load_class(self, name):
 		try:
-			self.class_name = "apirest.app.urls.%s" % name.lower()
-			class_load = importlib.import_module(self.class_name, 'apirest.app.urls')
+			self.class_name = "apirest.app.resturls.%s" % name.lower()
+			class_load = importlib.import_module(self.class_name, 'apirest.app.resturls')
 			class_object = getattr(class_load, name)
 
 			return class_object
 		except:
 			try:
-				self.class_name = "causepy.urls.%s" % name.lower()
-				class_load = importlib.import_module(self.class_name, 'causepy.urls')
+				self.class_name = "causepy.resturls.%s" % name.lower()
+				class_load = importlib.import_module(self.class_name, 'causepy.resturls')
 				class_object = getattr(class_load, name)
 
 				return class_object
