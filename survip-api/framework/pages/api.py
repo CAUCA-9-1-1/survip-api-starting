@@ -24,11 +24,11 @@ class Api:
 		for folder in folders:
 			class_object = self.load_class_from(folder, name)
 
-			if not isinstance(class_object, Exception):
+			if class_object is not None:
 				break
 
-		if isinstance(class_object, Exception):
-			raise Exception("We can't find the class: %s, exception: %s" % (name, class_object))
+		if class_object is None:
+			raise Exception("We can't find the class: %s" % name)
 		else:
 			return class_object
 
@@ -40,7 +40,9 @@ class Api:
 
 			return class_object
 		except Exception as e:
-			return e
+			logging.info("Loading class exception: %s", e)
+
+			return None
 
 	def exec_method(self, name, args):
 		class_object = self.load_class(name)

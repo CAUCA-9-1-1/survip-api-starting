@@ -13,7 +13,7 @@ PERMISSION = {
 	'systemID': '2d9f85c6-c41b-4b53-b391-9caa31bb3494',
 }
 
-LOGS_NAME = 'webservice'
+LOGS_NAME = 'survip-api'
 FORCE_CAMELCASE = True
 IS_DEV = True
 IS_UWSGI = False

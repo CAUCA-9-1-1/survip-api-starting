@@ -71,12 +71,12 @@ class Base:
 		for folder in folders:
 			page_class = self.add_page_from(folder, page)
 
-			if not isinstance(page_class, Exception):
+			if page_class is not None:
 				break
 
-		if isinstance(page_class, Exception):
-			logging.exception("Can't mount the page: %s, config: %s, exception: %s" % (
-				page, self.site_config, page_class
+		if page_class is None:
+			logging.exception("Can't mount the page: %s, config: %s" % (
+				page, self.site_config
 			))
 		else:
 			path = path if path is not None else '/%s' % page.lower()
@@ -89,7 +89,9 @@ class Base:
 
 			return getattr(page_loaded, page)
 		except Exception as e:
-			return e
+			logging.info("Loading class exception: %s", e)
+
+			return None
 
 	def complete(self):
 		self.add_config({
