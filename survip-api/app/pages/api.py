@@ -1,12 +1,8 @@
 import cherrypy
-from opensource.pages.api import Api as OSApi
+from opensource.pages.api import Api as OpenSourceApi
 
 
-class Api(OSApi):
-	@cherrypy.expose
-	def auth(self, *args, **kwargs):
-		return self.call_method('Auth', self.get_argument(args, kwargs))
-
+class Api(OpenSourceApi):
 	@cherrypy.expose
 	def multilang(self, *args, **kwargs):
 		return self.call_method('Multilang', self.get_argument(args, kwargs))

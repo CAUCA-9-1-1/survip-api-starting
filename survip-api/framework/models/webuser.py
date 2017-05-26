@@ -1,3 +1,4 @@
+from datetime import datetime
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import Column, Boolean, DateTime, String
 
@@ -11,5 +12,5 @@ class Webuser(Base):
 	id_webuser = Column(String(36), primary_key=True)
 	username = Column(String(100))
 	password = Column(String(100))
-	created_on = Column(DateTime)
+	created_on = Column(DateTime, default=datetime.now())
 	is_active = Column(Boolean)

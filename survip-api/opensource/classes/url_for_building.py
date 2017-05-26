@@ -1,5 +1,5 @@
 import cherrypy
-from framework.pages.api import Api as BaseApi
+from framework.manage.api import Api as BaseApi
 
 
 class UrlForBuilding(BaseApi):

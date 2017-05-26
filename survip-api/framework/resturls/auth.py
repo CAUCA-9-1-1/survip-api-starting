@@ -1,6 +1,6 @@
-from causeweb.site.token import Token
-from causeweb.apis.webuser import Webuser
-from causeweb.apis.base import Base
+from .base import Base
+from .webuser import Webuser
+from framework.auth.token import Token
 
 
 class Auth(Token, Base):
@@ -13,7 +13,10 @@ class Auth(Token, Base):
 		'PATCH': '',
 	}
 
-	def token(self, args):
+	def token(self, token=None):
+		if token is None:
+			raise Exception("You need to pass a token id")
+
 		return {
 			'message': 'token is valid'
 		}

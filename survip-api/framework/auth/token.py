@@ -4,31 +4,34 @@ import random
 import uuid
 import cherrypy
 from ..config import setup as config
+from ..manage.database import Database
+from ..resturls.webuser import Webuser
+from ..models.accesstoken import AccessToken
 
 
 class Token:
 	def logon(self, args):
-		"""if WithDB().logon(args['username'], args['password']):
+
+		if Webuser().logon(args['username'], args['password']):
 			id_access_token = uuid.uuid4()
 			access_token = self.generate_token()
 			refresh_token = self.generate_token()
 
-			with DB() as db:
-				db.execute(""INSERT INTO tbl_access_token(id_access_token, id_webuser, access_token, refresh_token, created_on, expires_in)
-							VALUES(%s, %s, %s, %s, NOW(), %s);"", (
-					id_access_token, WithDB.get('userId'), access_token, refresh_token, (self.expires_in_minutes * 60)
-				))
+			with Database() as db:
+				db.insert(AccessToken(id_access_token, Webuser.id, access_token, refresh_token, self.expires_in_minutes * 60))
+				db.commit()
 
 			return {
-				'authorizationType': 'Token',
-				'expiresIn': (self.expires_in_minutes * 60),
-				'accessToken': access_token,
-				'refreshToken': refresh_token,
-				'userId': WithDB.get('userId'),
-				'user': WithDB.get('user')
+				'data': {
+					'authorizationType': 'Token',
+					'expiresIn': (self.expires_in_minutes * 60),
+					'accessToken': access_token,
+					'refreshToken': refresh_token,
+					'userId': Webuser.id,
+				}
 			}
-		else:"""
-		raise Exception("authentification failed")
+		else:
+			raise Exception("authentification failed")
 
 	def generate_secretkey(self, name):
 		randomkey = str(random.getrandbits(256))

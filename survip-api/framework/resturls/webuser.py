@@ -1,10 +1,12 @@
-from opensource.models.webuser import Webuser as Table
-from opensource.models.webuserattributes import WebuserAttributes
-from framework.manage.database import Database
-from framework.resturls.base import Base
+from ..auth.encryption import Encryption
+from ..manage.database import Database
+from ..models.webuser import Webuser as Table
+from ..models.webuserattributes import WebuserAttributes
+from .base import Base
 
 
 class Webuser(Base):
+	id_webuser = None
 	mapping_method = {
 		'GET': 'get',
 		'PUT': 'modify',
@@ -44,6 +46,19 @@ class Webuser(Base):
 			}
 		else:
 			return CausewebWebuser().get(id_webuser)
+
+	def logon(self, username, password):
+		with Database() as db:
+			data = db.query(Table).filter(
+				Table.username == username,
+				Table.password == Encryption.password(password)
+			).first()
+
+		if data is not None:
+			Webuser.id = data.id_webuser
+			return True
+
+		return False
 
 	def create(self, args):
 		return CausewebWebuser().create(args)

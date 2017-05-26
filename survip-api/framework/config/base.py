@@ -89,7 +89,7 @@ class Base:
 
 			return getattr(page_loaded, page)
 		except Exception as e:
-			logging.info("Loading class exception: %s", e)
+			logging.info("Loading exception on page '%s': %s", page_name, e)
 
 			return None
 
