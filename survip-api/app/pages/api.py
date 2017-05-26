@@ -1,11 +1,8 @@
 import cherrypy
-from opensource.classes.url_for_address import UrlForAddress
-from opensource.classes.url_for_building import UrlForBuilding
-from opensource.classes.url_for_inspection import UrlForInspection
-from framework.pages.api import Api as BaseApi
+from opensource.pages.api import Api as OSApi
 
 
-class Api(UrlForInspection, UrlForAddress, UrlForBuilding, BaseApi):
+class Api(OSApi):
 	@cherrypy.expose
 	def auth(self, *args, **kwargs):
 		return self.call_method('Auth', self.get_argument(args, kwargs))

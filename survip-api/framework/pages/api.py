@@ -20,7 +20,7 @@ class Api:
 		})
 
 	def load_class(self, name):
-		folders = ['proprietary', 'opensource', 'framework']
+		folders = ['app', 'opensource', 'framework']
 		for folder in folders:
 			class_object = self.load_class_from(folder, name)
 

@@ -67,7 +67,7 @@ class Base:
 			os.makedirs("%s/%s/" % (config.ROOT, path))
 
 	def add_page(self, page, path=None):
-		folders = ['proprietary', 'opensource', 'framework']
+		folders = ['app', 'opensource', 'framework']
 		for folder in folders:
 			page_class = self.add_page_from(folder, page)
 
