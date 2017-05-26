@@ -36,6 +36,9 @@ class Database:
 		self.session.expunge_all()
 		self.session.close()
 
+	def execute(self, query):
+		return self.engine.execute(query)
+
 	def query(self, *args):
 		return self.session.query(*args)
 

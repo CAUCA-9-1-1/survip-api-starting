@@ -47,7 +47,7 @@ class Inspection(Base):
 			db.commit()
 
 		return {
-			'message': 'inspection successfully complete'
+			'message': 'inspection successfully completed'
 		}
 
 	def assign(self, args):
