@@ -1,7 +1,13 @@
 # API for SURVIPrevention
 
-### Commit guide ligne
+## Development server
+Run `python3 server.py` for a dev server. Navigate to `http://localhost:8080/`.
 
+## Dependencies
+SQLAlchemy (apt install python3-sqlalchemy or pip3 install sqlalchemy)\
+GELAlchemy (pip3 install geoalchemy2)
+
+### Commit guide ligne
 Must be one of the following:
 
 feat: A new feature\
@@ -15,4 +21,4 @@ chore: Changes to the build process or auxiliary tools and libraries such as doc
 
 ### Project status
 The table are actually clone from a old project.\
-A clean up need to be done on every table.
+A clean up need to be done on some table.
