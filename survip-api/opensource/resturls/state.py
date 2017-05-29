@@ -1,8 +1,8 @@
 import uuid
-from causeweb.storage.db import DB
-from causeweb.site.multilang import MultiLang
-from causeweb.apis.base import Base
-from .country import Country
+from framework.manage.database import Database
+from framework.manage.multilang import MultiLang
+from framework.resturls.base import Base
+from ..models.state import State as Table
 
 
 class State(Base):
@@ -21,21 +21,17 @@ class State(Base):
 		:param id_state: UUID
 		:param id_active: BOOLEAN
 		"""
-		with DB() as db:
+		with Database() as db:
 			if id_state is None and is_active is None:
-				data = db.get_all("SELECT * FROM tbl_state;")
+				data = db.query(Table).all()
 			elif id_state is None:
-				data = db.get_all("SELECT * FROM tbl_state WHERE is_active=%s;", (is_active,))
+				data = db.query(Table).filter(Table.is_active == is_active).all()
 			else:
-				data = db.get_all("SELECT * FROM tbl_state WHERE id_state=%s;", (id_state,))
-
-		for key, row in enumerate(data):
-			data[key]['name'] = MultiLang.get(row['id_language_content_name'])
-			data[key]['country'] = Country().get(row['id_country'])
+				data = db.query(Table).get(id_state)
 
 		return {
 			'data': data
-		} if id_state is None else data[0]
+		}
 
 	def create(self, args):
 		""" Create a new state
@@ -52,12 +48,9 @@ class State(Base):
 		id_state = uuid.uuid4()
 		id_language_content = MultiLang.set(args['name'], True)
 
-		with DB() as db:
-			db.execute("""INSERT INTO tbl_state(
-							id_state, id_language_content_name, id_country, ansi_code, is_active
-						  ) VALUES(%s, %s, %s, %s, True);""", (
-				id_state, id_language_content, args['id_country'], args['ansi_code']
-			))
+		with Database() as db:
+			db.insert(Table(id_state, id_language_content, args['id_country'], args['ansi_code']))
+			db.commit()
 
 		return {
 			'id_state': id_state,
@@ -81,14 +74,18 @@ class State(Base):
 		if 'id_state' not in args:
 			raise Exception("You need to pass a id_state")
 
-		id_language_content = MultiLang.set(args['name'])
+		with Database() as db:
+			data = db.query(Table).get(args['id_state'])
 
-		with DB() as db:
-			db.execute("""UPDATE tbl_state
-						SET id_language_content_name=%s, id_country=%s, ansi_code=%s, is_active=%s
-						WHERE id_state=%s;""", (
-				id_language_content, args['id_country'], args['ansi_code'], args['is_active'], args['id_state']
-			))
+			if 'name' in args:
+				data.id_language_content_name = MultiLang.set(args['name'])
+
+			if 'id_country' in args:
+				data.id_country = args['id_country']
+			if 'ansi_code' in args:
+				data.ansi_code = args['ansi_code']
+			if 'is_active' in args:
+				data.is_active = args['is_active']
 
 		return {
 			'message': 'state successfully modify'
@@ -102,10 +99,10 @@ class State(Base):
 		if self.has_permission('RightAdmin') is False:
 			return self.no_access()
 
-		with DB() as db:
-			db.execute("UPDATE tbl_state SET is_active=%s WHERE id_state=%s;", (
-				False, id_state
-			))
+		with Database() as db:
+			data = db.query(Table).get(id_state)
+			data.is_active = False
+			db.commit()
 
 		return {
 			'message': 'state successfully removed'

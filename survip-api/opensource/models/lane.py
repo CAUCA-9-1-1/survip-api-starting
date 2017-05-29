@@ -1,6 +1,5 @@
 from datetime import datetime
-
-from framework.manage.database import Database
+from framework.manage.multilang import MultiLang
 from framework.models.language_content import LanguageContent
 from sqlalchemy import Column, Boolean, DateTime, String, ForeignKey
 from sqlalchemy.ext.declarative import declarative_base
@@ -23,10 +22,7 @@ class Lane(Base):
 
 	@hybrid_property
 	def name(self):
-		with Database() as db:
-			data = db.query(LanguageContent).filter(LanguageContent.id_language_content == self.id_language_content_name)
-
-		return data[0].description
+		return MultiLang.get(self.id_language_content_name)
 
 	def __init__(self, id_lane, id_language_content, id_city):
 		self.id_lane = id_lane

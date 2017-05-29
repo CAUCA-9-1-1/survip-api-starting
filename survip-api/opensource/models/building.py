@@ -1,13 +1,12 @@
 import json
 from datetime import datetime
-
-from framework.manage.database import Database
-from framework.models.language_content import LanguageContent
 from geoalchemy2 import Geometry, functions
 from sqlalchemy import Column, Boolean, DateTime, Float, Numeric, String, Text, ForeignKey
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.ext.hybrid import hybrid_property
-
+from framework.manage.database import Database
+from framework.manage.multilang import MultiLang
+from framework.models.language_content import LanguageContent
 from .lane import Lane
 
 Base = declarative_base()
@@ -55,18 +54,14 @@ class Building(Base):
 
 	@hybrid_property
 	def name(self):
-		with Database() as db:
-			data = db.query(LanguageContent).filter(
-				LanguageContent.id_language_content == self.id_language_content_name)
-
-		return data[0].description
+		return MultiLang.get(self.id_language_content_name)
 
 	@hybrid_property
 	def address(self):
 		with Database() as db:
 			lane = db.query(Lane).get(self.id_lane)
 
-		return self.civic_number + ', ' + lane.name
+		return self.civic_number + ', ' + lane.name[0].description
 
 	@hybrid_property
 	def geojson(self):

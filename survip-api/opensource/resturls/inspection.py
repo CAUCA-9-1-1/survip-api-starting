@@ -1,8 +1,6 @@
 import uuid
-
 from framework.manage.database import Database
 from framework.resturls.base import Base
-
 from ..models.inspection import Inspection as Table
 
 

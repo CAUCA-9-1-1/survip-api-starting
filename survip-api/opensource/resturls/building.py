@@ -1,9 +1,7 @@
 import uuid
-
 from framework.manage.database import Database
 from framework.manage.multilang import MultiLang
 from framework.resturls.base import Base
-
 from ..models.building import Building as Table
 
 
@@ -76,12 +74,10 @@ class Building(Base):
 			return self.no_access()
 
 		with Database() as db:
-			data = db.query(Table).filter(Table.id_building == args['id_building']).first()
+			data = db.query(Table).get(args['id_building'])()
 
 			if 'name' in args:
-				id_language_content = MultiLang.set(args['name'])
-				data.id_language_content_name = id_language_content
-
+				data.id_language_content_name = MultiLang.set(args['name'])
 			if 'civic_number' in args:
 				data.civic_number = args['civic_number']
 			if 'year_of_construction' in args:
@@ -108,7 +104,7 @@ class Building(Base):
 			return self.no_access()
 
 		with Database() as db:
-			data = db.query(Table).filter(Table.id_building == id_building).first()
+			data = db.query(Table).get(id_building)
 			data.is_active = False
 			db.commit()
 

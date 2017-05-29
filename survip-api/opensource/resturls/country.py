@@ -1,6 +1,7 @@
+import uuid
 from framework.manage.database import Database
+from framework.manage.multilang import MultiLang
 from framework.resturls.base import Base
-
 from ..models.country import Country as Table
 
 
@@ -41,25 +42,20 @@ class Country(Base):
 			code_alpha3: STRING
 		}
 		"""
-		"""
 		if self.has_permission('RightAdmin') is False:
 			return self.no_access()
 
 		id_country = uuid.uuid4()
 		id_language_content = MultiLang.set(args['name'], True)
 
-		with DB() as db:
-			db.execute(""INSERT INTO tbl_country(
-							id_country, id_language_content_name, code_alpha2, code_alpha3, is_active
-						  ) VALUES(%s, %s, %s, %s, True);"", (
-				id_country, id_language_content, args['code_alpha2'], args['code_alpha3']
-			))
+		with Database() as db:
+			db.insert(Table(id_country, id_language_content, args['code_alpha2'], args['code_alpha3']))
+			db.commit()
 
 		return {
 			'id_country': id_country,
 			'message': 'country successfully created'
 		}
-		"""
 
 	def modify(self, args):
 		""" Modify a country
@@ -72,22 +68,25 @@ class Country(Base):
 			is_active: BOOLEAN,
 		}
 		"""
-		"""
 		if self.has_permission('RightAdmin') is False:
 			return self.no_access()
 
 		if 'id_country' not in args:
 			raise Exception("You need to pass a id_country")
 
-		id_language_content = MultiLang.set(args['name'])
+		with Database() as db:
+			data = db.query(Table).get(args['id_country'])
 
-		with DB() as db:
-			db.execute(""UPDATE tbl_country SET
-							id_language_content_name=%s, code_alpha2=%s, code_alpha3=%s, is_active=%s
-						WHERE id_country=%s;"", (
-				id_language_content, args['code_alpha2'], args['code_alpha3'], args['is_active'], args['id_country']
-			))
-		"""
+			if 'name' in args:
+				data.id_language_content_name = MultiLang.set(args['name'])
+
+			if 'code_alpha2' in args:
+				data.code_alpha2 = args['code_alpha2']
+			if 'code_alpha3' in args:
+				data.code_alpha3 = args['code_alpha3']
+			if 'is_active' in args:
+				data.is_active = args['is_active']
+
 		return {
 			'message': 'country successfully modify'
 		}
@@ -97,15 +96,14 @@ class Country(Base):
 
 		:param id_country: UUID
 		"""
-		"""
 		if self.has_permission('RightAdmin') is False:
 			return self.no_access()
 
-		with DB() as db:
-			db.execute("UPDATE tbl_country SET is_active=%s WHERE id_country=%s;", (
-				False, id_country
-			))
-		"""
+		with Database() as db:
+			data = db.query(Table).get(id_country)
+			data.is_active = False
+			db.commit()
+
 		return {
 			'message': 'country successfully removed'
 		}

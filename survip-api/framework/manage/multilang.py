@@ -1,5 +1,6 @@
 import json
 import uuid
+import logging
 from .database import Database
 from .utilities import Utilities
 from ..models.language_content import LanguageContent
@@ -11,12 +12,14 @@ class MultiLang:
 
 		try:
 			with Database() as db:
-				data = db.query(LanguageContent).get(id_language_content)
+				data = db.query(LanguageContent).filter(
+					LanguageContent.id_language_content == id_language_content
+				).all()
 
 			json_data = {'id_language_content': id_language_content}
 			json_data.update(Utilities.list_to_dict(data, 'language_code', 'description'))
-		except:
-			pass
+		except Exception as e:
+			logging.info("Error on get of LanguageContent : %s" % e)
 
 		return json_data
 

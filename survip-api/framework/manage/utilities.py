@@ -5,8 +5,13 @@ class Utilities:
 		my_dict = dict()
 
 		for list in my_lists:
-			my_dict.update({
-				list[my_key]: list[my_val]
-			})
+			try:
+				my_dict.update({
+					list[my_key]: list[my_val]
+				})
+			except:
+				my_dict.update({
+					getattr(list, my_key): getattr(list, my_val)
+				})
 
 		return my_dict

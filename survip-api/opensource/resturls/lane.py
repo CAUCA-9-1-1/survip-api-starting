@@ -1,9 +1,7 @@
 import uuid
-
 from framework.manage.database import Database
 from framework.manage.multilang import MultiLang
 from framework.resturls.base import Base
-
 from ..models.lane import Lane as Table
 
 

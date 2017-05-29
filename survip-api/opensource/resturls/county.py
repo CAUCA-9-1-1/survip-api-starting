@@ -1,8 +1,8 @@
 import uuid
-from causeweb.storage.db import DB
-from causeweb.site.multilang import MultiLang
-from causeweb.apis.base import Base
-from .state import State
+from framework.manage.database import Database
+from framework.manage.multilang import MultiLang
+from framework.resturls.base import Base
+from ..models.county import County as Table
 
 
 class County(Base):
@@ -21,29 +21,25 @@ class County(Base):
 		:param id_county: UUID
 		:param id_active: BOOLEAN
 		"""
-		with DB() as db:
+		with Database() as db:
 			if id_county is None and is_active is None:
-				data = db.get_all("SELECT * FROM tbl_county;")
+				data = db.query(Table).all()
 			elif id_county is None:
-				data = db.get_all("SELECT * FROM tbl_county WHERE is_active=%s;", (is_active,))
+				data = db.query(Table).filter(Table.is_active == is_active).all()
 			else:
-				data = db.get_all("SELECT * FROM tbl_county WHERE id_county=%s;", (id_county,))
-
-		for key, row in enumerate(data):
-			data[key]['name'] = MultiLang.get(row['id_language_content_name'])
-			data[key]['state'] = State().get(row['id_state'])
+				data = db.query(Table).get(id_county)
 
 		return {
 			'data': data
-		} if id_county is None else data[0]
-
+		}
 
 	def create(self, args):
 		""" Create a new county
 
 		:param args: {
 			name: JSON,
-			id_state: UUID
+			id_state: UUID,
+			id_region: UUID
 		}
 		"""
 		if self.has_permission('RightAdmin') is False:
@@ -52,12 +48,9 @@ class County(Base):
 		id_county = uuid.uuid4()
 		id_language_content = MultiLang.set(args['name'], True)
 
-		with DB() as db:
-			db.execute("""INSERT INTO tbl_county(
-							id_county, id_language_content_name, id_state, is_active
-						  ) VALUES(%s, %s, %s, True);""", (
-				id_county, id_language_content, args['id_state']
-			))
+		with Database() as db:
+			db.insert(Table(id_county, id_language_content, args['id_state'], args['id_region']))
+			db.commit()
 
 		return {
 			'id_county': id_county,
@@ -71,6 +64,7 @@ class County(Base):
 			id_county: UUID,
 			name: JSON,
 			id_state: UUID,
+			id_region: UUID
 			is_active: BOOLEAN,
 		}
 		"""
@@ -80,14 +74,18 @@ class County(Base):
 		if 'id_county' not in args:
 			raise Exception("You need to pass a id_county")
 
-		id_language_content = MultiLang.set(args['name'])
+		with Database() as db:
+			data = db.query(Table).get(args['id_county'])
 
-		with DB() as db:
-			db.execute("""UPDATE tbl_county
-						SET id_language_content_name=%s, id_state=%s, is_active=%s
-						WHERE id_county=%s;""", (
-			    id_language_content, args['id_state'], args['is_active'], args['id_county']
-			))
+			if 'name' in args:
+				data.id_language_content_name = MultiLang.set(args['name'])
+
+			if 'id_state' in args:
+				data.id_state = args['id_state']
+			if 'id_region' in args:
+				data.id_region = args['id_region']
+			if 'is_active' in args:
+				data.is_active = args['is_active']
 
 		return {
 			'message': 'county successfully modify'
@@ -101,10 +99,10 @@ class County(Base):
 		if self.has_permission('RightAdmin') is False:
 			return self.no_access()
 
-		with DB() as db:
-			db.execute("UPDATE tbl_county SET is_active=%s WHERE id_county=%s;", (
-				False, id_county
-			))
+		with Database() as db:
+			data = db.query(Table).get(id_county)
+			data.is_active = False
+			db.commit()
 
 		return {
 			'message': 'county successfully removed'

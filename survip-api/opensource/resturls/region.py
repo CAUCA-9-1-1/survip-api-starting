@@ -1,8 +1,8 @@
 import uuid
-from causeweb.storage.db import DB
-from causeweb.site.multilang import MultiLang
-from causeweb.apis.base import Base
-from .state import State
+from framework.manage.database import Database
+from framework.manage.multilang import MultiLang
+from framework.resturls.base import Base
+from ..models.region import Region as Table
 
 
 class Region(Base):
@@ -19,22 +19,19 @@ class Region(Base):
 		""" Return all region information
 
 		:param id_region: UUID
+		:param is_active: BOOLEAN
 		"""
-		with DB() as db:
+		with Database() as db:
 			if id_region is None and is_active is None:
-				data = db.get_all("SELECT * FROM tbl_region;")
+				data = db.query(Table).all()
 			elif id_region is None:
-				data = db.get_all("SELECT * FROM tbl_region WHERE is_active=%s;", (is_active,))
+				data = db.query(Table).filter(Table.is_active == is_active).all()
 			else:
-				data = db.get_all("SELECT * FROM tbl_region WHERE id_region=%s;", (id_region,))
-
-		for key, row in enumerate(data):
-			data[key]['name'] = MultiLang.get(row['id_language_content_name'])
-			data[key]['state'] = State().get(row['id_state'])
+				data = db.query(Table).get(id_region)
 
 		return {
 			'data': data
-		} if id_region is None else data[0]
+		}
 
 	def create(self, args):
 		""" Create a new region
@@ -51,12 +48,9 @@ class Region(Base):
 		id_region = uuid.uuid4()
 		id_language_content = MultiLang.set(args['name'], True)
 
-		with DB() as db:
-			db.execute("""INSERT INTO tbl_region(
-							id_region, code, id_language_content_name, id_state, is_active
-						  ) VALUES(%s, %s, %s, %s, True);""", (
-				id_region, args['code'], id_language_content, args['id_state']
-			))
+		with Database() as db:
+			db.insert(Table(id_region, id_language_content, args['code'], args['id_state']))
+			db.commit()
 
 		return {
 			'id_region': id_region,
@@ -82,12 +76,18 @@ class Region(Base):
 
 		id_language_content = MultiLang.set(args['name'])
 
-		with DB() as db:
-			db.execute("""UPDATE tbl_region
-						SET code=%s, id_language_content_name=%s, id_state=%s, is_active=%s
-						WHERE id_region=%s;""", (
-			    args['code'], id_language_content, args['id_state'], args['is_active'], args['id_region']
-			))
+		with Database() as db:
+			data = db.query(Table).get(args['id_state'])
+
+			if 'name' in args:
+				data.id_language_content_name = MultiLang.set(args['name'])
+
+			if 'id_state' in args:
+				data.id_state = args['id_state']
+			if 'code' in args:
+				data.code = args['code']
+			if 'is_active' in args:
+				data.is_active = args['is_active']
 
 		return {
 			'message': 'region successfully modify'
@@ -101,10 +101,10 @@ class Region(Base):
 		if self.has_permission('RightAdmin') is False:
 			return self.no_access()
 
-		with DB() as db:
-			db.execute("UPDATE tbl_region SET is_active=%s WHERE id_region=%s;", (
-				False, id_region
-			))
+		with Database() as db:
+			data = db.query(Table).get(id_region)
+			data.is_active = False
+			db.commit()
 
 		return {
 			'message': 'region successfully removed'

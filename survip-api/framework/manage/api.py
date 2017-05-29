@@ -1,7 +1,8 @@
-import importlib.util
+import re
 import json
 import logging
 import cherrypy
+import importlib.util
 from sqlalchemy.ext.declarative import DeclarativeMeta
 from ..manage.json import JsonEncoder
 from ..auth.token import Token
@@ -93,25 +94,44 @@ class Api:
 			}, cls=JsonEncoder)
 
 	def get_argument(self, args, kwargs):
+		arguments = ()
+
 		try:
 			body = cherrypy.request.body.readlines()
 
 			if body[0] is not '':
-				return (json.loads(body[0].decode('utf-8')),)
-		except:
+				arguments = (json.loads(body[0].decode('utf-8')),)
+		except Exception as e:
 			if args:
 				arguments = ()
 				for val in args:
 					arguments = arguments + (self.convert_argument(val),)
-
-				return arguments
 			if kwargs:
 				for key in kwargs:
-					kwargs[key] = self.convert_argument(kwargs[key])
+					kwargs[key] = self.convert_from_camel_case(self.convert_argument(kwargs[key]))
 
-				return (kwargs,)
+				arguments = (kwargs,)
 
-		return ()
+		if arguments is not () and config.FORCE_CAMELCASE:
+			arguments = (self.convert_from_camel_case(arguments[0]),)
+
+		return arguments
+
+	def convert_from_camel_case(self, data):
+		for old_key in data:
+			if sum(1 for c in old_key if c.isupper()):
+				key = re.sub(r'[A-Z]', lambda x: '_' + x.group(0).lower(), old_key)
+				data[key] = data.pop(old_key)
+			else:
+				key = old_key
+
+			if isinstance(data[key], list):
+				for pos, val in enumerate(data[key]):
+					data[key][pos] = self.convert_from_camel_case(val)
+			elif isinstance(data[key], dict):
+				data[key] = self.convert_from_camel_case(data[key])
+
+		return data
 
 	def convert_to_camel_case(self, data):
 		if isinstance(data, object) and isinstance(data.__class__, DeclarativeMeta):
@@ -119,8 +139,7 @@ class Api:
 
 		for old_key in data:
 			if '_' in old_key:
-				word = old_key.split('_')
-				key = word[0] + "".join(x.title() for x in word[1:])
+				key = re.sub(r'_([a-z])', lambda x: x.group(1).upper(), old_key)
 				data[key] = data.pop(old_key)
 			else:
 				key = old_key
