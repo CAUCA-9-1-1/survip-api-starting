@@ -6,12 +6,12 @@ import cherrypy
 from ..config import setup as config
 from ..manage.database import Database
 from ..resturls.webuser import Webuser
-from ..models.accesstoken import AccessToken
+from ..models.access_token import AccessToken
+from ..models.access_secretkey import AccessSecretkey
 
 
 class Token:
 	def logon(self, args):
-
 		if Webuser().logon(args['username'], args['password']):
 			id_access_token = uuid.uuid4()
 			access_token = self.generate_token()
@@ -59,38 +59,36 @@ class Token:
 		elif token is not None:
 			return self.valid_token(token)
 
-		#return False
-		return True
+		return False
 
 	def valid_secretkey(self, key):
-		"""with DB() as db:
-			is_active = db.get("SELECT is_active FROM tbl_access_secretkey WHERE secretkey=%s", (key,))
+		with Database() as db:
+			data = db.query(AccessSecretkey).filter(AccessSecretkey.secretkey == key).first()
 
-		return True if is_active is True else False"""
-		return True
-
-	def valid_token(self, token):
-		"""with DB() as db:
-			row = db.get_row("SELECT created_on, expires_in FROM tbl_access_token WHERE access_token=%s", (token,))
-
-		if row is None or 'created_on' not in row:
+		if data is None:
 			return False
 
-		expires = row['created_on'] + datetime.timedelta(0, row['expires_in'])
+		return True if data.is_active is True else False
+
+	def valid_token(self, token):
+		with Database() as db:
+			data = db.query(AccessToken).filter(AccessToken.access_token == token).first()
+
+		if data is None:
+			return False
+
+		expires = data.created_on + datetime.timedelta(0, data.expires_in)
 
 		if expires > datetime.datetime.now():
 			self.active_session(token)
 
 			return True
 
-		return False"""
-		return True
+		return False
 
 	def active_session(self, token):
-		"""with DB() as db:
-			user = db.get_row(""SELECT tbl_access_token.id_webuser, tbl_webuser.username
-								FROM tbl_access_token
-								LEFT JOIN tbl_webuser ON tbl_webuser.id_webuser = tbl_access_token.id_webuser
-								WHERE tbl_access_token.access_token=%s"", (token,))
+		with Database() as db:
+			data = db.query(AccessToken).filter(AccessToken.access_token == token).first()
 
-			WithDB().config_session(user['id_webuser'], user['username'])"""
+		if data:
+			Webuser.id_webuser = data.id_webuser

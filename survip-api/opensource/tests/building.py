@@ -9,7 +9,7 @@ class TestBuilding(unittest.TestCase):
 
 	def test_01_insert(self):
 		result = Building().create({
-			'name': 'building pour unittest',
+			'name': 'building for unittest',
 			'civic_number': '1234'
 		})
 

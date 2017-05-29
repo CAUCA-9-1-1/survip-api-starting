@@ -44,13 +44,13 @@ class Api:
 		if method_mapping is not None:
 			if cherrypy.request.method in method_mapping and method_mapping[cherrypy.request.method]:
 				self.method_name = method_mapping[cherrypy.request.method]
-		print(class_object)
+
 		api_method = getattr(class_object, self.method_name, None)
 
 		if api_method is None:
 			raise Exception("We can't find the method '%s' on class '%s'" % (cherrypy.request.method, name))
 
-		if Token().valid_access_from_header() is True:
+		if Token().valid_access_from_header() is True or (name == 'Auth' and cherrypy.request.method == 'PUT'):
 			execute = getattr(class_object, 'every_execution', None)
 			execute(class_object(), cherrypy.request.method, *args)
 
