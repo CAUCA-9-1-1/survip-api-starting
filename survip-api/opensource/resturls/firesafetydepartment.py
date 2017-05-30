@@ -1,7 +1,8 @@
 import uuid
-from causeweb.storage.db import DB
-from causeweb.site.multilang import MultiLang
-from causeweb.apis.base import Base
+from framework.manage.database import Database
+from framework.manage.multilang import MultiLang
+from framework.resturls.base import Base
+from ..models.fire_safety_department import FireSafetyDepartment as Table
 
 
 class FireSafetyDepartment(Base):
@@ -14,42 +15,40 @@ class FireSafetyDepartment(Base):
 		'PATCH': '',
 	}
 
-	def get(self, id_fire_safety_department=None):
+	def get(self, id_fire_safety_department=None, is_active=None):
 		""" Return all information for one fire safety department
 
 		:param id_fire_safety_department: UUID
+		:param is_active: BOOLEAN
 		"""
-		with DB() as db:
-			if id_fire_safety_department is None:
-				data = db.get_all("SELECT * FROM tbl_fire_safety_department;")
+		with Database() as db:
+			if id_fire_safety_department is None and is_active is None:
+				data = db.query(Table).all()
+			elif id_fire_safety_department is None:
+				data = db.query(Table).filter(Table.is_active == is_active).all()
 			else:
-				data = db.get_row("""SELECT * FROM tbl_fire_safety_department
-                	                WHERE id_fire_safety_department=%s;""", (id_fire_safety_department,))
-
-		for key, row in enumerate(data):
-			data[key]['name'] = MultiLang.get(row['id_language_content_name'])
+				data = db.query(Table).get(id_fire_safety_department)
 
 		return {
 			'data': data
-		} if id_fire_safety_department is None else data[0]
+		}
 
 	def create(self, args):
 		""" Create a new fire safety department
 
 		:param args: {
 			name: JSON,
+			id_county: UUID,
+			language: STRING,
 			is_active: BOOLEAN
 		}
 		"""
 		id_fire_safety_department = uuid.uuid4()
 		id_language_content = MultiLang.set(args['name'], True)
 
-		with DB() as db:
-			db.execute("""INSERT INTO tbl_fire_safety_department(
-							id_fire_safety_department, id_language_content_name, is_active
-						  ) VALUES(%s, %s, %s);""", (
-				id_fire_safety_department, id_language_content, args['is_active']
-			))
+		with Database() as db:
+			db.insert(Table(id_fire_safety_department, id_language_content, args['id_county'], args['language']))
+			db.commit()
 
 		return {
 			'id_fire_safety_department': id_fire_safety_department,
@@ -70,12 +69,17 @@ class FireSafetyDepartment(Base):
 
 		id_language_content = MultiLang.set(args['name'])
 
-		with DB() as db:
-			db.execute("""UPDATE tbl_fire_safety_department
-							SET id_language_content_name=%s, is_active=%s
-							WHERE id_fire_safety_department=%s;""", (
-				id_language_content, args['is_active'], args['id_fire_safety_department']
-			))
+		with Database() as db:
+			data = db.query(Table).get(args['id_city'])
+
+			if 'name' in args:
+				data.id_language_content_name = MultiLang.set(args['name'])
+			if 'id_county' in args:
+				data.id_county = args['id_county']
+			if 'language' in args:
+				data.language = args['language']
+			if 'is_active' in args:
+				data.is_active = args['is_active']
 
 		return {
 			'message': 'fire safety department successfully modify'
@@ -86,10 +90,10 @@ class FireSafetyDepartment(Base):
 
 		:param id_fire_safety_department: UUID
 		"""
-		with DB() as db:
-			db.execute("UPDATE tbl_fire_safety_department SET is_active=%s WHERE id_fire_safety_department=%s;", (
-				False, id_fire_safety_department
-			))
+		with Database() as db:
+			data = db.query(Table).get(id_fire_safety_department)
+			data.is_active = False
+			db.commit()
 
 		return {
 			'message': 'fire safety department successfully removed'

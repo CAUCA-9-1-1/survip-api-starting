@@ -2,7 +2,7 @@ import uuid
 from framework.manage.database import Database
 from framework.manage.multilang import MultiLang
 from framework.resturls.base import Base
-from ..models.citytype import CityType as Table
+from ..models.city_type import CityType as Table
 
 
 class CityType(Base):
