@@ -12,10 +12,6 @@ class Api(OpenSourceApi):
 		return self.call_method('ApisAction', self.get_argument(args, kwargs))
 
 	@cherrypy.expose
-	def user(self, *args, **kwargs):
-		return self.call_method('Webuser', self.get_argument(args, kwargs))
-
-	@cherrypy.expose
 	def useraction(self, *args, **kwargs):
 		return self.call_method('WebuserAction', self.get_argument(args, kwargs))
 

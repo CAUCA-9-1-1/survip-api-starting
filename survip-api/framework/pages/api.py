@@ -18,3 +18,7 @@ class Api(BaseApi):
 	@cherrypy.expose
 	def auth(self, *args, **kwargs):
 		return self.call_method('Auth', self.get_argument(args, kwargs))
+
+	@cherrypy.expose
+	def webuser(self, *args, **kwargs):
+		return self.call_method('Webuser', self.get_argument(args, kwargs))

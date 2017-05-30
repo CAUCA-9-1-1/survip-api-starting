@@ -1,7 +1,11 @@
 from datetime import datetime
-from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import Column, Boolean, DateTime, String
+from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy.ext.hybrid import hybrid_property
 from ..auth.encryption import Encryption
+from ..manage.database import Database
+from ..manage.utilities import Utilities
+from .webuser_attributes import WebuserAttributes
 
 
 Base = declarative_base()
@@ -15,6 +19,13 @@ class Webuser(Base):
 	password = Column(String(100))
 	created_on = Column(DateTime, default=datetime.now())
 	is_active = Column(Boolean, default=True)
+
+	@hybrid_property
+	def attributes(self):
+		with Database() as db:
+			attrs = db.query(WebuserAttributes).filter(WebuserAttributes.id_webuser == self.id_webuser).all()
+
+		return Utilities.list_to_dict(attrs, 'attribute_name', 'attribute_value')
 
 	def __init__(self, id_webuser, username, password):
 		self.id_webuser = id_webuser
