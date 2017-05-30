@@ -1,7 +1,8 @@
 import uuid
-from causeweb.storage.db import DB
-from causeweb.site.multilang import MultiLang
-from causeweb.apis.base import Base
+from framework.manage.database import Database
+from framework.manage.multilang import MultiLang
+from framework.resturls.base import Base
+from ..models.citytype import CityType as Table
 
 
 class CityType(Base):
@@ -14,24 +15,23 @@ class CityType(Base):
 		'PATCH': '',
 	}
 
-	def get(self, id_city_type=None):
+	def get(self, id_city_type=None, is_active=None):
 		""" Return all information for city type
 
 		:param id_city_type: UUID
+		:param is_active: BOOLEAN
 		"""
-		with DB() as db:
-			if id_city_type is None:
-				data = db.get_all("SELECT * FROM tbl_city_type;")
+		with Database() as db:
+			if id_city_type is None and is_active is None:
+				data = db.query(Table).all()
+			elif id_city_type is None:
+				data = db.query(Table).filter(Table.is_active == is_active).all()
 			else:
-				data = db.get_all("""SELECT * FROM tbl_city_type
-                	                WHERE id_city_type=%s;""", (id_city_type,))
-
-		for key, row in enumerate(data):
-			data[key]['name'] = MultiLang.get(row['id_language_content_name'])
+				data = db.query(Table).get(id_city_type)
 
 		return {
 			'data': data
-		} if id_city_type is None else data[0]
+		}
 
 	def create(self, args):
 		""" Create a new city type
@@ -46,12 +46,9 @@ class CityType(Base):
 		id_city_type = uuid.uuid4()
 		id_language_content = MultiLang.set(args['name'], True)
 
-		with DB() as db:
-			db.execute("""INSERT INTO tbl_city_type(
-							id_city_type, id_language_content_name, is_active
-						  ) VALUES (%s, %s, True);""", (
-				id_city_type, id_language_content
-			))
+		with Database() as db:
+			db.insert(Table(id_city_type, id_language_content))
+			db.commit()
 
 		return {
 			'id_city_type': id_city_type,
@@ -73,14 +70,13 @@ class CityType(Base):
 		if 'id_city_type' not in args:
 			raise Exception("You need to pass a id_city_type")
 
-		id_language_content = MultiLang.set(args['name'])
+		with Database() as db:
+			data = db.query(Table).get(args['id_city_type'])
 
-		with DB() as db:
-			db.execute("""UPDATE tbl_city_type SET
-			           	id_language_content_name=%s, is_active=%s
-			           WHERE id_city_type=%s;""", (
-				id_language_content, args['is_active'], args['id_city_type']
-			))
+			if 'name' in args:
+				data.id_language_content_name = MultiLang.set(args['name'])
+			if 'is_active' in args:
+				data.is_active = args['is_active']
 
 		return {
 			'message': 'city type successfully modify'
@@ -94,10 +90,10 @@ class CityType(Base):
 		if self.has_permission('RightAdmin') is False:
 			return self.no_access()
 
-		with DB() as db:
-			db.execute("UPDATE tbl_city_type SET is_active=%s WHERE id_city_type=%s;", (
-				False, id_city_type
-			))
+		with Database() as db:
+			data = db.query(Table).get(id_city_type)
+			data.is_active = False
+			db.commit()
 
 		return {
 			'message': 'city type successfully removed'

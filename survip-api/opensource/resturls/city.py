@@ -1,8 +1,8 @@
 import uuid
-from causeweb.storage.db import DB
-from causeweb.site.multilang import MultiLang
-from causeweb.apis.base import Base
-from .county import County
+from framework.manage.database import Database
+from framework.manage.multilang import MultiLang
+from framework.resturls.base import Base
+from ..models.city import City as Table
 
 
 class City(Base):
@@ -19,33 +19,30 @@ class City(Base):
 		""" Return all city information
 
 		:param id_city: UUID
+		:param is_active: BOOLEAN
 		"""
-		with DB() as db:
+		with Database() as db:
 			if id_city is None and is_active is None:
-				data = db.get_all("SELECT * FROM tbl_city;")
+				data = db.query(Table).all()
 			elif id_city is None:
-				data = db.get_all("SELECT * FROM tbl_city WHERE is_active=%s;", (is_active,))
+				data = db.query(Table).filter(Table.is_active == is_active).all()
 			else:
-				data = db.get_all("SELECT * FROM tbl_city WHERE id_city=%s;", (id_city,))
-
-		for key, row in enumerate(data):
-			data[key]['name'] = MultiLang.get(row['id_language_content_name'])
-
-			if 'id_county' in row:
-				data[key]['county'] = County().get(row['id_county'])
+				data = db.query(Table).get(id_city)
 
 		return {
 			'data': data
-		} if id_city is None else data[0]
+		}
 
 	def create(self, args):
 		""" Create a new city
 
 		:param args: {
 			name: JSON,
+			id_building: UUID,
+			id_city_type: UUID,
 			id_county: UUID,
 			code: INTEGER,
-			code_3_letter: STRING,
+			code3_letter: STRING,
 			email_address: STRING,
 		}
 		"""
@@ -55,12 +52,11 @@ class City(Base):
 		id_city = uuid.uuid4()
 		id_language_content = MultiLang.set(args['name'], True)
 
-		with DB() as db:
-			db.execute("""INSERT INTO tbl_city(
-							id_city, id_language_content_name, id_county, code, code_3_letter, email_address, is_active
-						  ) VALUES (%s, %s, %s, %s, %s, %s, True);""", (
-				id_city, id_language_content, args['id_county'], args['code'], args['code_3_letter'], args['email_address']
-			))
+		with Database() as db:
+			db.insert(Table(
+				id_city, id_language_content, args['id_building'], args['id_city_type'], args['id_county'],
+				args['code'], args['code3_letter'], args['email_address']))
+			db.commit()
 
 		return {
 			'id_city': id_city,
@@ -72,9 +68,11 @@ class City(Base):
 
 		:param args: {
 			id_city: UUID,
+			id_county: UUID,
+			id_building: UUID,
 			name: JSON,
 			code: INTEGER,
-			code_3_letter: STRING,
+			code3_letter: STRING,
 			email_address: STRING,
 			is_active: BOOLEAN,
 		}
@@ -85,14 +83,23 @@ class City(Base):
 		if 'id_city' not in args:
 			raise Exception("You need to pass a id_city")
 
-		id_language_content = MultiLang.set(args['name'])
+		with Database() as db:
+			data = db.query(Table).get(args['id_city'])
 
-		with DB() as db:
-			db.execute("""UPDATE tbl_city SET
-			           	id_language_content_name=%s, id_county=%s, code=%s, code_3_letter=%s, email_address=%s, is_active=%s
-			           WHERE id_city=%s;""", (
-				id_language_content, args['id_county'], args['code'], args['code_3_letter'], args['email_address'], args['is_active'], args['id_city']
-			))
+			if 'name' in args:
+				data.id_language_content_name = MultiLang.set(args['name'])
+			if 'id_building' in args:
+				data.id_building = args['id_building']
+			if 'id_city_type' in args:
+				data.id_city_type = args['id_city_type']
+			if 'id_county' in args:
+				data.id_county = args['id_county']
+			if 'code' in args:
+				data.code = args['code']
+			if 'code3_letter' in args:
+				data.code3_letter = args['code3_letter']
+			if 'is_active' in args:
+				data.is_active = args['is_active']
 
 		return {
 			'message': 'city successfully modify'
@@ -106,10 +113,10 @@ class City(Base):
 		if self.has_permission('RightAdmin') is False:
 			return self.no_access()
 
-		with DB() as db:
-			db.execute("UPDATE tbl_city SET is_active=%s WHERE id_city=%s;", (
-				False, id_city
-			))
+		with Database() as db:
+			data = db.query(Table).get(id_city)
+			data.is_active = False
+			db.commit()
 
 		return {
 			'message': 'city successfully removed'
