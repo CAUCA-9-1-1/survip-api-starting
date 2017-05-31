@@ -20,14 +20,6 @@ class Api(OpenSourceApi):
 		return self.call_method('WebuserStatistics', self.get_argument(args, kwargs))
 
 	@cherrypy.expose
-	def permission(self, *args, **kwargs):
-		return self.call_method('Permission', self.get_argument(args, kwargs))
-
-	@cherrypy.expose
-	def permissionuser(self, *args, **kwargs):
-		return self.call_method('PermissionUser', self.get_argument(args, kwargs))
-
-	@cherrypy.expose
 	def survey(self, *args, **kwargs):
 		return self.call_method('Survey', self.get_argument(args, kwargs))
 

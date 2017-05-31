@@ -100,20 +100,22 @@ class Api:
 			body = cherrypy.request.body.readlines()
 
 			if body[0] is not '':
-				arguments = (json.loads(body[0].decode('utf-8')),)
+				args = json.loads(body[0].decode('utf-8'))
+
+				if arguments is not () and config.FORCE_CAMELCASE:
+					arguments = (self.convert_from_camel_case(args),)
+				else:
+					arguments = (args,)
 		except Exception as e:
 			if args:
 				arguments = ()
 				for val in args:
 					arguments = arguments + (self.convert_argument(val),)
 			if kwargs:
-				for key in kwargs:
-					kwargs[key] = self.convert_from_camel_case(self.convert_argument(kwargs[key]))
+				if config.FORCE_CAMELCASE:
+					kwargs = self.convert_from_camel_case(self.convert_argument(kwargs))
 
 				arguments = (kwargs,)
-
-		if arguments is not () and config.FORCE_CAMELCASE:
-			arguments = (self.convert_from_camel_case(arguments[0]),)
 
 		return arguments
 
