@@ -68,5 +68,12 @@ class Permission(Base):
 	    ForeignKey(PermissionSystemFeature.id_permission_system_feature),
 	    nullable=False
 	)
-	access = Column(Boolean, default=False)
+	access = Column(Boolean, default=None)
 	created_on = Column(DateTime, default=datetime.now())
+
+	def __init__(self, id_permission, id_permission_object, id_permission_system, id_permission_system_feature, access):
+		self.id_permission = id_permission
+		self.id_permission_object = id_permission_object
+		self.id_permission_system = id_permission_system
+		self.id_permission_system_feature = id_permission_system_feature
+		self.access = access

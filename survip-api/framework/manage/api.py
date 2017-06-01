@@ -102,7 +102,7 @@ class Api:
 			if body[0] is not '':
 				args = json.loads(body[0].decode('utf-8'))
 
-				if arguments is not () and config.FORCE_CAMELCASE:
+				if config.FORCE_CAMELCASE:
 					arguments = (self.convert_from_camel_case(args),)
 				else:
 					arguments = (args,)
@@ -146,7 +146,12 @@ class Api:
 			else:
 				key = old_key
 
-			if isinstance(data[key], list):
+			if isinstance(data[key], tuple):
+				info = ()
+				for pos, val in enumerate(data[key]):
+					info = info + (self.convert_to_camel_case(val),)
+				data[key] = info
+			elif isinstance(data[key], list):
 				for pos, val in enumerate(data[key]):
 					data[key][pos] = self.convert_to_camel_case(val)
 			elif isinstance(data[key], dict):
