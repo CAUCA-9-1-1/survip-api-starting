@@ -1,6 +1,8 @@
 import json
+from ..config import setup as config
 from ..manage.database import Database
 from ..models.apis_action import ApisAction as Table
+from ..models.permission import Permission, PermissionSystemFeature, PermissionObject
 
 
 class Base:
@@ -33,10 +35,32 @@ class Base:
 		return {}
 
 	def has_permission(self, feature_name):
-		#if onUsePermission().get(feature_name) is True:
-		return True
+		with Database() as db:
+			permission_object = db.query(PermissionObject).filter(
+				PermissionObject.id_permission_system == config.PERMISSION['systemID'],
+				PermissionObject.object_table == 'webuser',
+				PermissionObject.generic_id == str(Base.logged_id_webuser),
+			).first()
 
-		#return False
+			if permission_object:
+				webuser = db.query(Permission).filter(
+					Permission.id_permission_object == permission_object.id_permission_object,
+					Permission.id_permission_system_feature == PermissionSystemFeature.id_permission_system_feature,
+					PermissionSystemFeature.feature_name == feature_name,
+				).first()
+
+				if webuser is None or webuser.access is None:
+					parent = db.query(Permission).filter(
+						Permission.id_permission_object == permission_object.id_permission_object_parent,
+						Permission.id_permission_system_feature == PermissionSystemFeature.id_permission_system_feature,
+						PermissionSystemFeature.feature_name == feature_name,
+					).first()
+
+					return parent.access
+				else:
+					return webuser.access
+
+		return False
 
 	def no_access(self):
 		return {

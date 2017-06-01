@@ -14,16 +14,16 @@ class PermissionSystemFeature(Base):
 		'PATCH': '',
 	}
 
-	def get(self, featureName=None):
+	def get(self, feature_name=None):
 		with Database() as db:
-			if featureName is None:
+			if feature_name is None:
 				data = db.query(Table).filter(
 					Table.id_permission_system == config.PERMISSION['systemID']
 				).all()
 			else:
 				data = db.query(Table).filter(
 					Table.id_permission_system == config.PERMISSION['systemID'],
-					Table.feature_name == featureName
+					Table.feature_name == feature_name
 				).all()
 
 		return {

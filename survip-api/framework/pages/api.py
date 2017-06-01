@@ -20,6 +20,10 @@ class Api(BaseApi):
 		return self.call_method('Auth', self.get_argument(args, kwargs))
 
 	@cherrypy.expose
+	def apisaction(self, *args, **kwargs):
+		return self.call_method('ApisAction', self.get_argument(args, kwargs))
+
+	@cherrypy.expose
 	def permissionsystemfeature(self, *args, **kwargs):
 		return self.call_method('PermissionSystemFeature', self.get_argument(args, kwargs))
 
