@@ -23,12 +23,6 @@ class Inspection(Base):
 	is_active = Column(Boolean, default=True)
 	is_completed = Column(Boolean, default=False)
 
-	def __init__(self, id_inspection, id_survey, id_building, id_webuser):
-		self.id_inspection = id_inspection
-		self.id_survey = id_survey
-		self.id_building = id_building
-		self.id_webuser = id_webuser
-
 	@hybrid_property
 	def address(self):
 		with Database() as db:
@@ -43,3 +37,9 @@ class Inspection(Base):
 	def matricule(self):
 		with Database() as db:
 			return db.query(Building).get(self.id_building).matricule
+
+	def __init__(self, id_inspection, id_survey, id_building, id_webuser):
+		self.id_inspection = id_inspection
+		self.id_survey = id_survey
+		self.id_building = id_building
+		self.id_webuser = id_webuser

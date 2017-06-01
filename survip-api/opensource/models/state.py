@@ -17,7 +17,7 @@ class State(Base):
 	id_language_content_name = Column(String(36), ForeignKey(LanguageContent.id_language_content), nullable=False)
 	id_country = Column(String(36), ForeignKey(Country.id_country))
 	ansi_code = Column(String(2))
-	created_on = Column(DateTime, default=datetime.now())
+	created_on = Column(DateTime, default=datetime.now)
 	is_active = Column(Boolean, default=True)
 
 	@hybrid_property

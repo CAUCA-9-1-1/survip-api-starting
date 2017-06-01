@@ -19,7 +19,7 @@ class City(Base):
 	code = Column(String(5))
 	code3_letter = Column(String(3))
 	email_address = Column(String(100))
-	created_on = Column(DateTime, default=datetime.now())
+	created_on = Column(DateTime, default=datetime.now)
 	is_active = Column(Boolean, default=True)
 
 	@hybrid_property

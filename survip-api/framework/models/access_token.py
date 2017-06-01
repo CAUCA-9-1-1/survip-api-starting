@@ -13,7 +13,7 @@ class AccessToken(Base):
 	id_webuser = Column(String(36))
 	access_token = Column(String(100))
 	refresh_token = Column(String(100))
-	created_on = Column(DateTime, default=datetime.now())
+	created_on = Column(DateTime, default=datetime.now)
 	expires_in = Column(Integer, default=1)
 
 	def __init__(self, id_access_token, id_webuser, access_token, refresh_token, expires_in):

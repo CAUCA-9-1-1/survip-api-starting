@@ -17,14 +17,15 @@ class FireSafetyDepartment(Base):
 	id_language_content_name = Column(String(36), ForeignKey(LanguageContent.id_language_content), nullable=False)
 	id_county = Column(String(36), ForeignKey(County.id_county))
 	language = Column(String(5))
-	created_on = Column(DateTime, default=datetime.now())
+	created_on = Column(DateTime, default=datetime.now)
 	is_active = Column(Boolean, default=True)
 
 	@hybrid_property
 	def name(self):
 		return MultiLang.get(self.id_language_content_name)
 
-	def __init__(self, id_fire_safety_department, id_language_content, id_county):
+	def __init__(self, id_fire_safety_department, id_language_content, id_county, language):
 		self.id_city = id_fire_safety_department
 		self.id_language_content_name = id_language_content
 		self.id_county = id_county
+		self.language = language

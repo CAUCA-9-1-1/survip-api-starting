@@ -15,7 +15,7 @@ class CityType(Base):
 
 	id_city_type = Column(String(36), primary_key=True)
 	id_language_content_name = Column(String(36), ForeignKey(LanguageContent.id_language_content), nullable=False)
-	created_on = Column(DateTime, default=datetime.now())
+	created_on = Column(DateTime, default=datetime.now)
 	is_active = Column(Boolean, default=True)
 
 	@hybrid_property

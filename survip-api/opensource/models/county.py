@@ -18,9 +18,15 @@ class County(Base):
 	id_language_content_name = Column(String(36), ForeignKey(LanguageContent.id_language_content), nullable=False)
 	id_region = Column(String(36), ForeignKey(Region.id_region))
 	id_state = Column(String(36), ForeignKey(State.id_state))
-	created_on = Column(DateTime, default=datetime.now())
+	created_on = Column(DateTime, default=datetime.now)
 	is_active = Column(Boolean, default=True)
 
 	@hybrid_property
 	def name(self):
 		return MultiLang.get(self.id_language_content_name)
+
+	def __init__(self, id_county, id_language_content, id_region, id_state):
+		self.id_county = id_county
+		self.id_language_content_name = id_language_content
+		self.id_region = id_region
+		self.id_state = id_state

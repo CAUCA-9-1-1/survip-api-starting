@@ -69,7 +69,7 @@ class Permission(Base):
 	    nullable=False
 	)
 	access = Column(Boolean, default=None)
-	created_on = Column(DateTime, default=datetime.now())
+	created_on = Column(DateTime, default=datetime.now)
 
 	def __init__(self, id_permission, id_permission_object, id_permission_system, id_permission_system_feature, access):
 		self.id_permission = id_permission

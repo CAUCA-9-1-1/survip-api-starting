@@ -14,7 +14,7 @@ class AccessSecretkey(Base):
 	application_name = Column(String(50))
 	randomkey = Column(String(100))
 	secretkey = Column(String(100))
-	created_on = Column(DateTime, default=datetime.now())
+	created_on = Column(DateTime, default=datetime.now)
 	is_active = Column(Boolean, default=True)
 
 	def __init__(self, id_access_token, id_webuser, application_name, randomkey, secretkey):

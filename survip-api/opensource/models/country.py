@@ -16,9 +16,15 @@ class Country(Base):
 	id_language_content_name = Column(String(36), ForeignKey(LanguageContent.id_language_content), nullable=False)
 	code_alpha2 = Column(String(2))
 	code_alpha3 = Column(String(3))
-	created_on = Column(DateTime, default=datetime.now())
+	created_on = Column(DateTime, default=datetime.now)
 	is_active = Column(Boolean, default=True)
 
 	@hybrid_property
 	def name(self):
 		return MultiLang.get(self.id_language_content_name)
+
+	def __init__(self, id_country, id_language_content, code_alpha2, code_alpha3):
+		self.id_country = id_country
+		self.id_language_content_name = id_language_content
+		self.code_alpha2 = code_alpha2
+		self.code_alpha3 = code_alpha3

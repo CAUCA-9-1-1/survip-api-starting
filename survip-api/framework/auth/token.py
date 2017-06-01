@@ -23,11 +23,11 @@ class Token:
 
 			return {
 				'data': {
-					'authorizationType': 'Token',
-					'expiresIn': (self.expires_in_minutes * 60),
-					'accessToken': access_token,
-					'refreshToken': refresh_token,
-					'userId': Webuser.id,
+					'authorization_type': 'Token',
+					'expires_in': (self.expires_in_minutes * 60),
+					'access_token': access_token,
+					'refresh_token': refresh_token,
+					'webuser_id': Webuser.id,
 				}
 			}
 		else:

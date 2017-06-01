@@ -5,10 +5,17 @@ from sqlalchemy.ext.hybrid import hybrid_property
 from ..auth.encryption import Encryption
 from ..manage.database import Database
 from ..manage.utilities import Utilities
-from .webuser_attributes import WebuserAttributes
 
 
 Base = declarative_base()
+
+
+class WebuserAttributes(Base):
+	__tablename__ = "tbl_webuser_attributes"
+
+	id_webuser = Column(String(36), primary_key=True)
+	attribute_name = Column(String(50), primary_key=True)
+	attribute_value = Column(String(200))
 
 
 class Webuser(Base):
@@ -17,7 +24,7 @@ class Webuser(Base):
 	id_webuser = Column(String(36), primary_key=True)
 	username = Column(String(100))
 	password = Column(String(100))
-	created_on = Column(DateTime, default=datetime.now())
+	created_on = Column(DateTime, default=datetime.now)
 	is_active = Column(Boolean, default=True)
 
 	@hybrid_property
