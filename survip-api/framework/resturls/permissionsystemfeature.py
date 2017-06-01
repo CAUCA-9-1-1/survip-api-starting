@@ -5,7 +5,7 @@ from .base import Base
 
 
 class PermissionSystemFeature(Base):
-	active = False
+	table_name = 'tbl_permission_system_feature'
 	mapping_method = {
 		'GET': 'get',
 		'PUT': '',

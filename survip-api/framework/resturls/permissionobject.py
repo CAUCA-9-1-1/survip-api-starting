@@ -5,7 +5,7 @@ from .base import Base
 
 
 class PermissionObject(Base):
-	active = False
+	table_name = 'tbl_permission_object'
 	mapping_method = {
 		'GET': 'get',
 		'PUT': 'move',

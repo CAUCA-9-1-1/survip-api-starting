@@ -1,4 +1,10 @@
-class Base():
+import json
+from ..manage.database import Database
+from ..models.apis_action import ApisAction as Table
+
+
+class Base:
+	logged_id_webuser = None
 	table_name = ''
 	mapping_method = {
 		'GET': '',
@@ -8,19 +14,20 @@ class Base():
 		'PATCH': '',
 	}
 
-	def every_execution(self, method, *args):
-		if self.table_name == '' or method == 'GET' or method == 'PUT':
+	def every_execution(self, class_name, method, *args):
+		if self.table_name == '':
 			return
 
-		table_id = self.table_name.replace('tbl_', 'id_')
+		field_id = self.table_name.replace('tbl_', 'id_')
+		object_id = None
 
-		"""if table_id in args[0]:
-			with DB() as db:
-				db.execute(""INSERT INTO tbl_apis_action(
-								id_apis_update, action_table, action_table_id, id_webuser
-							  ) VALUES(uuid_generate_v4(), %s, %s, %s);"", (
-					self.table_name, args[0][table_id], Session.get('userId')
-				))"""
+		if len(args) > 0:
+			if field_id in args[0]:
+				object_id = args[0][field_id]
+
+		with Database() as db:
+			db.insert(Table(Base.logged_id_webuser, method, json.dumps(args), class_name, object_id))
+			db.commit()
 
 	def options(self):
 		return {}

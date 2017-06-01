@@ -53,7 +53,7 @@ class Api:
 
 		if Token().valid_access_from_header() is True or (name == 'Auth' and cherrypy.request.method == 'PUT'):
 			execute = getattr(class_object, 'every_execution', None)
-			execute(class_object(), cherrypy.request.method, *args)
+			execute(class_object(), name, cherrypy.request.method, *args)
 
 			return api_method(class_object(), *args)
 		else:
@@ -139,23 +139,24 @@ class Api:
 		if isinstance(data, object) and isinstance(data.__class__, DeclarativeMeta):
 			data = JsonEncoder.sqlalchemy_to_dict(data)
 
-		for old_key in data:
-			if '_' in old_key:
-				key = re.sub(r'_([a-z])', lambda x: x.group(1).upper(), old_key)
-				data[key] = data.pop(old_key)
-			else:
-				key = old_key
+		if isinstance(data, dict):
+			for old_key in data:
+				if '_' in old_key:
+					key = re.sub(r'_([a-z])', lambda x: x.group(1).upper(), old_key)
+					data[key] = data.pop(old_key)
+				else:
+					key = old_key
 
-			if isinstance(data[key], tuple):
-				info = ()
-				for pos, val in enumerate(data[key]):
-					info = info + (self.convert_to_camel_case(val),)
-				data[key] = info
-			elif isinstance(data[key], list):
-				for pos, val in enumerate(data[key]):
-					data[key][pos] = self.convert_to_camel_case(val)
-			elif isinstance(data[key], dict):
-				data[key] = self.convert_to_camel_case(data[key])
+				if isinstance(data[key], tuple):
+					info = ()
+					for pos, val in enumerate(data[key]):
+						info = info + (self.convert_to_camel_case(val),)
+					data[key] = info
+				elif isinstance(data[key], list):
+					for pos, val in enumerate(data[key]):
+						data[key][pos] = self.convert_to_camel_case(val)
+				elif isinstance(data[key], dict):
+					data[key] = self.convert_to_camel_case(data[key])
 
 		return data
 

@@ -6,7 +6,7 @@ from .base import Base
 
 
 class Webuser(Base):
-	id_webuser = None
+	table_name = 'tbl_webuser'
 	mapping_method = {
 		'GET': 'get',
 		'PUT': 'modify',
@@ -41,7 +41,7 @@ class Webuser(Base):
 			).first()
 
 		if data is not None:
-			Webuser.id = data.id_webuser
+			Base.logged_id_webuser = data.id_webuser
 			return True
 
 		return False

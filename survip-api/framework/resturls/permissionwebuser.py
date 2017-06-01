@@ -7,7 +7,7 @@ from .permissionsystemfeature import PermissionSystemFeature
 
 
 class PermissionWebuser(Base):
-	active = False
+	table_name = 'tbl_permission'
 	mapping_method = {
 		'GET': 'get',
 		'PUT': 'modify',

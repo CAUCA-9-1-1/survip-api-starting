@@ -5,6 +5,7 @@ import uuid
 import cherrypy
 from ..config import setup as config
 from ..manage.database import Database
+from ..resturls.base import Base
 from ..resturls.webuser import Webuser
 from ..models.access_token import AccessToken
 from ..models.access_secretkey import AccessSecretkey
@@ -18,7 +19,7 @@ class Token:
 			refresh_token = self.generate_token()
 
 			with Database() as db:
-				db.insert(AccessToken(id_access_token, Webuser.id, access_token, refresh_token, self.expires_in_minutes * 60))
+				db.insert(AccessToken(id_access_token, Base.logged_id_webuser, access_token, refresh_token, self.expires_in_minutes * 60))
 				db.commit()
 
 			return {
@@ -27,7 +28,7 @@ class Token:
 					'expires_in': (self.expires_in_minutes * 60),
 					'access_token': access_token,
 					'refresh_token': refresh_token,
-					'webuser_id': Webuser.id,
+					'webuser_id': Base.logged_id_webuser,
 				}
 			}
 		else:
@@ -91,4 +92,4 @@ class Token:
 			data = db.query(AccessToken).filter(AccessToken.access_token == token).first()
 
 		if data:
-			Webuser.id_webuser = data.id_webuser
+			Base.logged_id_webuser = data.id_webuser
