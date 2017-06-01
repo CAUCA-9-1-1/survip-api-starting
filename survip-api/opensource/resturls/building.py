@@ -23,9 +23,6 @@ class Building(Base):
 		"""
 		with Database() as db:
 			if id_building is None:
-				if self.has_permission('RightAdmin') is False:
-					return self.no_access()
-
 				if is_active is None:
 					data = db.query(Table).all()
 				else:

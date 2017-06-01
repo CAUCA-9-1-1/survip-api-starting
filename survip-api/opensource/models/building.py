@@ -61,7 +61,7 @@ class Building(Base):
 		with Database() as db:
 			lane = db.query(Lane).get(self.id_lane)
 
-		return self.civic_number + ', ' + lane.name[0].description
+		return self.civic_number + ', ' + lane.name['fr']
 
 	@hybrid_property
 	def geojson(self):
