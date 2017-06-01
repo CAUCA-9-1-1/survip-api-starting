@@ -35,9 +35,76 @@ create table tbl_apis_action
 		constraint tbl_field_update_pkey
 			primary key,
 	id_webuser uuid,
-	action_time timestamp default now(),
-	action_table varchar(50),
-	action_table_id uuid
+	method varchar(10),
+	params text,
+	action_object varchar(50),
+	action_object_id uuid,
+	action_time timestamp default now()
+)
+;
+
+create table tbl_external_import
+(
+	id_external_import uuid not null
+		constraint tbl_external_import_pkey
+			primary key,
+	internal_id uuid,
+	internal_table varchar(50),
+	external_id varchar(50),
+	external_table varchar(50),
+	imported_on timestamp
+)
+;
+
+create table tbl_fire_safety_department
+(
+	id_fire_safety_department uuid not null
+		constraint tbl_fire_safety_department_pkey
+			primary key,
+	id_language_content_name uuid,
+	id_county uuid,
+	language varchar(5),
+	created_on timestamp default now(),
+	is_active boolean
+)
+;
+
+create table tbl_fire_safety_department_city_serving
+(
+	id_fire_safety_department_city_serving uuid not null
+		constraint tbl_fire_safety_department_city_serving_pkey
+			primary key,
+	id_fire_safety_department uuid not null,
+	id_city uuid not null,
+	id_sector_type uuid,
+	created_on timestamp default now(),
+	is_active boolean default true not null
+)
+;
+
+create table tbl_firestation
+(
+	id_firestation uuid not null
+		constraint tbl_firestation_pkey
+			primary key,
+	id_fire_safety_department uuid,
+	station_name varchar(30),
+	phone_number varchar(10),
+	fax_number varchar(10),
+	email varchar(70),
+	id_building uuid,
+	created_on timestamp default now(),
+	is_active boolean
+)
+;
+
+create table tbl_language_content
+(
+	id_language_content uuid not null,
+	language_code varchar(5) not null,
+	description varchar(250),
+	constraint tbl_language_content_pkey
+		primary key (id_language_content, language_code)
 )
 ;
 
@@ -90,6 +157,19 @@ create table tbl_permission_system_feature
 )
 ;
 
+create table tbl_picture
+(
+	id_picture uuid not null
+		constraint picture_pkey
+			primary key,
+	id_language_content_name uuid,
+	picture bytea,
+	transfered boolean,
+	created_on timestamp default now(),
+	is_active boolean
+)
+;
+
 create table tbl_webuser
 (
 	id_webuser uuid not null
@@ -99,19 +179,6 @@ create table tbl_webuser
 	password varchar(100),
 	is_active boolean,
 	created_on timestamp default now()
-)
-;
-
-create table tbl_webuser_action
-(
-	id_webuser_action uuid not null
-		constraint tbl_webuser_action_pkey
-			primary key,
-	id_webuser uuid,
-	action_time timestamp,
-	action_object varchar(50),
-	action_name varchar(50),
-	action_param text
 )
 ;
 
@@ -134,83 +201,5 @@ create table tbl_webuser_fire_safety_department
 	id_fire_safety_department uuid not null,
 	is_active boolean,
 	created_on timestamp default now()
-)
-;
-
-create table tbl_language_content
-(
-	id_language_content uuid not null,
-	language_code varchar(5) not null,
-	description varchar(250),
-	constraint tbl_language_content_pkey
-		primary key (id_language_content, language_code)
-)
-;
-
-create table tbl_picture
-(
-	id_picture uuid not null
-		constraint picture_pkey
-			primary key,
-	id_language_content_name uuid,
-	transfered boolean,
-	created_on timestamp default now(),
-	is_active boolean,
-	picture bytea
-)
-;
-
-create table tbl_firestation
-(
-	id_firestation uuid not null
-		constraint tbl_firestation_pkey
-			primary key,
-	id_fire_safety_department uuid,
-	station_name varchar(30),
-	phone_number varchar(10),
-	fax_number varchar(10),
-	email varchar(70),
-	id_building uuid,
-	created_on timestamp default now(),
-	is_active boolean
-)
-;
-
-create table tbl_external_import
-(
-	id_external_import uuid not null
-		constraint tbl_external_import_pkey
-			primary key,
-	internal_id uuid,
-	internal_table varchar(50),
-	external_id varchar(50),
-	external_table varchar(50),
-	imported_on timestamp
-)
-;
-
-create table tbl_fire_safety_department
-(
-	id_fire_safety_department uuid not null
-		constraint tbl_fire_safety_department_pkey
-			primary key,
-	id_language_content_name uuid,
-	id_county uuid,
-	language varchar(5),
-	created_on timestamp default now(),
-	is_active boolean
-)
-;
-
-create table tbl_fire_safety_department_city_serving
-(
-	id_fire_safety_department_city_serving uuid not null
-		constraint tbl_fire_safety_department_city_serving_pkey
-			primary key,
-	id_fire_safety_department uuid not null,
-	id_city uuid not null,
-	id_sector_type uuid,
-	created_on timestamp default now(),
-	is_active boolean default true not null
 )
 ;

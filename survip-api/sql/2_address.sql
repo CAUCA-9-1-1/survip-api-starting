@@ -43,7 +43,7 @@ create table tbl_county
 		constraint tbl_county_pkey
 			primary key,
 	id_language_content_name uuid,
-	id_administrative_region uuid,
+	id_region uuid,
 	id_state uuid,
 	created_on timestamp default now(),
 	is_active boolean
