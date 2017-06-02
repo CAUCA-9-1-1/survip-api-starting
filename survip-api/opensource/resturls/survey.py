@@ -1,9 +1,10 @@
 import json
 import uuid
-from causeweb.storage.db import DB
-from causeweb.site.multilang import MultiLang
-from causeweb.apis.base import Base
-from .surveyquestion import SurveyQuestion
+from framework.manage.database import Database
+from framework.manage.multilang import MultiLang
+from framework.resturls.base import Base
+from ..models.survey import Survey as Table
+from ..models.inspection import Inspection
 
 
 class Survey(Base):
@@ -16,7 +17,7 @@ class Survey(Base):
 		'PATCH': '',
 	}
 
-	def get(self, id_survey=None):
+	def get(self, id_survey=None, is_active=None):
 		""" Return the survey information
 
 		:param id_survey: UUID
@@ -24,15 +25,13 @@ class Survey(Base):
 		if self.has_permission('RightTPI') is False:
 			return self.no_access()
 
-		with DB() as db:
-			if id_survey is None:
-				data = db.get_all("SELECT * FROM tbl_survey;")
+		with Database() as db:
+			if id_survey is None and is_active is None:
+				data = db.query(Table).all()
+			elif id_survey is None:
+				data = db.query(Table).filter(Table.is_active == is_active).all()
 			else:
-				data = db.get_all("SELECT * FROM tbl_survey WHERE id_survey=%s;", (id_survey,))
-
-		for key, row in enumerate(data):
-			data[key]['name'] = MultiLang.get(row['id_language_content_name'])
-			data[key]['questions'] = SurveyQuestion().get(row['id_survey'], True)['data']
+				data = db.query(Table).get(id_survey)
 
 		return {
 			'data': data
@@ -53,13 +52,9 @@ class Survey(Base):
 		id_survey = uuid.uuid4()
 		id_language_content = MultiLang.set(args['name'], True)
 
-		with DB() as db:
-			db.execute("INSERT INTO tbl_survey(id_survey, id_language_content_name, survey_type, created_on, is_active) VALUES(%s, %s, %s, NOW(), True);", (
-				id_survey, id_language_content, args['survey_type']
-			))
-
-		if 'questions' in args:
-			self.set_questions(id_survey, args['questions'], True)
+		with Database() as db:
+			db.insert(Table(id_survey, id_language_content, args['survey_type']))
+			db.commit()
 
 		return {
 			'id_survey': id_survey,
@@ -83,21 +78,25 @@ class Survey(Base):
 		if 'id_survey' not in args:
 			raise Exception("You need to pass a id_survey")
 
-		with DB() as db:
-			id_survey_answer = db.get("SELECT id_inspection FROM tbl_inspection WHERE id_survey=%s;", (args['id_survey'],))
+		with Database() as db:
+			inspection = db.query(Inspection).filter(
+				Inspection.id_survey == args['id_survey'],
+				Inspection.is_completed == True,
+			).all()
 
-			if id_survey_answer != '':
+			if len(inspection) > 0:
 				self.remove(args['id_survey'])
 				self.create(args)
 			else:
-				id_language_content = MultiLang.set(args['name'])
+				data = db.query(Table).get(args['id_survey'])
 
-				db.execute("UPDATE tbl_survey SET id_language_content_name=%s, survey_type=%s, is_active=%s WHERE id_survey=%s;", (
-					id_language_content, args['survey_type'], args['is_active'], args['id_survey']
-				))
+				if 'name' in args:
+					data.id_language_content_name = MultiLang.set(args['name'])
 
-				if 'questions' in args:
-					self.set_questions(args['id_survey'], args['questions'])
+				if 'survey_type' in args:
+					data.survey_type = args['survey_type']
+				if 'is_active' in args:
+					data.is_active = args['is_active']
 
 		return {
 			'message': 'survey successfully modify'
@@ -111,25 +110,11 @@ class Survey(Base):
 		if self.has_permission('RightTPI') is False:
 			return self.no_access()
 
-		with DB() as db:
-			db.execute("UPDATE tbl_survey SET is_active=%s WHERE id_survey=%s;", (
-				False, id_survey
-			))
+		with Database() as db:
+			data = db.query(Table).get(id_survey)
+			data.is_active = False
+			db.commit()
 
 		return {
 			'message': 'survey successfully removed'
 		}
-
-	def set_questions(self, id_survey, questions, force_creation=False):
-		if not isinstance(questions, dict) and not isinstance(questions, list):
-			questions = json.loads(questions)
-
-		for question in questions:
-			question.update({
-				'id_survey': id_survey
-			})
-
-			if 'id_survey_question' not in question or force_creation is True:
-				SurveyQuestion().create(question)
-			else:
-				SurveyQuestion().modify(question)

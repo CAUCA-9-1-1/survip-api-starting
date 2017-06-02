@@ -1,9 +1,9 @@
 import json
 import uuid
-from causeweb.storage.db import DB
-from causeweb.site.multilang import MultiLang
-from causeweb.apis.base import Base
-from .surveychoice import SurveyChoice
+from framework.manage.database import Database
+from framework.manage.multilang import MultiLang
+from framework.resturls.base import Base
+from ..models.survey import SurveyQuestion as Table
 
 
 class SurveyQuestion(Base):
@@ -24,24 +24,14 @@ class SurveyQuestion(Base):
 		if self.has_permission('RightTPI') is False:
 			return self.no_access()
 
-		with DB() as db:
+		with Database() as db:
 			if is_active is None:
-				data = db.get_all("""SELECT *
-								FROM tbl_survey_question
-								WHERE id_survey=%s
-								ORDER BY sequence;""", (id_survey,))
+				data = db.query(Table).filter(Table.id_survey == id_survey).all()
 			else:
-				data = db.get_all("""SELECT *
-								FROM tbl_survey_question
-								WHERE id_survey=%s AND is_active=%s
-								ORDER BY sequence;""", (id_survey, is_active))
-
-		for key, row in enumerate(data):
-			data[key]['title'] = MultiLang.get(row['id_language_content_title'])
-			data[key]['description'] = MultiLang.get(row['id_language_content_description'])
-
-			if row['question_type'] == 'choice':
-				data[key]['choices'] = SurveyChoice().get(row['id_survey_question'], is_active)['data']
+				data = db.query(Table).filter(
+					Table.id_survey == id_survey,
+					Table.is_active == is_active,
+				).all()
 
 		return {
 			'data': data
@@ -73,82 +63,67 @@ class SurveyQuestion(Base):
 		sequence = int(args['sequence']) if 'sequence' in args else 0
 		question_type = args['question_type'] if 'question_type' in args else 'text'
 
-		with DB() as db:
-			db.execute("UPDATE tbl_survey_question SET sequence=(sequence + 1) WHERE sequence >= %s", (args['sequence'],))
-			db.execute("""INSERT INTO tbl_survey_question
-			           (id_survey_question, id_survey, id_language_content_title, id_language_content_description, id_survey_question_next, sequence, question_type, is_active)
-			           VALUES(%s, %s, %s, %s, %s, %s, %s, %s);""", (
-				id_survey_question, args['id_survey'], id_language_content_title, id_language_content_description, next_question, sequence, question_type, True
-			))
-
-		if 'choices' in args:
-			self.set_choices(id_survey_question, args['choices'], True)
+		with Database() as db:
+			db.insert(Table(
+				id_survey_question, id_language_content_title, id_language_content_description,next_question,
+				sequence, question_type))
+			db.commit()
 
 		return {
 			'id_survey_question': id_survey_question,
-			'message': 'survey successfully create question'
+			'message': 'survey question successfully created'
 		}
 
 	def modify(self, args):
 		if self.has_permission('RightTPI') is False:
 			return self.no_access()
 
+		if 'id_survey_question' not in args:
+			raise Exception("You need to pass a id_survey_question")
 		if 'step' in args:
 			return self.change_sequence(args)
 
-		id_language_content_title = MultiLang.set(args['title'])
-		id_language_content_description = MultiLang.set(args['description'])
 		next_question = args['id_survey_question_next'] if 'id_survey_question_next' in args and args['id_survey_question_next'] != '' else None
 
-		with DB() as db:
-			db.execute("""UPDATE tbl_survey_question
-					SET id_language_content_title=%s, id_language_content_description=%s, id_survey_question_next=%s, sequence=%s, question_type=%s, is_active=%s
-					WHERE id_survey_question=%s;""", (
-				id_language_content_title, id_language_content_description, next_question, args['sequence'], args['question_type'], True, args['id_survey_question']
-			))
+		with Database() as db:
+			data = db.query(Table).get(args['id_survey_question'])
+			data.id_survey_question_next = next_question
 
-		if 'choices' in args:
-			self.set_choices(args['id_survey_question'], args['choices'])
+			if 'title' in args:
+				data.id_language_content_name = MultiLang.set(args['title'])
+			if 'description' in args:
+				data.id_language_content_name = MultiLang.set(args['description'])
+			if 'sequence' in args:
+				data.sequence = MultiLang.set(args['sequence'])
+			if 'question_type' in args:
+				data.question_type = MultiLang.set(args['question_type'])
+			if 'is_active' in args:
+				data.is_active = MultiLang.set(args['is_active'])
 
 		return {
-			'message': 'survey successfully modify question'
+			'message': 'survey question successfully modify'
 		}
 
 	def remove(self, id_survey_question):
 		if self.has_permission('RightTPI') is False:
 			return self.no_access()
 
-		with DB() as db:
-			db.execute("UPDATE tbl_survey_question SET is_active=%s WHERE id_survey_question=%s;", (
-				False, id_survey_question
-			))
+		with Database() as db:
+			data = db.query(Table).get(id_survey_question)
+			data.is_active = False
+			db.commit()
 
 		return {
 			'message': 'survey successfully remove question'
 		}
 
 	def change_sequence(self, args):
-		with DB() as db:
-			sequence = db.get("SELECT sequence FROM tbl_survey_question WHERE id_survey_question=%s;", (args['id_survey_question'],))
-			new_sequence = int(sequence) + int(args['step'])
-
-			db.execute("UPDATE tbl_survey_question SET sequence=(sequence + %s) WHERE sequence=%s;", ((int(args['step']) * -1), new_sequence))
-			db.execute("UPDATE tbl_survey_question SET sequence=%s WHERE id_survey_question=%s;", (new_sequence, args['id_survey_question']))
+		with Database() as db:
+			question = db.query(Table).get(args['id_survey_question'])
+			question.sequence = int(question.sequence) + int(args['step'])
+			db.commit()
+			db.execute("UPDATE tbl_survey_question SET sequence=(sequence + %s) WHERE sequence=%s;", ((int(args['step']) * -1), question.sequence))
 
 		return {
-			'message': 'survey successfully change sequence question'
+			'message': 'survey question successfully change sequence'
 		}
-
-	def set_choices(self, id_survey_question, choices, force_creation=False):
-		if not isinstance(choices, dict) and not isinstance(choices, list):
-			choices = json.loads(choices)
-
-		for choice in choices:
-			choice.update({
-				'id_survey_question': id_survey_question
-			})
-
-			if 'id_survey_choice' not in choice or force_creation is True:
-				SurveyChoice().create(choice)
-			else:
-				SurveyChoice().modify(choice)
