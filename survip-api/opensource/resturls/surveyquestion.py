@@ -1,4 +1,3 @@
-import json
 import uuid
 from framework.manage.database import Database
 from framework.manage.multilang import MultiLang
@@ -65,8 +64,8 @@ class SurveyQuestion(Base):
 
 		with Database() as db:
 			db.insert(Table(
-				id_survey_question, id_language_content_title, id_language_content_description,next_question,
-				sequence, question_type))
+				id_survey_question, args['id_survey'], id_language_content_title,
+				id_language_content_description, next_question, sequence, question_type))
 			db.commit()
 
 		return {
@@ -90,9 +89,9 @@ class SurveyQuestion(Base):
 			data.id_survey_question_next = next_question
 
 			if 'title' in args:
-				data.id_language_content_name = MultiLang.set(args['title'])
+				data.id_language_content_title = MultiLang.set(args['title'])
 			if 'description' in args:
-				data.id_language_content_name = MultiLang.set(args['description'])
+				data.id_language_content_description = MultiLang.set(args['description'])
 			if 'sequence' in args:
 				data.sequence = MultiLang.set(args['sequence'])
 			if 'question_type' in args:

@@ -73,8 +73,7 @@ class Api:
 		try:
 			data = {
 				'success': True,
-				'error': '',
-				'data': None
+				'error': ''
 			}
 			return_data = self.exec_method(name, args)
 

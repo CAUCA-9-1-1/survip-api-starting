@@ -1,7 +1,8 @@
 import uuid
-from causeweb.storage.db import DB
-from causeweb.site.multilang import MultiLang
-from causeweb.apis.base import Base
+from framework.manage.database import Database
+from framework.manage.multilang import MultiLang
+from framework.resturls.base import Base
+from ..models.survey import SurveyChoice as Table
 
 
 class SurveyChoice(Base):
@@ -18,24 +19,19 @@ class SurveyChoice(Base):
 		""" Return all choices for one question
 
 		:param id_survey_question: UUID
+		:param is_active: BOOLEAN
 		"""
 		if self.has_permission('RightTPI') is False:
 			return self.no_access()
 
-		with DB() as db:
+		with Database() as db:
 			if is_active is None:
-				data = db.get_all("""SELECT *
-								FROM tbl_survey_choice
-								WHERE id_survey_question=%s
-								ORDER BY sequence;""", (id_survey_question,))
+				data = db.query(Table).filter(Table.id_survey_question == id_survey_question).all()
 			else:
-				data = db.get_all("""SELECT *
-								FROM tbl_survey_choice
-								WHERE id_survey_question=%s AND is_active=%s
-								ORDER BY sequence;""", (id_survey_question, is_active))
-
-		for key, row in enumerate(data):
-			data[key]['description'] = MultiLang.get(row['id_language_content'])
+				data = db.query(Table).filter(
+					Table.id_survey_question == id_survey_question,
+					Table.is_active == is_active,
+				).all()
 
 		return {
 			'data': data
@@ -55,47 +51,49 @@ class SurveyChoice(Base):
 			return self.no_access()
 
 		id_survey_choice = uuid.uuid4()
-		id_language_content = MultiLang.set(args['description'], True)
+		id_language_content = MultiLang.set(args['name'], True)
 		sequence = int(args['sequence']) if 'sequence' in args else 0
 		next_question = args['id_survey_question_next'] if 'id_survey_question_next' in args and args['id_survey_question_next'] != '' else None
 
-		with DB() as db:
-			db.execute("""INSERT INTO
-							tbl_survey_choice(id_survey_choice, id_survey_question, sequence, id_language_content, id_survey_question_next, is_active)
-							VALUES(%s, %s, %s, %s, %s, %s);""", (
-				id_survey_choice, args['id_survey_question'], sequence, id_language_content, next_question, True
-			))
+		with Database() as db:
+			db.insert(Table(id_survey_choice, id_language_content, next_question, sequence))
+			db.commit()
 
 		return {
-			'message': 'survey successfully create choice'
+			'id_survey_choice': id_survey_choice,
+			'message': 'survey choice successfully created'
 		}
 
 	def modify(self, args):
 		if self.has_permission('RightTPI') is False:
 			return self.no_access()
 
-		id_language_content = MultiLang.set(args['description'])
-		sequence = args['sequence'] if 'sequence' in args else 0
 		next_question = args['id_survey_question_next'] if 'id_survey_question_next' in args else None
 
-		with DB() as db:
-			db.execute("UPDATE tbl_survey_choice SET sequence=%s, id_language_content=%s, id_survey_question_next=%s, is_active=%s WHERE id_survey_choice=%s;", (
-				sequence, id_language_content, next_question, args['is_active'], args['id_survey_choice']
-			))
+		with Database() as db:
+			data = db.query(Table).get(args['id_survey_choice'])
+			data.id_survey_question_next = next_question
+
+			if 'name' in args:
+				data.id_language_content_name = MultiLang.set(args['name'])
+			if 'sequence' in args:
+				data.sequence = MultiLang.set(args['sequence'])
+			if 'is_active' in args:
+				data.is_active = MultiLang.set(args['is_active'])
 
 		return {
-			'message': 'survey successfully modify choice'
+			'message': 'survey choice successfully modify'
 		}
 
 	def remove(self, id_survey_choice):
 		if self.has_permission('RightTPI') is False:
 			return self.no_access()
 
-		with DB() as db:
-			db.execute("UPDATE tbl_survey_choice SET is_active=%s WHERE id_survey_choice=%s;", (
-				False, id_survey_choice
-			))
+		with Database() as db:
+			data = db.query(Table).get(id_survey_choice)
+			data.is_active = False
+			db.commit()
 
 		return {
-			'message': 'survey successfully remove choice'
+			'message': 'survey choice successfully removed'
 		}
