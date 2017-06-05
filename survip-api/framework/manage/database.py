@@ -36,8 +36,22 @@ class Database:
 		self.session.expunge_all()
 		self.session.close()
 
-	def execute(self, query):
-		return self.engine.execute(query)
+	def execute(self, query, args=None):
+		query = self.engine.execute(query, args)
+		keys = query.keys()
+		result = list()
+
+		for row in query:
+			nb = 0
+			my_row = {}
+
+			for val in row:
+				my_row[keys[nb]] = val
+				nb = nb + 1
+
+			result.append(my_row)
+
+		return result
 
 	def query(self, *args):
 		return self.session.query(*args)

@@ -8,14 +8,6 @@ class Api(OpenSourceApi):
 		return self.call_method('Multilang', self.get_argument(args, kwargs))
 
 	@cherrypy.expose
-	def useraction(self, *args, **kwargs):
-		return self.call_method('WebuserAction', self.get_argument(args, kwargs))
-
-	@cherrypy.expose
-	def userstatistics(self, *args, **kwargs):
-		return self.call_method('WebuserStatistics', self.get_argument(args, kwargs))
-
-	@cherrypy.expose
 	def search(self, *args, **kwargs):
 		return self.call_method('Search', self.get_argument(args, kwargs))
 

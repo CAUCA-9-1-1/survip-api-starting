@@ -38,3 +38,7 @@ class Api(BaseApi):
 	@cherrypy.expose
 	def webuser(self, *args, **kwargs):
 		return self.call_method('Webuser', self.get_argument(args, kwargs))
+
+	@cherrypy.expose
+	def webuserstatistic(self, *args, **kwargs):
+		return self.call_method('WebuserStatistic', self.get_argument(args, kwargs))
