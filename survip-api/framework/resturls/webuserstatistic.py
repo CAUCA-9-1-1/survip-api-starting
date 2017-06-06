@@ -41,11 +41,13 @@ class WebuserStatistic(Base):
 			return db.execute("""SELECT count(token.created_on) AS total, to_char(token.created_on, 'YYYY/MM/DD') AS days
 								FROM tbl_access_token token
 								WHERE token.created_on>=%s AND token.created_on<%s
-								GROUP BY days;""", (period_start, period_end))
+								GROUP BY days
+								ORDER BY days;""", (period_start, period_end))
 
 	def request_by_table(self, period_start, period_end):
 		with Database() as db:
 			return db.execute("""SELECT count(action_time) AS total, action_object AS table
 								FROM tbl_apis_action aa
 						        WHERE aa.action_time>=%s AND aa.action_time<%s
-						        GROUP BY action_object;""", (period_start, period_end))
+						        GROUP BY action_object
+						        ORDER BY action_object;""", (period_start, period_end))
