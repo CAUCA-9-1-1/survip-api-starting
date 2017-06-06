@@ -46,8 +46,18 @@ class WebuserStatistic(Base):
 
 	def request_by_table(self, period_start, period_end):
 		with Database() as db:
-			return db.execute("""SELECT count(action_time) AS total, action_object AS table
-								FROM tbl_apis_action aa
-						        WHERE aa.action_time>=%s AND aa.action_time<%s
-						        GROUP BY action_object
-						        ORDER BY action_object;""", (period_start, period_end))
+			return db.execute("""SELECT
+							  count(aa.action_time) AS total,
+							  count(aaget.action_time) as get,
+							  count(aaput.action_time) as put,
+							  count(aapost.action_time) as post,
+							  count(aadelete.action_time) as delete,
+							  aa.action_object AS table
+							FROM tbl_apis_action aa
+							  LEFT JOIN tbl_apis_action aaget ON (aaget.action_time = aa.action_time AND aaget.method = 'GET')
+							  LEFT JOIN tbl_apis_action aaput ON (aaput.action_time = aa.action_time AND aaput.method = 'PUT')
+							  LEFT JOIN tbl_apis_action aapost ON (aapost.action_time = aa.action_time AND aapost.method = 'POST')
+							  LEFT JOIN tbl_apis_action aadelete ON (aadelete.action_time = aa.action_time AND aadelete.method = 'DELETE')
+							WHERE aa.action_time >= %s AND aa.action_time < %s
+							GROUP BY aa.action_object
+							ORDER BY aa.action_object;""", (period_start, period_end))
