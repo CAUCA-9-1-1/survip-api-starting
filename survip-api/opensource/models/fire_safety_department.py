@@ -25,7 +25,7 @@ class FireSafetyDepartment(Base):
 		return MultiLang.get(self.id_language_content_name)
 
 	def __init__(self, id_fire_safety_department, id_language_content, id_county, language):
-		self.id_city = id_fire_safety_department
+		self.id_fire_safety_department = id_fire_safety_department
 		self.id_language_content_name = id_language_content
 		self.id_county = id_county
 		self.language = language

@@ -70,6 +70,9 @@ class Building(Base):
 		if self.has_permission('RightAdmin') is False:
 			return self.no_access()
 
+		if 'id_building' not in args:
+			raise Exception("You need to pass a id_building")
+
 		with Database() as db:
 			data = db.query(Table).get(args['id_building'])()
 

@@ -1,6 +1,7 @@
 import uuid
-from causeweb.storage.db import DB
-from causeweb.apis.base import Base
+from framework.manage.database import Database
+from framework.resturls.base import Base
+from ..models.webuser_fire_safety_department import WebuserFireSafetyDepartment as Table
 
 
 class WebuserFireSafetyDepartment(Base):
@@ -21,12 +22,13 @@ class WebuserFireSafetyDepartment(Base):
 		if self.has_permission('RightAdmin') is False:
 			return self.no_access()
 
-		with DB() as db:
+		with Database() as db:
 			if id_webuser is None:
 				data = []
 			else:
-				data = db.get_all("""SELECT * FROM tbl_webuser_fire_safety_department
-                	                WHERE id_webuser=%s;""", (id_webuser,))
+				data = db.query(Table).filter(
+					Table.id_webuser == id_webuser
+				).all()
 
 		return {
 			'data': data
@@ -46,12 +48,9 @@ class WebuserFireSafetyDepartment(Base):
 
 		id_webuser_fire_safety_department = uuid.uuid4()
 
-		with DB() as db:
-			db.execute("""INSERT INTO tbl_webuser_fire_safety_department(
-						id_webuser_fire_safety_department, id_webuser, id_fire_safety_department, is_active
-					) VALUES (%s, %s, %s, %s);""", (
-				id_webuser_fire_safety_department, args['id_webuser'], args['id_fire_safety_department'], args['is_active']
-			))
+		with Database() as db:
+			db.insert(Table(id_webuser_fire_safety_department, args['id_webuser'], args['id_fire_safety_department']))
+			db.commit()
 
 		return {
 			'id_webuser_fire_safety_department': id_webuser_fire_safety_department,
@@ -74,12 +73,15 @@ class WebuserFireSafetyDepartment(Base):
 		if self.has_permission('RightAdmin') is False:
 			return self.no_access()
 
-		with DB() as db:
-			db.execute("""UPDATE tbl_webuser_fire_safety_department SET
-							id_webuser=%s, id_fire_safety_department=%s, is_active=%s
-						  WHERE id_webuser_fire_safety_department=%s;""", (
-				args['id_webuser'], args['id_fire_safety_department'], args['is_active'], args['id_webuser_fire_safety_department']
-			))
+		with Database() as db:
+			data = db.query(Table).get(args['id_webuser_fire_safety_department'])
+
+			if 'id_webuser' in args:
+				data.id_webuser = args['id_webuser']
+			if 'id_fire_safety_department' in args:
+				data.id_fire_safety_department = args['id_fire_safety_department']
+			if 'is_active' in args:
+				data.is_active = args['is_active']
 
 		return {
 			'message': 'webuser fire safety department successfully modify'
@@ -93,10 +95,10 @@ class WebuserFireSafetyDepartment(Base):
 		if self.has_permission('RightAdmin') is False:
 			return self.no_access()
 
-		with DB() as db:
-			db.execute("UPDATE tbl_webuser_fire_safety_department SET is_active=%s WHERE id_webuser_fire_safety_department=%s;", (
-				False, id_webuser_fire_safety_department
-			))
+		with Database() as db:
+			data = db.query(Table).get(id_webuser_fire_safety_department)
+			data.is_active = False
+			db.commit()
 
 		return {
 			'message': 'fire safety department user successfully removed'

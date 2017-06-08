@@ -53,12 +53,21 @@ class Webuser(Base):
 			db.insert(Table(id_webuser, args['username'], args['password']))
 			db.commit()
 
+			if 'attributes' in args:
+				Table.set_attributes(id_webuser, args['attributes'])
+
 		return {
 			'id_webuser': id_webuser,
 			'message': 'webuser successfully created'
 		}
 
 	def modify(self, args):
+		if self.has_permission('RightAdmin') is False:
+			return self.no_access()
+
+		if 'id_webuser' not in args:
+			raise Exception("You need to pass a id_webuser")
+
 		with Database() as db:
 			data = db.query(Table).get(args['id_webuser'])
 
@@ -66,6 +75,8 @@ class Webuser(Base):
 				data.username = args['username']
 			if 'password' in args:
 				data.password = Encryption.password(args['password'])
+			if 'attributes' in args:
+				data.set_attributes(args['id_webuser'], args['attributes'])
 
 			db.commit()
 

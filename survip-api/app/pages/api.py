@@ -26,7 +26,3 @@ class Api(OpenSourceApi):
 	@cherrypy.expose
 	def firesafetydepartmentcityserving(self, *args, **kwargs):
 		return self.call_method('FireSafetyDepartmentCityServing', self.get_argument(args, kwargs))
-
-	@cherrypy.expose
-	def userfiresafetydepartment(self, *args, **kwargs):
-		return self.call_method('WebuserFireSafetyDepartment', self.get_argument(args, kwargs))

@@ -17,6 +17,11 @@ class WebuserAttributes(Base):
 	attribute_name = Column(String(50), primary_key=True)
 	attribute_value = Column(String(200))
 
+	def __init__(self, id_webuser, attribute_name, attribute_value):
+		self.id_webuser = id_webuser
+		self.attribute_name = attribute_name
+		self.attribute_value = attribute_value
+
 
 class Webuser(Base):
 	__tablename__ = "tbl_webuser"
@@ -38,3 +43,18 @@ class Webuser(Base):
 		self.id_webuser = id_webuser
 		self.username = username
 		self.password = Encryption.password(password)
+
+	def set_attributes(self, id_webuser, attributes):
+		with Database() as db:
+			for name in attributes:
+				data = db.query(WebuserAttributes).filter(
+					WebuserAttributes.id_webuser == id_webuser,
+					WebuserAttributes.attribute_name == name,
+				).first()
+
+				if data:
+					data.attribute_value = attributes[name]
+				else:
+					db.insert(WebuserAttributes(id_webuser, name, attributes[name]))
+
+				db.commit()

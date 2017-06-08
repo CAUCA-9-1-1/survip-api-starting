@@ -10,3 +10,7 @@ class Api(UrlForSurvey, UrlForInspection, UrlForAddress, UrlForBuilding, Framewo
 	@cherrypy.expose
 	def firesafetydepartment(self, *args, **kwargs):
 		return self.call_method('FireSafetyDepartment', self.get_argument(args, kwargs))
+
+	@cherrypy.expose
+	def webuserfiresafetydepartment(self, *args, **kwargs):
+		return self.call_method('WebuserFireSafetyDepartment', self.get_argument(args, kwargs))
