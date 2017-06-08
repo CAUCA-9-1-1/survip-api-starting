@@ -70,7 +70,7 @@ class FireSafetyDepartment(Base):
 		id_language_content = MultiLang.set(args['name'])
 
 		with Database() as db:
-			data = db.query(Table).get(args['id_city'])
+			data = db.query(Table).get(args['id_fire_safety_department'])
 
 			if 'name' in args:
 				data.id_language_content_name = MultiLang.set(args['name'])
@@ -80,6 +80,8 @@ class FireSafetyDepartment(Base):
 				data.language = args['language']
 			if 'is_active' in args:
 				data.is_active = args['is_active']
+
+			db.commit()
 
 		return {
 			'message': 'fire safety department successfully modify'
