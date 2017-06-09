@@ -7,12 +7,12 @@ create table tbl_access_secretkey
 	id_access_secretkey uuid not null
 		constraint tbl_access_secretkey_pkey
 			primary key,
-	id_webuser uuid,
+	id_webuser uuid not null,
 	application_name varchar(50),
 	randomkey varchar(100),
 	secretkey varchar(100),
 	created_on timestamp default now(),
-	is_active boolean
+	is_active boolean default true not null
 )
 ;
 
@@ -21,11 +21,11 @@ create table tbl_access_token
 	id_access_token uuid not null
 		constraint tbl_access_token_id_access_token_pk
 			primary key,
-	id_webuser uuid,
+	id_webuser uuid not null,
 	access_token varchar(100),
 	refresh_token varchar(100),
 	created_on timestamp default now(),
-	expires_in integer
+	expires_in integer default 7200
 )
 ;
 
@@ -34,7 +34,7 @@ create table tbl_apis_action
 	id_apis_update uuid not null
 		constraint tbl_field_update_pkey
 			primary key,
-	id_webuser uuid,
+	id_webuser uuid not null,
 	method varchar(10),
 	params text,
 	action_object varchar(50),
@@ -48,11 +48,11 @@ create table tbl_external_import
 	id_external_import uuid not null
 		constraint tbl_external_import_pkey
 			primary key,
-	internal_id uuid,
+	internal_id uuid not null,
 	internal_table varchar(50),
 	external_id varchar(50),
 	external_table varchar(50),
-	imported_on timestamp
+	imported_on timestamp default now()
 )
 ;
 
@@ -63,9 +63,9 @@ create table tbl_fire_safety_department
 			primary key,
 	id_language_content_name uuid,
 	id_county uuid,
-	language varchar(5),
+	language varchar(2),
 	created_on timestamp default now(),
-	is_active boolean
+	is_active boolean default true not null
 )
 ;
 
@@ -94,14 +94,14 @@ create table tbl_firestation
 	email varchar(70),
 	id_building uuid,
 	created_on timestamp default now(),
-	is_active boolean
+	is_active boolean default true not null
 )
 ;
 
 create table tbl_language_content
 (
 	id_language_content uuid not null,
-	language_code varchar(5) not null,
+	language_code varchar(2) not null,
 	description varchar(250),
 	constraint tbl_language_content_pkey
 		primary key (id_language_content, language_code)
@@ -117,8 +117,8 @@ create table tbl_permission
 	id_permission_system uuid,
 	id_permission_system_feature uuid,
 	comments varchar(400),
-	created_on timestamp,
-	access boolean
+	created_on timestamp default now(),
+	access boolean default false not null
 )
 ;
 
@@ -131,7 +131,7 @@ create table tbl_permission_object
 	object_table varchar(255),
 	generic_id varchar(50),
 	id_permission_system uuid,
-	is_group boolean,
+	is_group boolean default false not null,
 	group_name varchar(255)
 )
 ;
@@ -153,7 +153,7 @@ create table tbl_permission_system_feature
 	id_permission_system uuid,
 	feature_name varchar(50),
 	description varchar(255),
-	default_value boolean
+	default_value boolean default false not null
 )
 ;
 
@@ -164,9 +164,9 @@ create table tbl_picture
 			primary key,
 	id_language_content_name uuid,
 	picture bytea,
-	transfered boolean,
+	transfered boolean default false not null,
 	created_on timestamp default now(),
-	is_active boolean
+	is_active boolean default true not null
 )
 ;
 
@@ -177,8 +177,8 @@ create table tbl_webuser
 			primary key,
 	username varchar(100),
 	password varchar(100),
-	is_active boolean,
-	created_on timestamp default now()
+	created_on timestamp default now(),
+	is_active boolean default true not null
 )
 ;
 
@@ -197,9 +197,9 @@ create table tbl_webuser_fire_safety_department
 	id_webuser_fire_safety_department uuid not null
 		constraint tbl_webuser_fire_safety_dept_id_user_fire_safety_dept_pk
 			primary key,
-	id_webuser uuid,
+	id_webuser uuid not null,
 	id_fire_safety_department uuid not null,
-	is_active boolean,
-	created_on timestamp default now()
+	created_on timestamp default now(),
+  is_active boolean default true not null
 )
 ;
