@@ -79,13 +79,14 @@ class County(Base):
 
 			if 'name' in args:
 				data.id_language_content_name = MultiLang.set(args['name'])
-
 			if 'id_state' in args:
 				data.id_state = args['id_state']
 			if 'id_region' in args:
 				data.id_region = args['id_region']
 			if 'is_active' in args:
 				data.is_active = args['is_active']
+
+			db.commit()
 
 		return {
 			'message': 'county successfully modify'

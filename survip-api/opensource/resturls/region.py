@@ -89,6 +89,8 @@ class Region(Base):
 			if 'is_active' in args:
 				data.is_active = args['is_active']
 
+			db.commit()
+
 		return {
 			'message': 'region successfully modify'
 		}

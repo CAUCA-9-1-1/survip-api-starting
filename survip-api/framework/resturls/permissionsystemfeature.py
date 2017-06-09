@@ -1,6 +1,6 @@
 from ..config import setup as config
 from ..manage.database import Database
-from ..models.permission import Permission, PermissionObject, PermissionSystemFeature as Table
+from ..models.permission import PermissionSystemFeature as Table
 from .base import Base
 
 

@@ -81,6 +81,8 @@ class SurveyChoice(Base):
 			if 'is_active' in args:
 				data.is_active = MultiLang.set(args['is_active'])
 
+			db.commit()
+
 		return {
 			'message': 'survey choice successfully modify'
 		}

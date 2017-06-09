@@ -59,5 +59,9 @@ class MultiLang:
 						LanguageContent.language_code == language_code
 					).first()
 
-					data.description = description[language_code]
+					if data is None:
+						db.insert(LanguageContent(id_language_content, language_code, description[language_code]))
+					else:
+						data.description = description[language_code]
+
 					db.commit()

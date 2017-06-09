@@ -83,6 +83,8 @@ class WebuserFireSafetyDepartment(Base):
 			if 'is_active' in args:
 				data.is_active = args['is_active']
 
+			db.commit()
+
 		return {
 			'message': 'webuser fire safety department successfully modify'
 		}

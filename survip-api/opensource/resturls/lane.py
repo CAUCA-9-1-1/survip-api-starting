@@ -75,11 +75,11 @@ class Lane(Base):
 			data = db.query(Table).filter(Table.id_lane == args['id_lane']).first()
 
 			if 'name' in args:
-				id_language_content = MultiLang.set(args['name'])
-				data.id_language_content_name = id_language_content
-
+				data.id_language_content_name = MultiLang.set(args['name'])
 			if 'id_city' in args:
 				data.id_city = args['id_city']
+
+			db.commit()
 
 		return {
 			'message': 'lane successfully modify'
