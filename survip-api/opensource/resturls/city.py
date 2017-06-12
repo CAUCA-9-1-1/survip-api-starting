@@ -54,7 +54,7 @@ class City(Base):
 
 		with Database() as db:
 			db.insert(Table(
-				id_city, id_language_content, args['id_building'], args['id_city_type'], args['id_county'],
+				id_city, id_language_content, args['id_building'], args['id_county'], args['id_city_type'],
 				args['code'], args['code3_letter'], args['email_address']))
 			db.commit()
 
