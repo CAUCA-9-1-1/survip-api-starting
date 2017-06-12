@@ -24,7 +24,9 @@ class Lane(Base):
 	def name(self):
 		return MultiLang.get(self.id_language_content_name)
 
-	def __init__(self, id_lane, id_language_content, id_city):
+	def __init__(self, id_lane, id_language_content, id_city, public_lane_code, generic_code):
 		self.id_lane = id_lane
 		self.id_language_content_name = id_language_content
 		self.id_city = id_city
+		self.public_lane_code = public_lane_code
+		self.generic_code = generic_code

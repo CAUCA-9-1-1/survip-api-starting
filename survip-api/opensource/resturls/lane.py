@@ -48,7 +48,8 @@ class Lane(Base):
 		id_language_content = MultiLang.set(args['name'], True)
 
 		with Database() as db:
-			db.insert(Table(id_lane, id_language_content, args['id_city']))
+			db.insert(Table(id_lane, id_language_content, args['id_city'],
+			                args['public_lane_code'], args['generic_code']))
 			db.commit()
 
 		return {
@@ -78,6 +79,10 @@ class Lane(Base):
 				data.id_language_content_name = MultiLang.set(args['name'])
 			if 'id_city' in args:
 				data.id_city = args['id_city']
+			if 'public_lane_code' in args:
+				data.public_lane_code = args['public_lane_code']
+			if 'generic_code' in args:
+				data.generic_code = args['generic_code']
 
 			db.commit()
 
