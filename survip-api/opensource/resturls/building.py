@@ -74,7 +74,7 @@ class Building(Base):
 			raise Exception("You need to pass a id_building")
 
 		with Database() as db:
-			data = db.query(Table).get(args['id_building'])()
+			data = db.query(Table).get(args['id_building'])
 
 			if 'name' in args:
 				data.id_language_content_name = MultiLang.set(args['name'])

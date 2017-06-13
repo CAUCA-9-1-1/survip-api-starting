@@ -1,4 +1,5 @@
 import uuid
+from sqlalchemy import asc
 from framework.manage.database import Database
 from framework.manage.multilang import MultiLang
 from framework.resturls.base import Base
@@ -25,12 +26,14 @@ class SurveyQuestion(Base):
 
 		with Database() as db:
 			if is_active is None:
-				data = db.query(Table).filter(Table.id_survey == id_survey).all()
+				data = db.query(Table).filter(
+					Table.id_survey == id_survey
+				).order_by(asc(Table.sequence)).all()
 			else:
 				data = db.query(Table).filter(
 					Table.id_survey == id_survey,
 					Table.is_active == is_active,
-				).all()
+				).order_by(asc(Table.sequence)).all()
 
 		return {
 			'data': data
@@ -93,11 +96,11 @@ class SurveyQuestion(Base):
 			if 'description' in args:
 				data.id_language_content_description = MultiLang.set(args['description'])
 			if 'sequence' in args:
-				data.sequence = MultiLang.set(args['sequence'])
+				data.sequence = args['sequence']
 			if 'question_type' in args:
-				data.question_type = MultiLang.set(args['question_type'])
+				data.question_type = args['question_type']
 			if 'is_active' in args:
-				data.is_active = MultiLang.set(args['is_active'])
+				data.is_active = args['is_active']
 
 			db.commit()
 

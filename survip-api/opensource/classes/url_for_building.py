@@ -18,3 +18,11 @@ class UrlForBuilding(BaseApi):
 	@cherrypy.expose
 	def buildinghazardousmaterial(self, *args, **kwargs):
 		return self.call_method('BuildingHazardousMaterial', self.get_argument(args, kwargs))
+
+	@cherrypy.expose
+	def risklevel(self, *args, **kwargs):
+		return self.call_method('RiskLevel', self.get_argument(args, kwargs))
+
+	@cherrypy.expose
+	def utilisationcode(self, *args, **kwargs):
+		return self.call_method('UtilisationCode', self.get_argument(args, kwargs))

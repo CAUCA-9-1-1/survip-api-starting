@@ -1,6 +1,6 @@
-from causeweb.storage.db import DB
-from causeweb.site.multilang import MultiLang
-from causeweb.apis.base import Base
+from framework.manage.database import Database
+from framework.resturls.base import Base
+from ..models.risk_level import RiskLevel as Table
 
 
 class RiskLevel(Base):
@@ -13,18 +13,20 @@ class RiskLevel(Base):
 		'PATCH': '',
 	}
 
-	def get(self, id_risk_level):
-		""" Return all information for one risk level
+	def get(self, id_risk_level=None, is_active=None):
+		""" Return all information for risk level
 
 		:param id_risk_level: UUID
+		:param is_active: BOOLEAN
 		"""
-		with DB() as db:
-			data = db.get_all("""SELECT code, id_language_content_name, color FROM tbl_risk_level
-                                WHERE id_risk_level=%s;""", (id_risk_level,))
-
-		for key, row in enumerate(data):
-			data[key]['name'] = MultiLang.get(row['id_language_content_name'])
+		with Database() as db:
+			if id_risk_level is None and is_active is None:
+				data = db.query(Table).all()
+			elif id_risk_level is None:
+				data = db.query(Table).filter(Table.is_active == is_active).all()
+			else:
+				data = db.query(Table).get(id_risk_level)
 
 		return {
 			'data': data
-		} if id_risk_level is None else data[0]
+		}
