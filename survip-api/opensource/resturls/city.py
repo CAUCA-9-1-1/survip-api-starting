@@ -51,11 +51,17 @@ class City(Base):
 
 		id_city = uuid.uuid4()
 		id_language_content = MultiLang.set(args['name'], True)
+		id_building = args['id_building'] if 'id_building' in args else None
+		id_county = args['id_county'] if 'id_county' in args else None
+		id_city_type = args['id_city_type'] if 'id_city_type' in args else None
+		code = args['code'] if 'code' in args else None
+		code3_letter = args['code3_letter'] if 'code3_letter' in args else None
+		email_address = args['email_address'] if 'email_address' in args else None
 
 		with Database() as db:
 			db.insert(Table(
-				id_city, id_language_content, args['id_building'], args['id_county'], args['id_city_type'],
-				args['code'], args['code3_letter'], args['email_address']))
+				id_city, id_language_content, id_building, id_county, id_city_type,
+				code, code3_letter, email_address))
 			db.commit()
 
 		return {
@@ -104,7 +110,7 @@ class City(Base):
 			db.commit()
 
 		return {
-			'message': 'city successfully modify'
+			'message': 'city successfully modified'
 		}
 
 	def remove(self, id_city):

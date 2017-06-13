@@ -1,4 +1,4 @@
-from causeweb.apis.base import Base
+from framework.resturls.base import Base
 
 """ Basic example
 
@@ -25,12 +25,12 @@ class Test(Base):
 		'PATCH': '',
 	}
 
-	def get(self, action, entry):
+	def get(self, id_test=None, is_active=None):
 		return {
-			'method test2': 'GET'
+			'method test': 'GET'
 		}
 
-	def modify(self, args):
+	def modify(self, args={}):
 		return {
-			'method test2': 'POST'
+			'method test': 'PUT'
 		}

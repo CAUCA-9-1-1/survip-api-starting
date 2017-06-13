@@ -1,13 +1,14 @@
 import unittest
-from framework.tests.webuser import TestWebuser
-from opensource.tests.building import TestBuilding
-from opensource.tests.inspection import TestInspection
+from framework.tests.__main__ import get_test_framework
+from opensource.tests.__main__ import get_test_opensource
+from app.tests.__main__ import get_test_app
+
 
 if __name__ == '__main__':
 	suite = unittest.TestSuite()
-	suite.addTest(unittest.makeSuite(TestWebuser))
-	suite.addTest(unittest.makeSuite(TestBuilding))
-	suite.addTest(unittest.makeSuite(TestInspection))
-	runner = unittest.TextTestRunner()
+	suite = get_test_framework(suite)
+	suite = get_test_opensource(suite)
+	suite = get_test_app(suite)
 
-	print(runner.run(suite))
+	runner = unittest.TextTestRunner()
+	runner.run(suite)

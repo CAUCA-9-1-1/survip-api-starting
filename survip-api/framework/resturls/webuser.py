@@ -49,6 +49,9 @@ class Webuser(Base):
 	def create(self, args):
 		id_webuser = uuid.uuid4()
 
+		if self.has_permission('RightAdmin') is False:
+			return self.no_access()
+
 		with Database() as db:
 			db.insert(Table(id_webuser, args['username'], args['password']))
 			db.commit()
