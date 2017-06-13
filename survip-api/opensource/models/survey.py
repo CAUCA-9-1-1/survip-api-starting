@@ -49,13 +49,14 @@ class SurveyQuestion(Base):
 	def description(self):
 		return MultiLang.get(self.id_language_content_description)
 
-	def __init__(self, id_survey_question, id_survey, id_language_content_title, id_language_content_description, id_survey_question_next, sequence):
-		self.id_survey_choice = id_survey_question
+	def __init__(self, id_survey_question, id_survey, id_language_content_title, id_language_content_description, id_survey_question_next, sequence, question_type):
+		self.id_survey_question = id_survey_question
 		self.id_survey = id_survey
 		self.id_language_content_title = id_language_content_title
 		self.id_language_content_description = id_language_content_description
 		self.id_survey_question_next = id_survey_question_next
 		self.sequence = sequence
+		self.question_type = question_type
 
 
 class SurveyChoice(Base):

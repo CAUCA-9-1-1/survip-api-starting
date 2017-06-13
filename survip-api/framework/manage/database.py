@@ -41,15 +41,18 @@ class Database:
 		keys = query.keys()
 		result = list()
 
-		for row in query:
-			nb = 0
-			my_row = {}
+		try:
+			for row in query:
+				nb = 0
+				my_row = {}
 
-			for val in row:
-				my_row[keys[nb]] = val
-				nb = nb + 1
+				for val in row:
+					my_row[keys[nb]] = val
+					nb = nb + 1
 
-			result.append(my_row)
+				result.append(my_row)
+		except:
+			pass
 
 		return result
 
