@@ -8,6 +8,8 @@ from .firesafetydepartment import TestFireSafetyDepartment
 from .inspection import TestInspection
 from .lane import TestLane
 from .region import TestRegion
+from .risklevel import TestRiskLevel
+from .state import TestState
 
 
 def get_test_opensource(suite=None):
@@ -23,5 +25,7 @@ def get_test_opensource(suite=None):
 	suite.addTest(unittest.makeSuite(TestInspection))
 	suite.addTest(unittest.makeSuite(TestLane))
 	suite.addTest(unittest.makeSuite(TestRegion))
+	suite.addTest(unittest.makeSuite(TestRiskLevel))
+	suite.addTest(unittest.makeSuite(TestState))
 
 	return suite
