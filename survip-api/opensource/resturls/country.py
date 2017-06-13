@@ -45,6 +45,9 @@ class Country(Base):
 		if self.has_permission('RightAdmin') is False:
 			return self.no_access()
 
+		if 'name' not in args:
+			raise Exception("You need to pass a 'name'")
+
 		id_country = uuid.uuid4()
 		id_language_content = MultiLang.set(args['name'], True)
 		code_alpha2 = args['code_alpha2'] if 'code_alpha2' in args else None

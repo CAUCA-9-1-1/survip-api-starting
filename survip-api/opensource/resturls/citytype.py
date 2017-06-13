@@ -43,6 +43,9 @@ class CityType(Base):
 		if self.has_permission('RightAdmin') is False:
 			return self.no_access()
 
+		if 'name' not in args:
+			raise Exception("You need to pass a 'name'")
+
 		id_city_type = uuid.uuid4()
 		id_language_content = MultiLang.set(args['name'], True)
 

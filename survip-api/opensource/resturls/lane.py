@@ -44,12 +44,17 @@ class Lane(Base):
 		if self.has_permission('RightAdmin') is False:
 			return self.no_access()
 
+		if 'id_city' not in args or 'name' not in args:
+			raise Exception("You need to pass a 'name' and 'id_city'")
+
 		id_lane = uuid.uuid4()
 		id_language_content = MultiLang.set(args['name'], True)
+		public_lane_code = args['public_lane_code'] if 'public_lane_code' in args else None
+		generic_code = args['generic_code'] if 'generic_code' in args else None
 
 		with Database() as db:
 			db.insert(Table(id_lane, id_language_content, args['id_city'],
-			                args['public_lane_code'], args['generic_code']))
+			                public_lane_code, generic_code))
 			db.commit()
 
 		return {

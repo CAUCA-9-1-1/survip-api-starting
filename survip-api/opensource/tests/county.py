@@ -9,7 +9,8 @@ class TestCounty(unittest.TestCase):
 
 	def test_01_insert(self):
 		result = County().create({
-			'name': 'county for unittest'
+			'name': 'county for unittest',
+			'id_state': 'cf6b91c3-08ac-4d06-b5ed-9396c99f2c18'
 		})
 
 		self.__class__.id_county = result['id_county']

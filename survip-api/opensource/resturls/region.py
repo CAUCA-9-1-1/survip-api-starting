@@ -45,11 +45,15 @@ class Region(Base):
 		if self.has_permission('RightAdmin') is False:
 			return self.no_access()
 
+		if 'id_state' not in args or 'name' not in args:
+			raise Exception("You need to pass a 'name' and 'id_state'")
+
 		id_region = uuid.uuid4()
 		id_language_content = MultiLang.set(args['name'], True)
+		code = args['code'] if 'code' in args else None
 
 		with Database() as db:
-			db.insert(Table(id_region, id_language_content, args['code'], args['id_state']))
+			db.insert(Table(id_region, id_language_content, args['id_state'], code))
 			db.commit()
 
 		return {
@@ -77,11 +81,10 @@ class Region(Base):
 		id_language_content = MultiLang.set(args['name'])
 
 		with Database() as db:
-			data = db.query(Table).get(args['id_state'])
+			data = db.query(Table).get(args['id_region'])
 
 			if 'name' in args:
 				data.id_language_content_name = MultiLang.set(args['name'])
-
 			if 'id_state' in args:
 				data.id_state = args['id_state']
 			if 'code' in args:

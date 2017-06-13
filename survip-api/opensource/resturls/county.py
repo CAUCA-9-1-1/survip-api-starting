@@ -45,13 +45,15 @@ class County(Base):
 		if self.has_permission('RightAdmin') is False:
 			return self.no_access()
 
+		if 'id_state' not in args or 'name' not in args:
+			raise Exception("You need to pass a 'name' and 'id_state'")
+
 		id_county = uuid.uuid4()
 		id_language_content = MultiLang.set(args['name'], True)
-		id_state = args['id_state'] if 'id_state' in args else None
 		id_region = args['id_region'] if 'id_region' in args else None
 
 		with Database() as db:
-			db.insert(Table(id_county, id_language_content, id_state, id_region))
+			db.insert(Table(id_county, id_language_content, args['id_state'], id_region))
 			db.commit()
 
 		return {

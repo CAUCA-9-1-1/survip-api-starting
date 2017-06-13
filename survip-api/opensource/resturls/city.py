@@ -49,10 +49,12 @@ class City(Base):
 		if self.has_permission('RightAdmin') is False:
 			return self.no_access()
 
+		if 'id_county' not in args or 'name' not in args:
+			raise Exception("You need to pass a 'name' and 'id_county'")
+
 		id_city = uuid.uuid4()
 		id_language_content = MultiLang.set(args['name'], True)
 		id_building = args['id_building'] if 'id_building' in args else None
-		id_county = args['id_county'] if 'id_county' in args else None
 		id_city_type = args['id_city_type'] if 'id_city_type' in args else None
 		code = args['code'] if 'code' in args else None
 		code3_letter = args['code3_letter'] if 'code3_letter' in args else None
@@ -60,7 +62,7 @@ class City(Base):
 
 		with Database() as db:
 			db.insert(Table(
-				id_city, id_language_content, id_building, id_county, id_city_type,
+				id_city, id_language_content, id_building, args['id_county'], id_city_type,
 				code, code3_letter, email_address))
 			db.commit()
 

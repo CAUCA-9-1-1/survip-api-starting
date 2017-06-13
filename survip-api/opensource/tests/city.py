@@ -10,6 +10,7 @@ class TestCity(unittest.TestCase):
 	def test_01_insert(self):
 		result = City().create({
 			'name': 'city for unittest',
+			'id_county': '511993cc-bcee-4a0e-bac9-4774109f3b62',
 			'code': '12345'
 		})
 

@@ -45,9 +45,11 @@ class FireSafetyDepartment(Base):
 		"""
 		id_fire_safety_department = uuid.uuid4()
 		id_language_content = MultiLang.set(args['name'], True)
+		id_county = args['id_county'] if 'id_county' in args else None
+		language = args['language'] if 'language' in args else None
 
 		with Database() as db:
-			db.insert(Table(id_fire_safety_department, id_language_content, args['id_county'], args['language']))
+			db.insert(Table(id_fire_safety_department, id_language_content, id_county, language))
 			db.commit()
 
 		return {
@@ -66,8 +68,6 @@ class FireSafetyDepartment(Base):
 		"""
 		if 'id_fire_safety_department' not in args:
 			raise Exception("You need to pass a id_fire_safety_department")
-
-		id_language_content = MultiLang.set(args['name'])
 
 		with Database() as db:
 			data = db.query(Table).get(args['id_fire_safety_department'])

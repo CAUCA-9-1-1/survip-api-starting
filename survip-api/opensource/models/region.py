@@ -23,3 +23,9 @@ class Region(Base):
 	@hybrid_property
 	def name(self):
 		return MultiLang.get(self.id_language_content_name)
+
+	def __init__(self, id_region, id_language_content, id_state, code):
+		self.id_region = id_region
+		self.id_language_content_name = id_language_content
+		self.id_state = id_state
+		self.code = code
