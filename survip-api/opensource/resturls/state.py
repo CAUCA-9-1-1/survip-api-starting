@@ -90,7 +90,7 @@ class State(Base):
 			db.commit()
 
 		return {
-			'message': 'state successfully modify'
+			'message': 'state successfully modified'
 		}
 
 	def remove(self, id_state):

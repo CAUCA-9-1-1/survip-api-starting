@@ -84,7 +84,7 @@ class FireSafetyDepartment(Base):
 			db.commit()
 
 		return {
-			'message': 'fire safety department successfully modify'
+			'message': 'fire safety department successfully modified'
 		}
 
 	def remove(self, id_fire_safety_department):

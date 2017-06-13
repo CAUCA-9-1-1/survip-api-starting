@@ -86,7 +86,7 @@ class WebuserFireSafetyDepartment(Base):
 			db.commit()
 
 		return {
-			'message': 'webuser fire safety department successfully modify'
+			'message': 'webuser fire safety department successfully modified'
 		}
 
 	def remove(self, id_webuser_fire_safety_department):

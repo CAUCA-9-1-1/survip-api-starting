@@ -73,7 +73,7 @@ class FireSafetyDepartmentCityServing(Base):
 			))
 
 		return {
-			'message': 'fire safety department city serving successfully modify'
+			'message': 'fire safety department city serving successfully modified'
 		}
 
 	def remove(self, id_fire_safety_department_city):

@@ -92,7 +92,7 @@ class Region(Base):
 			db.commit()
 
 		return {
-			'message': 'region successfully modify'
+			'message': 'region successfully modified'
 		}
 
 	def remove(self, id_region):

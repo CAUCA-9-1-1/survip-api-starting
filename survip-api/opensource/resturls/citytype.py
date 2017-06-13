@@ -81,7 +81,7 @@ class CityType(Base):
 			db.commit()
 
 		return {
-			'message': 'city type successfully modify'
+			'message': 'city type successfully modified'
 		}
 
 	def remove(self, id_city_type):

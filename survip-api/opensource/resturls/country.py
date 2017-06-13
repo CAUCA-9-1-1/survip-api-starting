@@ -47,9 +47,11 @@ class Country(Base):
 
 		id_country = uuid.uuid4()
 		id_language_content = MultiLang.set(args['name'], True)
+		code_alpha2 = args['code_alpha2'] if 'code_alpha2' in args else None
+		code_alpha3 = args['code_alpha3'] if 'code_alpha3' in args else None
 
 		with Database() as db:
-			db.insert(Table(id_country, id_language_content, args['code_alpha2'], args['code_alpha3']))
+			db.insert(Table(id_country, id_language_content, code_alpha2, code_alpha3))
 			db.commit()
 
 		return {
@@ -90,7 +92,7 @@ class Country(Base):
 			db.commit();
 
 		return {
-			'message': 'country successfully modify'
+			'message': 'country successfully modified'
 		}
 
 	def remove(self, id_country):

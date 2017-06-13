@@ -47,9 +47,11 @@ class County(Base):
 
 		id_county = uuid.uuid4()
 		id_language_content = MultiLang.set(args['name'], True)
+		id_state = args['id_state'] if 'id_state' in args else None
+		id_region = args['id_region'] if 'id_region' in args else None
 
 		with Database() as db:
-			db.insert(Table(id_county, id_language_content, args['id_state'], args['id_region']))
+			db.insert(Table(id_county, id_language_content, id_state, id_region))
 			db.commit()
 
 		return {
@@ -89,7 +91,7 @@ class County(Base):
 			db.commit()
 
 		return {
-			'message': 'county successfully modify'
+			'message': 'county successfully modified'
 		}
 
 	def remove(self, id_county):

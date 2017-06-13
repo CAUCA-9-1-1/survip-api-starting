@@ -87,7 +87,7 @@ class Lane(Base):
 			db.commit()
 
 		return {
-			'message': 'lane successfully modify'
+			'message': 'lane successfully modified'
 		}
 
 	def remove(self, id_lane):

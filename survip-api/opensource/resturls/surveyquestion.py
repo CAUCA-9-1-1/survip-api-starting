@@ -105,7 +105,7 @@ class SurveyQuestion(Base):
 			db.commit()
 
 		return {
-			'message': 'survey question successfully modify'
+			'message': 'survey question successfully modified'
 		}
 
 	def remove(self, id_survey_question):
