@@ -21,6 +21,9 @@ class Building(Base):
 		:param id_building: UUID
 		:param is_active: Boolean
 		"""
+		if self.has_permission('RightAdmin') is False:
+			return self.no_access()
+
 		with Database() as db:
 			if id_building is None:
 				if is_active is None:

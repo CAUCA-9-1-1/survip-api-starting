@@ -8,8 +8,8 @@ class Inspection(Base):
 	table_name = 'tbl_inspection'
 	mapping_method = {
 		'GET': 'get',
-		'PUT': 'assign',
-		'POST': 'complete',
+		'PUT': 'complete',
+		'POST': 'assign',
 		'DELETE': 'remove',
 		'PATCH': '',
 	}
@@ -59,6 +59,9 @@ class Inspection(Base):
 		"""
 		if self.has_permission('RightTPI') is False:
 			return self.no_access()
+
+		if 'id_survey' not in args or 'id_building' not in args or 'id_webuser' not in args:
+			raise Exception("You need to pass a 'id_webuser', 'id_building' and 'id_survey'")
 
 		id_inspection = uuid.uuid4()
 		with Database() as db:
