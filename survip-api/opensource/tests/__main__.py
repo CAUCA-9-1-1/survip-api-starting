@@ -2,6 +2,7 @@ import unittest
 from .building import TestBuilding
 from .city import TestCity
 from .citytype import TestCityType
+from .constructiontype import TestConstructionType
 from .country import TestCountry
 from .county import TestCounty
 from .firesafetydepartment import TestFireSafetyDepartment
@@ -20,6 +21,7 @@ def get_test_opensource(suite=None):
 	suite.addTest(unittest.makeSuite(TestBuilding))
 	suite.addTest(unittest.makeSuite(TestCity))
 	suite.addTest(unittest.makeSuite(TestCityType))
+	suite.addTest(unittest.makeSuite(TestConstructionType))
 	suite.addTest(unittest.makeSuite(TestCountry))
 	suite.addTest(unittest.makeSuite(TestCounty))
 	suite.addTest(unittest.makeSuite(TestFireSafetyDepartment))

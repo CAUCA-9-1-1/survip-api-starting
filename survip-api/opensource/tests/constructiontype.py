@@ -1,13 +1,13 @@
 import unittest
-from ..resturls.risklevel import RiskLevel
+from ..resturls.constructiontype import ConstructionType
 
 
-class TestRiskLevel(unittest.TestCase):
+class TestConstructionType(unittest.TestCase):
 	def setUp(self):
 		pass
 
 	def test_01_get(self):
-		result = RiskLevel().get()
+		result = ConstructionType().get()
 		isList = isinstance(result['data'], list)
 
 		self.assertEqual(isList, True)
