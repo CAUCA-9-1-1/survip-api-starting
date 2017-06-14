@@ -5,7 +5,7 @@ Run `python3 server.py` for a dev server. Navigate to `http://localhost:8080/`.
 
 ## Dependencies
 SQLAlchemy (apt install python3-sqlalchemy or pip3 install sqlalchemy)\
-GELAlchemy (pip3 install geoalchemy2)
+GEOAlchemy (pip3 install geoalchemy2)
 
 ### Commit guide ligne
 Must be one of the following:
