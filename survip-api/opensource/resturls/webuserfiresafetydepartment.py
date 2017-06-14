@@ -45,6 +45,8 @@ class WebuserFireSafetyDepartment(Base):
 		"""
 		if self.has_permission('RightAdmin') is False:
 			return self.no_access()
+		if 'id_webuser' not in args or 'id_fire_safety_department' not in args:
+			raise Exception("You need to pass a 'id_webuser' and 'id_fire_safety_department'")
 
 		id_webuser_fire_safety_department = uuid.uuid4()
 
@@ -67,11 +69,10 @@ class WebuserFireSafetyDepartment(Base):
 			is_active: BOOLEAN
 		}
 		"""
-		if 'id_webuser_fire_safety_department' not in args:
-			raise Exception("You need to pass a id_webuser_fire_safety_department")
-
 		if self.has_permission('RightAdmin') is False:
 			return self.no_access()
+		if 'id_webuser_fire_safety_department' not in args:
+			raise Exception("You need to pass a 'id_webuser_fire_safety_department'")
 
 		with Database() as db:
 			data = db.query(Table).get(args['id_webuser_fire_safety_department'])
@@ -103,5 +104,5 @@ class WebuserFireSafetyDepartment(Base):
 			db.commit()
 
 		return {
-			'message': 'fire safety department user successfully removed'
+			'message': 'webuser fire safety department successfully removed'
 		}
