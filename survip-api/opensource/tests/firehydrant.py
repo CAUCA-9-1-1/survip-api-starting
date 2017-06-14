@@ -1,13 +1,13 @@
 import unittest
-from ..resturls.constructiontype import ConstructionType
+from ..resturls.firehydrant import FireHydrant
 
 
-class TestConstructionType(unittest.TestCase):
+class TestFireHydrant(unittest.TestCase):
 	def setUp(self):
 		pass
 
 	def test_01_get(self):
-		result = ConstructionType().get()
+		result = FireHydrant().get()
 		isList = isinstance(result['data'], list)
 
 		self.assertEqual(isList, True)
