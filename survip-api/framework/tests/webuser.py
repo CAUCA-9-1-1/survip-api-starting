@@ -1,14 +1,11 @@
 import unittest
 from ..manage.database import Database
-from ..resturls.base import Base
 from ..resturls.webuser import Webuser
 
 
 class TestWebuser(unittest.TestCase):
 	def setUp(self):
 		self.id_webuser = None
-
-		Base.logged_id_webuser = 'd25a7a30-22e0-4169-95b8-bd36368f12d6'
 
 	def test_01_create(self):
 		result = Webuser().create({

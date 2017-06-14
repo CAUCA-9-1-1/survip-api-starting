@@ -1,16 +1,16 @@
 import unittest
 from framework.manage.database import Database
+from framework.resturls.base import Base
 from opensource.resturls.webuserfiresafetydepartment import WebuserFireSafetyDepartment
 
 
 class TestWebuserFireSafetyDepartment(unittest.TestCase):
 	def setUp(self):
-		self.__class__.id_webuser = 'd25a7a30-22e0-4169-95b8-bd36368f12d6'
 		self.id_webuser_fire_safety_department = None
 
 	def test_01_insert(self):
 		result = WebuserFireSafetyDepartment().create({
-			'id_webuser': self.__class__.id_webuser,
+			'id_webuser': Base.logged_id_webuser,
 			'id_fire_safety_department': 'd25a7a30-22e0-4169-95b8-bd36368f12d5'
 		})
 
@@ -18,7 +18,7 @@ class TestWebuserFireSafetyDepartment(unittest.TestCase):
 		self.assertEqual(result['message'], "webuser fire safety department successfully created")
 
 	def test_02_get(self):
-		result = WebuserFireSafetyDepartment().get(self.__class__.id_webuser)
+		result = WebuserFireSafetyDepartment().get(Base.logged_id_webuser)
 		last = result['data'][(len(result['data']) - 1)]
 		self.assertEqual(str(last.id_fire_safety_department), 'd25a7a30-22e0-4169-95b8-bd36368f12d5')
 
@@ -31,7 +31,7 @@ class TestWebuserFireSafetyDepartment(unittest.TestCase):
 		self.assertEqual(result['message'], "webuser fire safety department successfully modified")
 
 	def test_04_get(self):
-		result = WebuserFireSafetyDepartment().get(self.__class__.id_webuser)
+		result = WebuserFireSafetyDepartment().get(Base.logged_id_webuser)
 		last = result['data'][(len(result['data']) - 1)]
 		self.assertEqual(str(last.id_fire_safety_department), 'd25a7a30-22e0-4169-95b8-bd36368f12d4')
 
