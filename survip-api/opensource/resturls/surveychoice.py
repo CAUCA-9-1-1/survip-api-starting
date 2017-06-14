@@ -49,6 +49,8 @@ class SurveyChoice(Base):
 		"""
 		if self.has_permission('RightTPI') is False:
 			return self.no_access()
+		if 'id_survey_question' not in args or 'name' not in args:
+			raise Exception("You need to pass a 'name' and 'id_survey_question'")
 
 		id_survey_choice = uuid.uuid4()
 		id_language_content = MultiLang.set(args['name'], True)
@@ -56,7 +58,7 @@ class SurveyChoice(Base):
 		next_question = args['id_survey_question_next'] if 'id_survey_question_next' in args and args['id_survey_question_next'] != '' else None
 
 		with Database() as db:
-			db.insert(Table(id_survey_choice, id_language_content, next_question, sequence))
+			db.insert(Table(id_survey_choice, args['id_survey_question'], id_language_content, next_question, sequence))
 			db.commit()
 
 		return {

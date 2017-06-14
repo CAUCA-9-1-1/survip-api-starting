@@ -10,6 +10,7 @@ from .lane import TestLane
 from .region import TestRegion
 from .risklevel import TestRiskLevel
 from .state import TestState
+from .survey import TestSurvey
 
 
 def get_test_opensource(suite=None):
@@ -27,5 +28,6 @@ def get_test_opensource(suite=None):
 	suite.addTest(unittest.makeSuite(TestRegion))
 	suite.addTest(unittest.makeSuite(TestRiskLevel))
 	suite.addTest(unittest.makeSuite(TestState))
+	suite.addTest(unittest.makeSuite(TestSurvey))
 
 	return suite

@@ -54,9 +54,7 @@ class SurveyQuestion(Base):
 			return self.no_access()
 
 		if 'title' not in args or 'description' not in args or 'id_survey' not in args:
-			return {
-				'message': 'not all parameter are pass to create a new question'
-			}
+			raise Exception("You need to pass a 'title', 'description' and 'id_survey'")
 
 		id_survey_question = uuid.uuid4()
 		id_language_content_title = MultiLang.set(args['title'], True)
@@ -118,7 +116,7 @@ class SurveyQuestion(Base):
 			db.commit()
 
 		return {
-			'message': 'survey successfully remove question'
+			'message': 'survey question successfully removed'
 		}
 
 	def change_sequence(self, args):
