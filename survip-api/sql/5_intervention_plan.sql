@@ -25,7 +25,6 @@ create table tbl_fire_hydrant
 	id_fire_hydrant uuid not null
 		constraint tbl_fire_hydrant_pkey
 			primary key,
-	id_city uuid not null,
 	id_lane uuid not null,
 	id_intersection uuid,
 	id_fire_hydrant_type uuid,

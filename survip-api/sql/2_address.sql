@@ -57,7 +57,6 @@ create table tbl_intersection
 	id_intersection uuid not null
 		constraint tbl_intersection_pkey
 			primary key,
-	id_city uuid,
 	id_lane uuid,
 	id_lane_transversal uuid,
 	id_fire_sector uuid,
