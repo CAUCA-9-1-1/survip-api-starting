@@ -1,5 +1,6 @@
-from causeweb.storage.db import DB
-from causeweb.apis.base import Base
+from framework.manage.database import Database
+from framework.resturls.base import Base
+from ..models.construction_type import ConstructionType as Table
 
 
 class ConstructionType(Base):
@@ -12,14 +13,18 @@ class ConstructionType(Base):
 		'PATCH': '',
 	}
 
-	def get(self, id_construction_type):
-		""" Return all information for one construction type
+	def get(self, id_construction_type=None, is_active=None):
+		""" Return all information for construction type
 
 		:param id_construction_type: UUID
 		"""
-		with DB() as db:
-			data = db.get_row("""SELECT * FROM tbl_construction_type
-                                WHERE id_construction_type=%s;""", (id_construction_type,))
+		with Database() as db:
+			if id_construction_type is None and is_active is None:
+				data = db.query(Table).all()
+			elif id_construction_type is None:
+				data = db.query(Table).filter(Table.is_active == is_active).all()
+			else:
+				data = db.query(Table).get(id_construction_type)
 
 		return {
 			'data': data
