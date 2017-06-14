@@ -17,6 +17,7 @@ class ConstructionType(Base):
 		""" Return all information for construction type
 
 		:param id_construction_type: UUID
+		:param is_active: BOOLEAN
 		"""
 		with Database() as db:
 			if id_construction_type is None and is_active is None:
