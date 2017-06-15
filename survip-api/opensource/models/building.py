@@ -9,6 +9,7 @@ from framework.manage.multilang import MultiLang
 from framework.models.language_content import LanguageContent
 from .lane import Lane
 
+
 Base = declarative_base()
 
 
@@ -19,36 +20,7 @@ class Building(Base):
 	id_language_content_name = Column(String(36), ForeignKey(LanguageContent.id_language_content), nullable=False)
 	matricule = Column(String(18), nullable=False)
 	civic_number = Column(String(15))
-	civic_letter = Column(String(10))
-	civic_supp = Column(String(10))
-	civic_letter_supp = Column(String(10))
-	appartment_number = Column(String(10))
-	floor = Column(String(10))
-	suite = Column(String(Numeric))
-	number_of_appartment = Column(Numeric)
-	number_of_building = Column(Numeric)
-	vacant_land = Column(Boolean)
-	year_of_construction = Column(Numeric)
-	building_value = Column(Float)
 	id_lane = Column(String(36), nullable=False)
-	postal_code = Column(String(6))
-	id_utilisation_code = Column(String(36))
-	id_sector = Column(String(36))
-	id_mutual_aid_sector = Column(String(36))
-	id_jaws_extrication_sector = Column(String(36))
-	id_sled_sector = Column(String(36))
-	id_risk_level = Column(String(36))
-	source = Column(String(25))
-	is_parent = Column(Boolean)
-	utilisation_description = Column(String(255))
-	show_in_resources = Column(Boolean)
-	id_resource_category = Column(String(50))
-	id_association_building = Column(String(50))
-	id_association_type = Column(String(50))
-	id_unit_type = Column(String(50))
-	coordinates = Column(Geometry())
-	coordinates_source = Column(String(50))
-	details = Column(Text)
 	created_on = Column(DateTime, default=datetime.now)
 	is_active = Column(Boolean, default=True)
 
@@ -63,6 +35,42 @@ class Building(Base):
 
 		return self.civic_number + ', ' + lane.name['fr']
 
+	def __init__(self, id_building, id_language_content, civic_number):
+		self.id_building = id_building
+		self.id_language_content_name = id_language_content
+		self.civic_number = civic_number
+
+
+class BuildingFull(Building):
+	civic_letter = Column(String(10))
+	civic_supp = Column(String(10))
+	civic_letter_supp = Column(String(10))
+	appartment_number = Column(String(10))
+	floor = Column(String(10))
+	suite = Column(String(Numeric))
+	number_of_appartment = Column(Numeric)
+	number_of_building = Column(Numeric)
+	vacant_land = Column(Boolean)
+	year_of_construction = Column(Numeric)
+	building_value = Column(Float)
+	postal_code = Column(String(6))
+	id_utilisation_code = Column(String(36))
+	id_sector = Column(String(36))
+	id_mutual_aid_sector = Column(String(36))
+	id_jaws_extrication_sector = Column(String(36))
+	id_sled_sector = Column(String(36))
+	source = Column(String(25))
+	is_parent = Column(Boolean)
+	utilisation_description = Column(String(255))
+	show_in_resources = Column(Boolean)
+	id_resource_category = Column(String(50))
+	id_association_building = Column(String(50))
+	id_association_type = Column(String(50))
+	id_unit_type = Column(String(50))
+	coordinates = Column(Geometry())
+	coordinates_source = Column(String(50))
+	details = Column(Text)
+
 	@hybrid_property
 	def geojson(self):
 		with Database() as db:
@@ -73,8 +81,3 @@ class Building(Base):
 			geojson = geojson + (json.loads(val),)
 
 		return geojson
-
-	def __init__(self, id_building, id_language_content, civic_number):
-		self.id_building = id_building
-		self.id_language_content_name = id_language_content
-		self.civic_number = civic_number

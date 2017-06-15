@@ -1,8 +1,9 @@
-from causeweb.apis.base import Base
-from causeweb.storage.db import DB
+from datetime import date, timedelta
+from framework.manage.database import Database
+from framework.resturls.base import Base
 
 
-class InspectionStatistics(Base):
+class InspectionStatistic(Base):
 	mapping_method = {
 		'GET': 'get',
 		'PUT': '',
@@ -20,13 +21,17 @@ class InspectionStatistics(Base):
 		if self.has_permission('RightTPI') is False:
 			return self.no_access()
 
+		if period_start is None:
+			period_end = date.today()
+			period_start = period_end - timedelta(days=30)
+
 		return {
-			'by_date': self.get_by_date(period_start, period_end)
+			'data': self.get_by_date(period_start, period_end)
 		}
 
 	def get_by_date(self, period_start, period_end):
-		with DB() as db:
-			return db.get_all("""SELECT count(answered_on) AS total, to_char(ia.answered_on, 'YYYY/MM/DD') AS days
+		with Database() as db:
+			return db.execute("""SELECT count(answered_on) AS total, to_char(ia.answered_on, 'YYYY/MM/DD') AS days
 								FROM tbl_inspection_answer ia
 								WHERE ia.answered_on>=%s AND ia.answered_on<%s
 								GROUP BY days;""", (period_start, period_end))

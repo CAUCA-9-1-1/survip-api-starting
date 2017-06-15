@@ -2,7 +2,7 @@ import uuid
 from framework.manage.database import Database
 from framework.manage.multilang import MultiLang
 from framework.resturls.base import Base
-from ..models.building import Building as Table
+from ..models.building import BuildingFull as Table
 
 
 class Building(Base):

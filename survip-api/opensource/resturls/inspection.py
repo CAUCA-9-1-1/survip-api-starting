@@ -8,8 +8,8 @@ class Inspection(Base):
 	table_name = 'tbl_inspection'
 	mapping_method = {
 		'GET': 'get',
-		'PUT': 'complete',
-		'POST': 'assign',
+		'PUT': 'modify',
+		'POST': 'create',
 		'DELETE': 'remove',
 		'PATCH': '',
 	}
@@ -32,23 +32,7 @@ class Inspection(Base):
 			'data': data
 		}
 
-	def complete(self, args):
-		""" Mark inspection as done
-
-		:param args: {
-			id_inspection: UUID
-		}
-		"""
-		with Database() as db:
-			data = db.query(Table).filter(Table.id_inspection == args['id_inspection']).first()
-			data.is_completed = True
-			db.commit()
-
-		return {
-			'message': 'inspection successfully completed'
-		}
-
-	def assign(self, args):
+	def create(self, args):
 		""" Assign building inspection to someone
 
 		:param args: {
@@ -71,6 +55,34 @@ class Inspection(Base):
 		return {
 			'id_inspection': id_inspection,
 			'message': 'inspection successfully assigned'
+		}
+
+	def modify(self, args):
+		""" Mark inspection as done
+
+		:param args: {
+			id_inspection: UUID
+		}
+		"""
+		if self.has_permission('RightTPI') is False:
+			return self.no_access()
+
+		if 'id_inspection' not in args:
+			raise Exception("You need to pass a 'id_inspection'")
+
+		with Database() as db:
+			data = db.query(Table).filter(Table.id_inspection == args['id_inspection']).first()
+
+			if 'id_webuser' in args:
+				data.id_webuser = args['id_webuser']
+			if 'is_active' in args:
+				data.is_active = args['is_active']
+			if 'is_completed' in args:
+				data.is_completed = args['is_completed']
+			db.commit()
+
+		return {
+			'message': 'inspection successfully modified'
 		}
 
 	def remove(self, id_inspection):

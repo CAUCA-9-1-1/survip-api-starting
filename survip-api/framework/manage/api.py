@@ -1,4 +1,5 @@
 import re
+import os
 import json
 import logging
 import cherrypy
@@ -26,16 +27,19 @@ class Api:
 			return class_object
 
 	def load_class_from(self, folder, name):
-		try:
-			self.class_name = "%s.resturls.%s" % (folder, name.lower())
-			class_load = importlib.import_module(self.class_name, '%s.resturls' % folder)
-			class_object = getattr(class_load, name)
+		self.class_name = "%s.resturls.%s" % (folder, name.lower())
+		file = '%s/%s.py' % (config.ROOT, self.class_name.replace('.', '/'))
 
-			return class_object
-		except Exception as e:
-			logging.info("Loading exception on class '%s': %s", name, e)
+		if os.path.isfile(file):
+			try:
+				class_load = importlib.import_module(self.class_name, '%s.resturls' % folder)
+				class_object = getattr(class_load, name)
 
-			return None
+				return class_object
+			except Exception as e:
+				raise Exception("Loading exception on class '%s': %s" % (name, e))
+
+		return None
 
 	def exec_method(self, name, args):
 		class_object = self.load_class(name)

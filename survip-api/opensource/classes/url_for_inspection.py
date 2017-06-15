@@ -24,5 +24,5 @@ class UrlForInspection(BaseApi):
 		return self.call_method('InspectionReport', self.get_argument(args, kwargs))
 
 	@cherrypy.expose
-	def inspectionstatistics(self, *args, **kwargs):
-		return self.call_method('InspectionStatistics', self.get_argument(args, kwargs))
+	def inspectionstatistic(self, *args, **kwargs):
+		return self.call_method('InspectionStatistic', self.get_argument(args, kwargs))
