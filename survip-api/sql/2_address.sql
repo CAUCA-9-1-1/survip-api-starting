@@ -86,6 +86,20 @@ create table tbl_lane
 )
 ;
 
+CREATE TABLE tbl_lane_generic_code (
+  code CHAR(1),
+  description VARCHAR(15),
+  add_white_space_after BOOL,
+  is_active BOOL
+);
+
+CREATE TABLE tbl_lane_public_code (
+  code CHAR(2),
+  description VARCHAR(20),
+  abbreviation CHAR(2),
+  is_active BOOL
+);
+
 create table tbl_region
 (
 	id_region uuid not null
