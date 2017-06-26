@@ -15,19 +15,19 @@ class AlarmPanelType(Base):
 		'PATCH': '',
 	}
 
-	def get(self, id_alarm_panel=None, is_active=None):
+	def get(self, id_alarm_panel_type=None, is_active=None):
 		""" Return all alarm panel type information
 
-		:param id_alarm_panel: UUID
+		:param id_alarm_panel_type: UUID
 		:param is_active: BOOLEAN
 		"""
 		with Database() as db:
-			if id_alarm_panel is None and is_active is None:
+			if id_alarm_panel_type is None and is_active is None:
 				data = db.query(Table).all()
-			elif id_alarm_panel is None:
+			elif id_alarm_panel_type is None:
 				data = db.query(Table).filter(Table.is_active == is_active).all()
 			else:
-				data = db.query(Table).get(id_alarm_panel)
+				data = db.query(Table).get(id_alarm_panel_type)
 
 		return {
 			'data': data
@@ -62,7 +62,7 @@ class AlarmPanelType(Base):
 		""" Modify a alarm panel type
 
 		:param args: {
-			id_alarm_panel: UUID,
+			id_alarm_panel_type: UUID,
 			name: JSON,
 			is_active: BOOLEAN,
 		}
