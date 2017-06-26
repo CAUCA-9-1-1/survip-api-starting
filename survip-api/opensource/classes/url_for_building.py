@@ -24,5 +24,9 @@ class UrlForBuilding(BaseApi):
 		return self.call_method('RiskLevel', self.get_argument(args, kwargs))
 
 	@cherrypy.expose
+	def risklevellist(self, *args, **kwargs):
+		return self.call_method('RiskLevelList', self.get_argument(args, kwargs))
+
+	@cherrypy.expose
 	def utilisationcode(self, *args, **kwargs):
 		return self.call_method('UtilisationCode', self.get_argument(args, kwargs))
