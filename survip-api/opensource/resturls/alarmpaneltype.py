@@ -16,7 +16,7 @@ class AlarmPanelType(Base):
 	}
 
 	def get(self, id_alarm_panel=None, is_active=None):
-		""" Return all alarm panel information
+		""" Return all alarm panel type information
 
 		:param id_alarm_panel: UUID
 		:param is_active: BOOLEAN
@@ -34,7 +34,7 @@ class AlarmPanelType(Base):
 		}
 
 	def create(self, args):
-		""" Create a new alarm panel
+		""" Create a new alarm panel type
 
 		:param args: {
 			name: JSON,
@@ -46,20 +46,20 @@ class AlarmPanelType(Base):
 		if 'name' not in args:
 			raise Exception("You need to pass a 'name'")
 
-		id_alarm_panel = uuid.uuid4()
+		id_alarm_panel_type = uuid.uuid4()
 		id_language_content = MultiLang.set(args['name'], True)
 
 		with Database() as db:
-			db.insert(Table(id_alarm_panel, id_language_content))
+			db.insert(Table(id_alarm_panel_type, id_language_content))
 			db.commit()
 
 		return {
-			'id_alarm_panel': id_alarm_panel,
-			'message': 'alarm panel successfully created'
+			'id_alarm_panel_type': id_alarm_panel_type,
+			'message': 'alarm panel type successfully created'
 		}
 
 	def modify(self, args):
-		""" Modify a alarm panel
+		""" Modify a alarm panel type
 
 		:param args: {
 			id_alarm_panel: UUID,
@@ -70,11 +70,11 @@ class AlarmPanelType(Base):
 		if self.has_permission('RightAdmin') is False:
 			return self.no_access()
 
-		if 'id_alarm_panel' not in args:
-			raise Exception("You need to pass a id_alarm_panel")
+		if 'id_alarm_panel_type' not in args:
+			raise Exception("You need to pass a id_alarm_panel_type")
 
 		with Database() as db:
-			data = db.query(Table).get(args['id_alarm_panel'])
+			data = db.query(Table).get(args['id_alarm_panel_type'])
 
 			if 'name' in args:
 				data.id_language_content_name = MultiLang.set(args['name'])
@@ -84,22 +84,22 @@ class AlarmPanelType(Base):
 			db.commit()
 
 		return {
-			'message': 'alarm panel successfully modified'
+			'message': 'alarm panel type successfully modified'
 		}
 
-	def remove(self, id_alarm_panel):
-		""" Remove a alarm panel
+	def remove(self, id_alarm_panel_type):
+		""" Remove a alarm panel type
 
-		:param id_alarm_panel: UUID
+		:param id_alarm_panel_type: UUID
 		"""
 		if self.has_permission('RightAdmin') is False:
 			return self.no_access()
 
 		with Database() as db:
-			data = db.query(Table).get(id_alarm_panel)
+			data = db.query(Table).get(id_alarm_panel_type)
 			data.is_active = False
 			db.commit()
 
 		return {
-			'message': 'alarm panel successfully removed'
+			'message': 'alarm panel type successfully removed'
 		}
