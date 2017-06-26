@@ -8,6 +8,14 @@ class UrlForAddress(BaseApi):
 		return self.call_method('Lane', self.get_argument(args, kwargs))
 
 	@cherrypy.expose
+	def citylanes(self, *args, **kwargs):
+		return self.call_method('CityLanes', self.get_argument(args, kwargs))
+
+	@cherrypy.expose
+	def lanelight(self, *args, **kwargs):
+		return self.call_method('LaneLight', self.get_argument(args, kwargs))
+
+	@cherrypy.expose
 	def city(self, *args, **kwargs):
 		return self.call_method('City', self.get_argument(args, kwargs))
 

@@ -1,8 +1,12 @@
 import uuid
+
+from sqlalchemy.ext.declarative import declarative_base
+
 from framework.manage.database import Database
 from framework.manage.multilang import MultiLang
-from framework.resturls.base import Base
 from ..models.lane import Lane as Table
+
+Base = declarative_base()
 
 
 class Lane(Base):
@@ -111,3 +115,5 @@ class Lane(Base):
 		return {
 			'message': 'lane successfully removed'
 		}
+
+
