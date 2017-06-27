@@ -111,5 +111,3 @@ class Lane(Base):
 		return {
 			'message': 'lane successfully removed'
 		}
-
-
