@@ -18,6 +18,6 @@ class InterventionPlan(Base):
 	is_active = Column(Boolean, default=True)
 
 
-	@hybrid_property
-	def picture(self):
-		return PictureLoader.get(self.id_picture_site_plan)
+#	@hybrid_property
+#	def picture(self):
+#		return PictureLoader.get(self.id_picture_site_plan)
