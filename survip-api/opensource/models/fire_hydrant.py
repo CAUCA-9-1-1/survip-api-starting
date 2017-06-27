@@ -48,8 +48,10 @@ class FireHydrant(Base):
 
 		return geojson
 
-	def __init__(self, id_fire_hydrant, id_lane, id_intersection, id_fire_hydrant_type):
+	def __init__(self, id_fire_hydrant, id_fire_hydrant_type, fire_hydrant_number, id_lane, id_intersection):
 		self.id_fire_hydrant = id_fire_hydrant
+		self.id_fire_hydrant_type = id_fire_hydrant_type
+		self.fire_hydrant_number = fire_hydrant_number
 		self.id_lane = id_lane
 		self.id_intersection = id_intersection
-		self.id_fire_hydrant_type = id_fire_hydrant_type
+

@@ -13,19 +13,16 @@ class UnitOfMeasure(Base):
 		'PATCH': '',
 	}
 
-	def get(self, id_unit_of_measure=None, is_active=None):
+	def get(self, type=None):
 		""" Return all information for unit of measure
 
-		:param id_unit_of_measure: UUID
-		:param is_active: BOOLEAN
+		:param type: STRING
 		"""
 		with Database() as db:
-			if id_unit_of_measure is None and is_active is None:
+			if type is None:
 				data = db.query(Table).all()
-			elif id_unit_of_measure is None:
-				data = db.query(Table).filter(Table.is_active == is_active).all()
 			else:
-				data = db.query(Table).get(id_unit_of_measure)
+				data = db.query(Table).filter(Table.type == type).all()
 
 		return {
 			'data': data
