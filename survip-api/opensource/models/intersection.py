@@ -1,8 +1,10 @@
+import json
 from datetime import datetime
 from geoalchemy2 import Geometry, functions
 from sqlalchemy import Column, Boolean, DateTime, String, ForeignKey
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.ext.hybrid import hybrid_property
+from framework.manage.database import Database
 from .lane import Lane
 
 
@@ -23,6 +25,17 @@ class Intersection(Base):
 	coordinates = Column(Geometry())
 	created_on = Column(DateTime, default=datetime.now)
 	is_active = Column(Boolean, default=True)
+
+	@hybrid_property
+	def geojson(self):
+		with Database() as db:
+			points = db.query(functions.ST_AsGeoJSON(self.coordinates)).first()
+
+		geojson = ()
+		for pos, val in enumerate(points):
+			geojson = geojson + (json.loads(val),)
+
+		return geojson
 
 	def __init__(self, id_intersection, id_lane, id_lane_transversal):
 		self.id_intersection = id_intersection

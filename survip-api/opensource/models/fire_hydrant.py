@@ -1,8 +1,10 @@
+import json
 from datetime import datetime
 from geoalchemy2 import Geometry, functions
 from sqlalchemy import Column, Boolean, DateTime, Float, String, Text, ForeignKey
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.ext.hybrid import hybrid_property
+from framework.manage.database import Database
 from .lane import Lane
 from .intersection import Intersection
 from .fire_hydrant_type import FireHydrantType
@@ -34,6 +36,17 @@ class FireHydrant(Base):
 	comments = Column(Text)
 	created_on = Column(DateTime, default=datetime.now)
 	is_active = Column(Boolean, default=True)
+
+	@hybrid_property
+	def geojson(self):
+		with Database() as db:
+			points = db.query(functions.ST_AsGeoJSON(self.coordinates)).first()
+
+		geojson = ()
+		for pos, val in enumerate(points):
+			geojson = geojson + (json.loads(val),)
+
+		return geojson
 
 	def __init__(self, id_fire_hydrant, id_lane, id_intersection, id_fire_hydrant_type):
 		self.id_fire_hydrant = id_fire_hydrant

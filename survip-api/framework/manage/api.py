@@ -139,6 +139,8 @@ class Api:
 		return data
 
 	def convert_to_camel_case(self, data):
+		new_data = dict()
+
 		if isinstance(data, object) and isinstance(data.__class__, DeclarativeMeta):
 			data = JsonEncoder.sqlalchemy_to_dict(data)
 
@@ -146,22 +148,25 @@ class Api:
 			for old_key in data:
 				if '_' in old_key:
 					key = re.sub(r'_([a-z])', lambda x: x.group(1).upper(), old_key)
-					data[key] = data.pop(old_key)
 				else:
 					key = old_key
 
-				if isinstance(data[key], tuple):
+				if isinstance(data[old_key], tuple):
 					info = ()
-					for pos, val in enumerate(data[key]):
+					for pos, val in enumerate(data[old_key]):
 						info = info + (self.convert_to_camel_case(val),)
-					data[key] = info
-				elif isinstance(data[key], list):
-					for pos, val in enumerate(data[key]):
-						data[key][pos] = self.convert_to_camel_case(val)
-				elif isinstance(data[key], dict):
-					data[key] = self.convert_to_camel_case(data[key])
+					new_data[key] = info
+				elif isinstance(data[old_key], list):
+					info = list()
+					for pos, val in enumerate(data[old_key]):
+						info.append(self.convert_to_camel_case(val))
+					new_data[key] = info
+				elif isinstance(data[old_key], dict):
+					new_data[key] = self.convert_to_camel_case(data[old_key])
+				else:
+					new_data[key] = data[old_key]
 
-		return data
+		return new_data
 
 	def convert_argument(self, val):
 		if val == '' or val == 'null':

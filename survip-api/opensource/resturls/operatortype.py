@@ -1,10 +1,10 @@
 from framework.manage.database import Database
 from framework.resturls.base import Base
-from ..models.fire_hydrant import FireHydrant as Table
+from ..models.operator_type import OperatorType as Table
 
 
-class FireHydrant(Base):
-	table_name = 'tbl_fire_hydrant'
+class OperatorType(Base):
+	table_name = 'tbl_operator_type'
 	mapping_method = {
 		'GET': 'get',
 		'PUT': '',
@@ -13,19 +13,19 @@ class FireHydrant(Base):
 		'PATCH': '',
 	}
 
-	def get(self, id_fire_hydrant=None, is_active=None):
-		""" Return all information for fire hydrant
+	def get(self, id_operator_type=None, is_active=None):
+		""" Return all information for operator type
 
-		:param id_fire_hydrant: UUID
+		:param id_operator_type: UUID
 		:param is_active: BOOLEAN
 		"""
 		with Database() as db:
-			if id_fire_hydrant is None and is_active is None:
+			if id_operator_type is None and is_active is None:
 				data = db.query(Table).all()
-			elif id_fire_hydrant is None:
+			elif id_operator_type is None:
 				data = db.query(Table).filter(Table.is_active == is_active).all()
 			else:
-				data = db.query(Table).get(id_fire_hydrant)
+				data = db.query(Table).get(id_operator_type)
 
 		return {
 			'data': data

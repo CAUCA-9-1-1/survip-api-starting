@@ -54,7 +54,7 @@ class Inspection(Base):
 
 		return {
 			'id_inspection': id_inspection,
-			'message': 'inspection successfully assigned'
+			'message': 'inspection successfully created'
 		}
 
 	def modify(self, args):
