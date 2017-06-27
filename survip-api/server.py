@@ -8,7 +8,9 @@ Logging()
 def run_server():
 	""" Start the application
 	"""
-	site_config = ConfigApi()
+	site_config = ConfigApi({
+		'response.timeout': 3000,
+	})
 
 	site_config.add_folder('data/pdfs')
 	site_config.add_config({

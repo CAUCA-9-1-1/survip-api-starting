@@ -9,9 +9,9 @@ class ConstructionType(Base):
 	table_name = 'tbl_construction_type'
 	mapping_method = {
 		'GET': 'get',
-		'PUT': '',
-		'POST': '',
-		'DELETE': '',
+		'PUT': 'modify',
+		'POST': 'create',
+		'DELETE': 'remove',
 		'PATCH': '',
 	}
 

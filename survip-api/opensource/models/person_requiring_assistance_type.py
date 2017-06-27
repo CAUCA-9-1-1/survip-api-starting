@@ -20,3 +20,7 @@ class PersonRequiringAssistanceType(Base):
 	@hybrid_property
 	def name(self):
 		return MultiLang.get(self.id_language_content_name)
+
+	def __init__(self, id_person_requiring_assistance_type, id_language_content):
+		self.id_person_requiring_assistance_type = id_person_requiring_assistance_type
+		self.id_language_content_name = id_language_content

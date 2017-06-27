@@ -78,8 +78,6 @@ class Region(Base):
 		if 'id_region' not in args:
 			raise Exception("You need to pass a id_region")
 
-		id_language_content = MultiLang.set(args['name'])
-
 		with Database() as db:
 			data = db.query(Table).get(args['id_region'])
 

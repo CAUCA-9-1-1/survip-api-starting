@@ -30,3 +30,11 @@ class UrlForBuilding(BaseApi):
 	@cherrypy.expose
 	def utilisationcode(self, *args, **kwargs):
 		return self.call_method('UtilisationCode', self.get_argument(args, kwargs))
+
+	@cherrypy.expose
+	def personrequiringassistancetype(self, *args, **kwargs):
+		return self.call_method('PersonRequiringAssistanceType', self.get_argument(args, kwargs))
+
+	@cherrypy.expose
+	def hazardousmaterial(self, *args, **kwargs):
+		return self.call_method('HazardousMaterial', self.get_argument(args, kwargs))
