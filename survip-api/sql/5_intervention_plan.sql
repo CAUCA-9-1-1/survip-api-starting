@@ -88,7 +88,7 @@ create table tbl_operator_type
 	id_operator_type uuid not null
 		constraint tbl_operator_type_pkey
 			primary key,
-	type_name varchar(3),
+	symbol varchar(3),
 	created_on timestamp default now(),
 	is_active boolean default true
 )
