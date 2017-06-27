@@ -24,6 +24,9 @@ class Lane(Base):
 	is_valid = Column(Boolean, default=False)
 	is_active = Column(Boolean, default=True)
 
+	lane_generic_code = relationship(LaneGenericCode)
+	lane_public_code = relationship(LanePublicCode)
+
 	@hybrid_property
 	def name(self):
 		return MultiLang.get(self.id_language_content_name)

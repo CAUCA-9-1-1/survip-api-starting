@@ -15,3 +15,7 @@ class Api(UrlForSurvey, UrlForInterventionPlan, UrlForInspection, UrlForAddress,
 	@cherrypy.expose
 	def webuserfiresafetydepartment(self, *args, **kwargs):
 		return self.call_method('WebuserFireSafetyDepartment', self.get_argument(args, kwargs))
+
+	@cherrypy.expose
+	def picture(self, *args, **kwargs):
+		return self.call_method('Picture', self.get_argument(args, kwargs))

@@ -1,5 +1,6 @@
 import json
 import uuid
+import base64
 import decimal
 import datetime
 from sqlalchemy.ext.declarative import DeclarativeMeta
@@ -32,7 +33,12 @@ class JsonEncoder(json.JSONEncoder):
 			try:
 				data = obj.__getattribute__(field)
 
-				json.dumps(data, cls=JsonEncoder)
+				if isinstance(data, bytes):
+					encode = base64.encodebytes(data)
+					data = "data:;base64,%s" % encode.decode('UTF-8')
+				else:
+					json.dumps(data, cls=JsonEncoder)
+
 				fields[field] = data
 			except:
 				fields[field] = None
