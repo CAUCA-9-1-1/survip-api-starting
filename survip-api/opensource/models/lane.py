@@ -1,14 +1,13 @@
 from datetime import datetime
-
 from sqlalchemy import Column, Boolean, DateTime, String, ForeignKey
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.ext.hybrid import hybrid_property
 from sqlalchemy.orm import relationship
-
 from framework.manage.multilang import MultiLang
 from framework.models.language_content import LanguageContent
 from opensource.models.lane_generic_code import LaneGenericCode
 from opensource.models.lane_public_code import LanePublicCode
+
 
 Base = declarative_base()
 
@@ -24,9 +23,6 @@ class Lane(Base):
 	created_on = Column(DateTime, default=datetime.now)
 	is_valid = Column(Boolean, default=False)
 	is_active = Column(Boolean, default=True)
-
-	lane_generic_code = relationship(LaneGenericCode)
-	lane_public_code = relationship(LanePublicCode)
 
 	@hybrid_property
 	def name(self):

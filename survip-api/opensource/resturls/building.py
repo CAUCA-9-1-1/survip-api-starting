@@ -10,8 +10,8 @@ class Building(Base):
 	mapping_method = {
 		'GET': 'get',
 		'PUT': 'modify',
-		'POST': '',
-		'DELETE': '',
+		'POST': 'create',
+		'DELETE': 'remove',
 		'PATCH': '',
 	}
 
