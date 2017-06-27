@@ -1,10 +1,7 @@
-from datetime import datetime
-
-from sqlalchemy import Column, Boolean, DateTime, String, ForeignKey
+from sqlalchemy import Column, Boolean, String
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.ext.hybrid import hybrid_property
 from sqlalchemy.orm import relationship
-
 from framework.manage.picture_loader import PictureLoader
 
 Base = declarative_base()
@@ -20,6 +17,7 @@ class InterventionPlan(Base):
 	number = Column(String(50))
 	is_active = Column(Boolean, default=True)
 
-#	@hybrid_property
-#	def picture(self):
-#	 	return PictureLoader.get(self.id_picture_site_plan)
+
+	@hybrid_property
+	def picture(self):
+		return PictureLoader.get(self.id_picture_site_plan)

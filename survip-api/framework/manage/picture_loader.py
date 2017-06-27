@@ -1,3 +1,4 @@
+import base64
 import json
 import uuid
 import logging
@@ -13,8 +14,7 @@ class PictureLoader:
 
 		try:
 			with Database() as db:
-				data = db.query(Picture).filter(id_picture = id_picture).all()
-
+				data = db.query(Picture).filter(Picture.id_picture == id_picture).first()
 			json_data = {'id_language_content': id_picture, 'data': data}
 		except Exception as e:
 			logging.info("Error on get of PictureLoader : %s" % e)

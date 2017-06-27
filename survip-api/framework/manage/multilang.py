@@ -24,6 +24,22 @@ class MultiLang:
 		return json_data
 
 	@staticmethod
+	def get_by_language(language, id_language_content):
+		try:
+			names = MultiLang.get(id_language_content)
+
+			return MultiLang.get_name_by_language(language, names)
+		except Exception as e:
+			logging.info("Error on get of LanguageContent : %s" % e)
+
+	@staticmethod
+	def get_name_by_language(language, names):
+		if language in names:
+			return names[language]
+		else:
+			return names['fr']
+
+	@staticmethod
 	def set(description, force_create=False):
 		if not isinstance(description, dict):
 			try:

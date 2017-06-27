@@ -1,3 +1,6 @@
+from framework.manage.multilang import MultiLang
+
+
 class LaneLightMapper:
 	@staticmethod
 	def generate_row(lane, language):
@@ -5,17 +8,10 @@ class LaneLightMapper:
 
 	@classmethod
 	def _generate_full_name(cls, lane, language):
-		name = cls._get_name(lane, language)
+		name = MultiLang.get_name_by_language(language, lane.name)
 		name = cls._add_generic_code_to_name(lane, name)
 		name = cls._add_public_code_to_name(lane, name)
 		return name
-
-	@classmethod
-	def _get_name(cls, lane, language):
-		if language in lane.name:
-			return lane.name[language]
-		else:
-			return lane.name['fr']
 
 	@classmethod
 	def _add_public_code_to_name(cls, lane, name):
