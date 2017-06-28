@@ -8,8 +8,16 @@ class UrlForFireHydrant(BaseApi):
 		return self.call_method('FireHydrant', self.get_argument(args, kwargs))
 
 	@cherrypy.expose
+	def firehydrantconnection(self, *args, **kwargs):
+		return self.call_method('FireHydrantConnection', self.get_argument(args, kwargs))
+
+	@cherrypy.expose
 	def firehydranttype(self, *args, **kwargs):
 		return self.call_method('FireHydrantType', self.get_argument(args, kwargs))
+
+	@cherrypy.expose
+	def firehydrantconnectiontype(self, *args, **kwargs):
+		return self.call_method('FireHydrantConnectionType', self.get_argument(args, kwargs))
 
 	@cherrypy.expose
 	def operatortype(self, *args, **kwargs):
