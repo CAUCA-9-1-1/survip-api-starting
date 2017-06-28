@@ -1,6 +1,6 @@
 import cherrypy
 
-from api.management.apiurl import ApiUrl as UrlForManagement
+from api.management.api_url import ApiUrl as UrlForManagement
 from api.survip.url_by_module.address import UrlForAddress
 from api.survip.url_by_module.building import UrlForBuilding
 from api.survip.url_by_module.firehydrant import UrlForFireHydrant

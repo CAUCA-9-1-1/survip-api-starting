@@ -3,6 +3,7 @@ import logging
 import cherrypy
 import importlib
 from . import setup as config
+from ..core.case_format import CaseFormat
 
 
 class ConfigBase:
@@ -83,7 +84,7 @@ class ConfigBase:
 
 	def add_page_from(self, folder, page):
 		try:
-			page_name = "%s.%s" % (folder, page.lower())
+			page_name = "%s.%s" % (folder, CaseFormat().pascal_to_snake(page))
 			page_loaded = importlib.import_module(page_name, '%s.pages' % folder)
 
 			return getattr(page_loaded, page)

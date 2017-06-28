@@ -2,18 +2,17 @@ import importlib.util
 import json
 import logging
 import os
-import re
-
 import cherrypy
-from sqlalchemy.ext.declarative import DeclarativeMeta
-
-from api.management.config import setup as config
-from api.management.core.json import JsonEncoder
-from api.management.core.token import Token
+from ..config import setup as config
+from .json import JsonEncoder
+from .token import Token
+from .case_format import CaseFormat
 
 
 class ExecuteApiClass:
 	def load_class(self, name):
+		class_object = None
+
 		for folder in config.SEARCH_FOLDERS:
 			class_object = self.load_class_from(folder, name)
 
@@ -27,6 +26,7 @@ class ExecuteApiClass:
 
 	def load_class_from(self, folder, name):
 		class_name = "%s.resturls.%s" % (folder, name.lower())
+
 		if folder[0:5] == 'cause':
 			file = '%s/%s.py' % (config.ROOT[0:config.ROOT.rfind('/')], class_name.replace('.', '/'))
 		else:
@@ -84,7 +84,7 @@ class ExecuteApiClass:
 			return_data = self.exec_method(name, args)
 
 			if isinstance(return_data, dict) and config.FORCE_CAMELCASE:
-				return_data = self.convert_to_camel_case(return_data)
+				return_data = CaseFormat().object_snake_to_camel(return_data)
 
 			data.update(return_data)
 
@@ -108,7 +108,7 @@ class ExecuteApiClass:
 				args = json.loads(body[0].decode('utf-8'))
 
 				if config.FORCE_CAMELCASE:
-					arguments = (self.convert_from_camel_case(args),)
+					arguments = (CaseFormat().object_camel_to_snake(args),)
 				else:
 					arguments = (args,)
 		except Exception as e:
@@ -118,57 +118,11 @@ class ExecuteApiClass:
 					arguments = arguments + (self.convert_argument(val),)
 			if kwargs:
 				if config.FORCE_CAMELCASE:
-					kwargs = self.convert_from_camel_case(self.convert_argument(kwargs))
+					kwargs = CaseFormat().object_camel_to_snake(self.convert_argument(kwargs))
 
 				arguments = (kwargs,)
 
 		return arguments
-
-	def convert_from_camel_case(self, data):
-		for old_key in data:
-			if sum(1 for c in old_key if c.isupper()):
-				key = re.sub(r'[A-Z]', lambda x: '_' + x.group(0).lower(), old_key)
-				data[key] = data.pop(old_key)
-			else:
-				key = old_key
-
-			if isinstance(data[key], list):
-				for pos, val in enumerate(data[key]):
-					data[key][pos] = self.convert_from_camel_case(val)
-			elif isinstance(data[key], dict):
-				data[key] = self.convert_from_camel_case(data[key])
-
-		return data
-
-	def convert_to_camel_case(self, data):
-		new_data = dict()
-
-		if isinstance(data, object) and isinstance(data.__class__, DeclarativeMeta):
-			data = JsonEncoder.sqlalchemy_to_dict(data)
-
-		if isinstance(data, dict):
-			for old_key in data:
-				if '_' in old_key:
-					key = re.sub(r'_([a-z])', lambda x: x.group(1).upper(), old_key)
-				else:
-					key = old_key
-
-				if isinstance(data[old_key], tuple):
-					info = ()
-					for pos, val in enumerate(data[old_key]):
-						info = info + (self.convert_to_camel_case(val),)
-					new_data[key] = info
-				elif isinstance(data[old_key], list):
-					info = list()
-					for pos, val in enumerate(data[old_key]):
-						info.append(self.convert_to_camel_case(val))
-					new_data[key] = info
-				elif isinstance(data[old_key], dict):
-					new_data[key] = self.convert_to_camel_case(data[old_key])
-				else:
-					new_data[key] = data[old_key]
-
-		return new_data
 
 	def convert_argument(self, val):
 		if val == '' or val == 'null':
