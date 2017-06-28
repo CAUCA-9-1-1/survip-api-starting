@@ -1,8 +1,9 @@
 import cherrypy
-from cause.api.management.core.manage.api import Api as BaseApi
+
+from api.management.core.execute_api_class import ExecuteApiClass
 
 
-class UrlForAddress(BaseApi):
+class UrlForAddress(ExecuteApiClass):
 	@cherrypy.expose
 	def lane(self, *args, **kwargs):
 		return self.call_method('Lane', self.get_argument(args, kwargs))

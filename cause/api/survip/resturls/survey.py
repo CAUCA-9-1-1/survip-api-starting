@@ -1,9 +1,10 @@
 import uuid
-from cause.api.management.core.manage.database import Database
-from cause.api.management.core.manage.multilang import MultiLang
+
+from api.management.core.database import Database
+from api.management.core.multilang import MultiLang
 from cause.api.management.resturls.base import Base
-from ..models.survey import Survey as Table
 from ..models.inspection import Inspection
+from ..models.survey import Survey as Table
 
 
 class Survey(Base):

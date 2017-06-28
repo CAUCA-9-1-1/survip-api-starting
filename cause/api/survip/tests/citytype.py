@@ -1,5 +1,6 @@
 import unittest
-from cause.api.management.core.manage.database import Database
+
+from api.management.core.database import Database
 from ..resturls.citytype import CityType
 
 

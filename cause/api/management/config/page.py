@@ -1,11 +1,11 @@
 import os
 from . import setup as config
-from .base import Base
+from .base import ConfigBase
 
 
-class Page(Base):
+class ConfigPage(ConfigBase):
 	def __init__(self, specific_base_config=None):
-		Base.__init__(self, specific_base_config)
+		ConfigBase.__init__(self, specific_base_config)
 
 		self.causejs_config = {
 			'tools.staticdir.on': True,
@@ -41,4 +41,4 @@ class Page(Base):
 		if os.path.exists("%s/app/pages/%s.py" % (config.ROOT, 'ajax')):
 			self.add_page('Ajax')
 
-		Base.complete(self)
+		ConfigBase.complete(self)

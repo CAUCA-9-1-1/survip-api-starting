@@ -1,7 +1,9 @@
 import uuid
+
 from sqlalchemy import asc
-from cause.api.management.core.manage.database import Database
-from cause.api.management.core.manage.multilang import MultiLang
+
+from api.management.core.database import Database
+from api.management.core.multilang import MultiLang
 from cause.api.management.resturls.base import Base
 from ..models.survey import SurveyQuestion as Table
 

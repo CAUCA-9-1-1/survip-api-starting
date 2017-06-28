@@ -1,10 +1,12 @@
 import json
+
 import cherrypy
-from cause.api.management.core.config import setup as config
-from cause.api.management.core.manage.api import Api as BaseApi
+
+from api.management.config import setup as config
+from api.management.core.execute_api_class import ExecuteApiClass
 
 
-class Api(BaseApi):
+class ApiUrl(ExecuteApiClass):
 	class_name = ''
 	method_name = ''
 

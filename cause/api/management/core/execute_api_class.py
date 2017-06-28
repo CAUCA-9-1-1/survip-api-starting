@@ -1,19 +1,20 @@
-import os
-import re
+import importlib.util
 import json
 import logging
+import os
+import re
+
 import cherrypy
-import importlib.util
 from sqlalchemy.ext.declarative import DeclarativeMeta
-from cause.api.management.core.auth.token import Token
-from cause.api.management.core.config import setup as config
-from ..manage.json import JsonEncoder
+
+from api.management.config import setup as config
+from api.management.core.json import JsonEncoder
+from api.management.core.token import Token
 
 
-class Api:
+class ExecuteApiClass:
 	def load_class(self, name):
-		folders = ['app', 'cause.api.survip', 'cause.api.management']
-		for folder in folders:
+		for folder in config.SEARCH_FOLDERS:
 			class_object = self.load_class_from(folder, name)
 
 			if class_object is not None:

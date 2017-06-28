@@ -1,9 +1,9 @@
 from sqlalchemy.orm import joinedload
 
-from framework.manage.database import Database
-from framework.resturls.base import Base
-from opensource.resturls.mappers.lane_light_mapper import LaneLightMapper
+from api.management.core.database import Database
+from cause.api.management.resturls.base import Base
 from ..models.lane import Lane as Table, Lane
+from ..resturls.mappers.lane_light_mapper import LaneLightMapper
 
 
 class LaneLight(Base):

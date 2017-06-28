@@ -1,8 +1,8 @@
 from . import setup as config
-from .base import Base
+from .base import ConfigBase
 
 
-class Api(Base):
+class ConfigApi(ConfigBase):
 	def __init__(self, specific_base_config={}):
 		specific_base_config.update({
 			'tools.response_headers.on': True,
@@ -14,9 +14,9 @@ class Api(Base):
 			],
 		})
 
-		Base.__init__(self, specific_base_config)
+		ConfigBase.__init__(self, specific_base_config)
 
 	def complete(self):
-		self.add_page('Api', config.WEBROOT)
+		self.add_page('ApiUrl', config.WEBROOT)
 
-		Base.complete(self)
+		ConfigBase.complete(self)

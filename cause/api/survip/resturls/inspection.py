@@ -1,5 +1,6 @@
 import uuid
-from cause.api.management.core.manage.database import Database
+
+from api.management.core.database import Database
 from cause.api.management.resturls.base import Base
 from ..models.inspection import Inspection as Table
 

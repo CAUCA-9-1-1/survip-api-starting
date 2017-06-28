@@ -1,4 +1,4 @@
-from cause.api.management.core.manage.database import Database
+from api.management.core.database import Database
 from cause.api.management.resturls.base import Base
 from ..models.unit_of_measure import UnitOfMeasure as Table
 

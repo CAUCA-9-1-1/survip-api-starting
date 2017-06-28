@@ -1,10 +1,12 @@
-import uuid
-import random
-import hashlib
 import datetime
+import hashlib
+import random
+import uuid
+
 import cherrypy
-from cause.api.management.core.config import setup as config
-from cause.api.management.core.manage.database import Database
+
+from api.management.config import setup as config
+from api.management.core.database import Database
 from cause.api.management.models.access_secretkey import AccessSecretkey
 from cause.api.management.models.access_token import AccessToken
 from cause.api.management.resturls.base import Base

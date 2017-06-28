@@ -1,8 +1,8 @@
-from framework.manage.database import Database
-from framework.resturls.base import Base
+from api.management.core.database import Database
+from cause.api.management.resturls.base import Base
+from ..models.fire_safety_department_city_serving import FireSafetyDepartmentCityServing
 from ..models.inspection_building import InspectionBuilding as Table
 from ..models.lane import Lane
-from ..models.fire_safety_department_city_serving import FireSafetyDepartmentCityServing
 from ..models.webuser_fire_safety_department import WebuserFireSafetyDepartment
 
 

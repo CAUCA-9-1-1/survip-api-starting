@@ -1,5 +1,6 @@
 import unittest
-from cause.api.management.core.manage.database import Database
+
+from api.management.core.database import Database
 from ..resturls.survey import Survey
 from ..resturls.surveychoice import SurveyChoice
 from ..resturls.surveyquestion import SurveyQuestion

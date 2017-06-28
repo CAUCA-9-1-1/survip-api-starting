@@ -1,7 +1,7 @@
 import logging
 import os
 
-from cause.api.management.core.config import setup as config
+from api.management.config import setup as config
 
 
 class Logging:

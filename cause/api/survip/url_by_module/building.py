@@ -1,9 +1,9 @@
 import cherrypy
 
-from cause.api.management.core.manage.api import Api as BaseApi
+from api.management.core.execute_api_class import ExecuteApiClass
 
 
-class UrlForBuilding(BaseApi):
+class UrlForBuilding(ExecuteApiClass):
 	@cherrypy.expose
 	def building(self, *args, **kwargs):
 		return self.call_method('Building', self.get_argument(args, kwargs))

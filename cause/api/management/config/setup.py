@@ -23,7 +23,7 @@ DATABASE = {
 """
 
 # Logs
-LOGS_NAME = 'framework'
+LOGS_NAME = 'cause-api'
 LOGS = {
 	'level': 'info',
 	'format': '%(asctime)s:%(name)s/%(funcName)s()@%(lineno)d:%(levelname)s:%(message)s',
@@ -51,6 +51,7 @@ SESSION_TIMEOUT = 30
 # Folder
 ROOT = os.path.abspath(os.getcwd())
 WEBROOT = '/'
+SEARCH_FOLDERS = ['app', 'cause.api.survip', 'cause.api.management']
 
 """ Override all default config with the user config
 """

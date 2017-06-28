@@ -1,6 +1,7 @@
 import json
-from cause.api.management.core.config import setup as config
-from cause.api.management.core.manage.database import Database
+
+from api.management.config import setup as config
+from api.management.core.database import Database
 from ..models.apis_action import ApisAction as Table
 from ..models.permission import Permission, PermissionSystemFeature, PermissionObject
 

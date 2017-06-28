@@ -5,7 +5,7 @@ import importlib
 from . import setup as config
 
 
-class Base:
+class ConfigBase:
 	cherrypy_version = 0
 
 	def __init__(self, specific_base_config=None):
@@ -67,8 +67,7 @@ class Base:
 			os.makedirs("%s/%s/" % (config.ROOT, path))
 
 	def add_page(self, page, path=None):
-		folders = ['app', 'cause.api.survip', 'cause.api.management']
-		for folder in folders:
+		for folder in config.SEARCH_FOLDERS:
 			page_class = self.add_page_from(folder, page)
 
 			if page_class is not None:
@@ -84,7 +83,7 @@ class Base:
 
 	def add_page_from(self, folder, page):
 		try:
-			page_name = "%s.pages.%s" % (folder, page.lower())
+			page_name = "%s.%s" % (folder, page.lower())
 			page_loaded = importlib.import_module(page_name, '%s.pages' % folder)
 
 			return getattr(page_loaded, page)

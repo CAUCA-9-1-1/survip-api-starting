@@ -1,8 +1,7 @@
 from sqlalchemy import Column, Boolean, String
 from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.ext.hybrid import hybrid_property
-from sqlalchemy.orm import relationship
-from framework.manage.picture_loader import PictureLoader
+from .picture import Picture
+
 
 Base = declarative_base()
 
@@ -20,4 +19,4 @@ class InterventionPlan(Base):
 
 #	@hybrid_property
 #	def picture(self):
-#		return PictureLoader.get(self.id_picture_site_plan)
+#		return Picture().get(self.id_picture_site_plan)

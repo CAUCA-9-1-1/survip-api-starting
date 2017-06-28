@@ -1,6 +1,7 @@
 from datetime import date, timedelta
-from framework.manage.database import Database
-from framework.resturls.base import Base
+
+from api.management.core.database import Database
+from cause.api.management.resturls.base import Base
 
 
 class InspectionStatistic(Base):

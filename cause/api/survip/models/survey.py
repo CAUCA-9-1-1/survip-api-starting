@@ -1,10 +1,11 @@
 from datetime import datetime
+
 from sqlalchemy import Column, Boolean, DateTime, Integer, String, ForeignKey
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.ext.hybrid import hybrid_property
-from cause.api.management.core.manage.multilang import MultiLang
-from cause.api.management.models.language_content import LanguageContent
 
+from api.management.core.multilang import MultiLang
+from cause.api.management.models.language_content import LanguageContent
 
 Base = declarative_base()
 

@@ -1,9 +1,11 @@
 import json
-import uuid
 import logging
-from .database import Database
-from .utilities import Utilities
+import uuid
+
+from api.management.core.database import Database
+from api.management.core.utilities import Utilities
 from cause.api.management.models.language_content import LanguageContent
+
 
 class MultiLang:
 	@staticmethod

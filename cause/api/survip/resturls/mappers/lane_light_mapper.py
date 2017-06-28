@@ -1,4 +1,4 @@
-from framework.manage.multilang import MultiLang
+from api.management.core.multilang import MultiLang
 
 
 class LaneLightMapper:

@@ -1,9 +1,9 @@
 import cherrypy
 
-from cause.api.management.core.manage.api import Api as BaseApi
+from api.management.core.execute_api_class import ExecuteApiClass
 
 
-class UrlForFireHydrant(BaseApi):
+class UrlForFireHydrant(ExecuteApiClass):
 	@cherrypy.expose
 	def firehydrant(self, *args, **kwargs):
 		return self.call_method('FireHydrant', self.get_argument(args, kwargs))

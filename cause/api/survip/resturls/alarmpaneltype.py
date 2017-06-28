@@ -1,7 +1,8 @@
 import uuid
-from framework.manage.database import Database
-from framework.manage.multilang import MultiLang
-from framework.resturls.base import Base
+
+from api.management.core.database import Database
+from api.management.core.multilang import MultiLang
+from cause.api.management.resturls.base import Base
 from ..models.alarm_panel_type import AlarmPanelType as Table
 
 

@@ -1,6 +1,5 @@
-from framework.manage.database import Database
-from framework.resturls.base import Base
-
+from api.management.core.database import Database
+from cause.api.management.resturls.base import Base
 from ..models.building import Building
 from ..models.inspection import Inspection as Table
 from ..models.lane import Lane

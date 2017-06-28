@@ -1,12 +1,9 @@
-from sqlalchemy.orm import joinedload, subqueryload
-
-from framework.manage.database import Database
-from framework.resturls.base import Base
-from opensource.models.datatransfertobjects.BuildingForDisplay import BuildingForDisplay as Building
-from opensource.models.intervention_plan import InterventionPlan as Plan
-from opensource.models.intervention_plan_building import InterventionPlanBuilding as PlanBuilding
-from opensource.models.lane import Lane
-from opensource.resturls.mappers.building_for_display_loader import BuildingForDisplayLoader
+from api.management.core.database import Database
+from cause.api.management.resturls.base import Base
+from ..models.datatransfertobjects.BuildingForDisplay import BuildingForDisplay as Building
+from ..models.intervention_plan import InterventionPlan as Plan
+from ..models.intervention_plan_building import InterventionPlanBuilding as PlanBuilding
+from ..resturls.mappers.building_for_display_loader import BuildingForDisplayLoader
 
 
 class InterventionPlanGeneralInformations(Base):

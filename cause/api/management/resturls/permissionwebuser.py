@@ -1,6 +1,6 @@
 import uuid
 
-from cause.api.management.core.config import setup as config
+from api.management.config import setup as config
 from cause.api.management.core.manage import Database
 from .base import Base
 from .permissionsystemfeature import PermissionSystemFeature

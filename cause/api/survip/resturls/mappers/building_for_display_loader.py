@@ -1,11 +1,11 @@
 from sqlalchemy.orm import joinedload
 
-from framework.manage.database import Database
-from framework.manage.multilang import MultiLang
-from opensource.models.lane import Lane
-from opensource.models.risk_level import RiskLevel
-from opensource.models.utilisation_code import UtilisationCode
-from opensource.resturls.mappers.lane_light_mapper import LaneLightMapper
+from api.management.core.database import Database
+from api.management.core.multilang import MultiLang
+from ...models.lane import Lane
+from ...models.risk_level import RiskLevel
+from ...models.utilisation_code import UtilisationCode
+from ...resturls.mappers.lane_light_mapper import LaneLightMapper
 
 
 class BuildingForDisplayLoader:

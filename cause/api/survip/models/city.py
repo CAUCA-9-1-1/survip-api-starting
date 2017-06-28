@@ -1,12 +1,13 @@
 from datetime import datetime
+
 from sqlalchemy import Column, Boolean, DateTime, String, ForeignKey
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.ext.hybrid import hybrid_property
-from cause.api.management.core.manage.multilang import MultiLang
-from cause.api.management.models.language_content import LanguageContent
-from .county import County
-from .city_type import CityType
 
+from api.management.core.multilang import MultiLang
+from cause.api.management.models.language_content import LanguageContent
+from .city_type import CityType
+from .county import County
 
 Base = declarative_base()
 

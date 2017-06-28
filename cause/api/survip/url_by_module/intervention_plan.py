@@ -1,9 +1,9 @@
 import cherrypy
 
-from cause.api.management.core.manage.api import Api as BaseApi
+from api.management.core.execute_api_class import ExecuteApiClass
 
 
-class UrlForInterventionPlan(BaseApi):
+class UrlForInterventionPlan(ExecuteApiClass):
 	@cherrypy.expose
 	def alarmpaneltype(self, *args, **kwargs):
 		return self.call_method('AlarmPanelType', self.get_argument(args, kwargs))
