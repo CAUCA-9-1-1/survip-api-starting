@@ -1,7 +1,7 @@
 import cherrypy
-from framework.config import setup as config
-from framework.config.api import Api as ConfigApi
-from framework.logging import Logging
+from cause.api.management.core.config import setup as config
+from cause.api.management.core.config.api import Api as ConfigApi
+from cause.api.management.logging import Logging
 
 Logging()
 

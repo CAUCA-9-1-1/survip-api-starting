@@ -1,5 +1,5 @@
 import unittest
-from app.resturls.test import Test
+from ..resturls.test import Test
 
 
 class TestTest(unittest.TestCase):

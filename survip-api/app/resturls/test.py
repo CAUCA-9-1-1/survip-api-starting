@@ -1,4 +1,4 @@
-from framework.resturls.base import Base
+from cause.api.management.resturls.base import Base
 
 """ Basic example
 
