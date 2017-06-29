@@ -22,3 +22,4 @@ PACKAGE_VERSION = "0.0.1"
 SESSION_TIMEOUT = 5
 
 WEBROOT = '/'
+SEARCH_FOLDERS = ['app', 'cause.api.survip', 'cause.api.management']
