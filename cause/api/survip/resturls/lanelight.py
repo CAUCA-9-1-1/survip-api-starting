@@ -1,6 +1,5 @@
 from sqlalchemy.orm import joinedload
-
-from api.management.core.database import Database
+from cause.api.management.core.database import Database
 from cause.api.management.resturls.base import Base
 from ..models.lane import Lane as Table, Lane
 from ..resturls.mappers.lane_light_mapper import LaneLightMapper

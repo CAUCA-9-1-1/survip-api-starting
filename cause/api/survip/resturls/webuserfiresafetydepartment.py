@@ -1,6 +1,5 @@
 import uuid
-
-from api.management.core.database import Database
+from cause.api.management.core.database import Database
 from cause.api.management.resturls.base import Base
 from ..models.webuser_fire_safety_department import WebuserFireSafetyDepartment as Table
 

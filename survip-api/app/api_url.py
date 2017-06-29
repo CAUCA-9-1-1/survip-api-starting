@@ -1,6 +1,6 @@
 import cherrypy
 
-from api.survip.api_url import ApiUrl as UrlForSurviP
+from cause.api.survip.api_url import ApiUrl as UrlForSurviP
 
 
 class ApiUrl(UrlForSurviP):

@@ -5,11 +5,11 @@ from geoalchemy2 import Geometry, functions
 from sqlalchemy import Column, Boolean, DateTime, Float, String, Text, ForeignKey
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.ext.hybrid import hybrid_property
-
-from api.management.core.database import Database
+from cause.api.management.core.database import Database
 from .fire_hydrant_type import FireHydrantType
 from .intersection import Intersection
 from .lane import Lane
+
 
 Base = declarative_base()
 

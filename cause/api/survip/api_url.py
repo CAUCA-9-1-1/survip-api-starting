@@ -1,12 +1,12 @@
 import cherrypy
 
-from api.management.api_url import ApiUrl as UrlForManagement
-from api.survip.url_by_module.address import UrlForAddress
-from api.survip.url_by_module.building import UrlForBuilding
-from api.survip.url_by_module.firehydrant import UrlForFireHydrant
-from api.survip.url_by_module.inspection import UrlForInspection
-from api.survip.url_by_module.intervention_plan import UrlForInterventionPlan
-from api.survip.url_by_module.survey import UrlForSurvey
+from cause.api.management.api_url import ApiUrl as UrlForManagement
+from cause.api.survip.url_by_module.address import UrlForAddress
+from cause.api.survip.url_by_module.building import UrlForBuilding
+from cause.api.survip.url_by_module.firehydrant import UrlForFireHydrant
+from cause.api.survip.url_by_module.inspection import UrlForInspection
+from cause.api.survip.url_by_module.intervention_plan import UrlForInterventionPlan
+from cause.api.survip.url_by_module.survey import UrlForSurvey
 
 
 class ApiUrl(UrlForSurvey, UrlForInterventionPlan, UrlForInspection,

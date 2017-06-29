@@ -1,7 +1,7 @@
 import uuid
 
-from api.management.core.database import Database
-from api.management.core.multilang import MultiLang
+from cause.api.management.core.database import Database
+from cause.api.management.core.multilang import MultiLang
 from cause.api.management.resturls.base import Base
 from ..models.person_requiring_assistance_type import PersonRequiringAssistanceType as Table
 

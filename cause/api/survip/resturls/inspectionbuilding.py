@@ -1,4 +1,4 @@
-from api.management.core.database import Database
+from cause.api.management.core.database import Database
 from cause.api.management.resturls.base import Base
 from ..models.fire_safety_department_city_serving import FireSafetyDepartmentCityServing
 from ..models.inspection_building import InspectionBuilding as Table

@@ -1,13 +1,12 @@
 import json
-
 from geoalchemy2 import functions
 from sqlalchemy import Column, Boolean, String, ForeignKey
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.ext.hybrid import hybrid_property
-
-from api.management.core.database import Database
+from cause.api.management.core.database import Database
 from cause.api.management.models.language_content import LanguageContent
 from ...models.lane import Lane
+
 
 Base = declarative_base()
 

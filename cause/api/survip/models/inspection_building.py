@@ -1,7 +1,6 @@
 from sqlalchemy import desc
 from sqlalchemy.ext.hybrid import hybrid_property
-
-from api.management.core.database import Database
+from cause.api.management.core.database import Database
 from .building import Building
 from .inspection import Inspection
 

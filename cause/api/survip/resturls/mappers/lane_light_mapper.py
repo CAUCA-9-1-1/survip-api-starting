@@ -1,4 +1,4 @@
-from api.management.core.multilang import MultiLang
+from cause.api.management.core.multilang import MultiLang
 
 
 class LaneLightMapper:

@@ -1,4 +1,4 @@
-from api.management.core.database import Database
+from cause.api.management.core.database import Database
 from cause.api.management.resturls.base import Base
 from ..models.datatransfertobjects.BuildingForDisplay import BuildingForDisplay as Building
 from ..models.intervention_plan import InterventionPlan as Plan

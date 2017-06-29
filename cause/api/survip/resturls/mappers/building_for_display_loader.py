@@ -1,7 +1,6 @@
 from sqlalchemy.orm import joinedload
-
-from api.management.core.database import Database
-from api.management.core.multilang import MultiLang
+from cause.api.management.core.database import Database
+from cause.api.management.core.multilang import MultiLang
 from ...models.lane import Lane
 from ...models.risk_level import RiskLevel
 from ...models.utilisation_code import UtilisationCode

@@ -1,6 +1,6 @@
 import unittest
 
-from api.management.core.database import Database
+from cause.api.management.core.database import Database
 from ..resturls.firesafetydepartment import FireSafetyDepartment
 
 

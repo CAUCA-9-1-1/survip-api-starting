@@ -1,6 +1,6 @@
 import cherrypy
 
-from api.management.core.execute_api_class import ExecuteApiClass
+from cause.api.management.core.execute_api_class import ExecuteApiClass
 
 
 class UrlForFireHydrant(ExecuteApiClass):

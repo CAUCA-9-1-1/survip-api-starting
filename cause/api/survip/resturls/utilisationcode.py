@@ -1,7 +1,6 @@
 import uuid
-
-from api.management.core.database import Database
-from api.management.core.multilang import MultiLang
+from cause.api.management.core.database import Database
+from cause.api.management.core.multilang import MultiLang
 from cause.api.management.resturls.base import Base
 from ..models.utilisation_code import UtilisationCode as Table
 
