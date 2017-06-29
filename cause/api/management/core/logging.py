@@ -1,7 +1,7 @@
 import logging
 import os
 
-from api.management.config import setup as config
+from ..config import setup as config
 
 
 class Logging:
