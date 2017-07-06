@@ -1,0 +1,3 @@
+[submodule "cause/api/management"]
+	path = cause/api/management
+	url = https://github.com/CAUCA-9-1-1/management-api.git
