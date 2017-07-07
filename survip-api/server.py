@@ -5,6 +5,7 @@ from cause.api.management.config.api import ConfigApi
 
 Logging()
 
+
 def run_server():
 	""" Start the application
 	"""
