@@ -1,16 +1,17 @@
-# API for SURVIPrevention
-
-### Getting started
-
-See our [Getting Started Guide](https://github.com/CAUCA-9-1-1/survip-api-starting/blob/master/guides/getting-started.md)
-if you're building your first project with SURVIP-API.
+# Starting kit to use API of SURVIPrevention
 
 ## Dependencies
 SQLAlchemy (apt install python3-sqlalchemy or pip3 install sqlalchemy)\
 GEOAlchemy (pip3 install geoalchemy2)
 
-### Project status
-SURVIP-API Library is under active development and new features will be regularly added. If you'd like to contribute, you must follow our [contributing guidelines](https://github.com/CAUCA-9-1-1/survip-api-starting/blob/master/guides/CONTRIBUTING.md).
+## Development server
 
-The table are actually clone from a old project.\
-A clean up need to be done on some table.
+Run `python3 server.py` for a dev server. Navigate to `http://localhost:8080/`.
+
+## Implement your own REST URL
+
+See our [Wiki](https://github.com/CAUCA-9-1-1/survip-api-starting/wiki) if you're using for the first time SURVIP-API.
+
+### Project status
+No contribution are accepted in this project.
+This project are only to help to use the survip-api project.
