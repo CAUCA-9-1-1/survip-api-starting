@@ -1,6 +1,6 @@
-[submodule "survi-api/cause/api/management"]
-	path = survi-api/cause/api/management
+[submodule "survip-api/cause/api/management"]
+	path = survip-api/cause/api/management
 	url = https://github.com/CAUCA-9-1-1/management-api.git
-[submodule "survi-api/cause/api/survip"]
-	path = survi-api/cause/api/survip
+[submodule "survip-api/cause/api/survip"]
+	path = survip-api/cause/api/survip
 	url = https://github.com/CAUCA-9-1-1/survip-api.git
