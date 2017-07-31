@@ -2,10 +2,10 @@
 DATABASE = {
 	'general': {
 		'engine': 'postgresql',
-		'host': 'cadevspreventionpg:5432', # 'localhost',
+		'host': 'localhost',
 		'dbname': 'survi_prevention',
-		'username': 'www', # 'postgres',
-		'password': 'uhee3Iel', # 'postgres',
+		'username': 'postgres',
+		'password': 'postgres',
 	}
 }
 
