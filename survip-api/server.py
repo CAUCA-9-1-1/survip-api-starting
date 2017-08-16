@@ -2,6 +2,7 @@ import cherrypy
 from cause.api.management.config import setup as config
 from cause.api.management.config.api import ConfigApi
 from cause.api.management.core.logging import Logging
+from app.api_url import ApiUrl
 
 Logging()
 
@@ -10,8 +11,8 @@ def run_server():
 	""" Start the application
 	"""
 	site_config = ConfigApi({
-		'response.timeout': 3000,
-	})
+		'response.timeout': 3000
+	}, True)
 
 	site_config.add_folder('data/pdfs')
 	site_config.add_config({
@@ -22,6 +23,8 @@ def run_server():
 	})
 
 	site_config.complete()
+
+	ApiUrl()
 
 
 def application(environ, start_response):

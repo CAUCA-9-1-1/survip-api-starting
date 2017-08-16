@@ -1,9 +1,12 @@
 import cherrypy
-
 from cause.api.survip.api_url import ApiUrl as UrlForSurviP
+from .resturls.test import Test
 
 
-class ApiUrl(UrlForSurviP):
+class ApiUrl(UrlForSurviP, Test):
+	def __init__(self):
+		super(ApiUrl, self).__init__()
+
 	@cherrypy.expose
 	def multilang(self, *args, **kwargs):
 		return self.call_method('Multilang', self.get_argument(args, kwargs))
