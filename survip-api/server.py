@@ -12,7 +12,7 @@ def run_server():
 	"""
 	site_config = ConfigApi({
 		'response.timeout': 3000
-	}, True)
+	}, ApiUrl)
 
 	site_config.add_folder('data/pdfs')
 	site_config.add_config({
@@ -37,6 +37,7 @@ def application(environ, start_response):
 """
 if __name__ == '__main__':
 	cherrypy.config.update({
+		'server.socket_host': '0.0.0.0',
 		'server.socket_port': config.PORT
 	})
 
