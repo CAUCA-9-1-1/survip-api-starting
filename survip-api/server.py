@@ -24,8 +24,6 @@ def run_server():
 
 	site_config.complete()
 
-	ApiUrl()
-
 
 def application(environ, start_response):
 	""" Run the web application with UWSGI
