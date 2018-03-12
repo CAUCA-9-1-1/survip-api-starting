@@ -1,0 +1,20 @@
+{
+	"PERMISSION": {
+		"systemID": "2d9f85c6-c41b-4b53-b391-9caa31bb3494"
+	},
+	"IS_DEV": true,
+	"IS_UWSGI": false,
+	"DATABASE": {
+		"general": {
+			"engine": "postgresql",
+			"host": "cadevspreventionpg:5432",
+			"dbname": "survi_prevention",
+			"username": "www",
+			"password": "uhee3Iel"
+		}
+	},
+	"FORCE_CAMELCASE": true,
+	"SESSION_TIMEOUT": 5,
+	"WEBROOT": "/",
+	"SEARCH_FOLDERS": ["app", "cause.api.survip", "cause.api.management"]
+}

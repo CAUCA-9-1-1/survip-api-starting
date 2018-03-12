@@ -8,36 +8,36 @@ Logging()
 
 
 def run_server():
-	""" Start the application
-	"""
-	site_config = ConfigApi({
-		'response.timeout': 3000
-	}, ApiUrl)
+    """ Start the application
+    """
+    site_config = ConfigApi({
+        'response.timeout': 3000
+    }, ApiUrl)
 
-	site_config.add_folder('data/pdfs')
-	site_config.add_config({
-		'/downloads': {
-			'tools.staticdir.on': True,
-			'tools.staticdir.dir': 'data/pdfs'
-		}
-	})
+    site_config.add_folder('data/pdfs')
+    site_config.add_config({
+        '/downloads': {
+            'tools.staticdir.on': True,
+            'tools.staticdir.dir': 'data/pdfs'
+        }
+    })
 
-	site_config.complete()
+    site_config.complete()
 
 
 def application(environ, start_response):
-	""" Run the web application with UWSGI
-	"""
-	run_server()
-	return cherrypy.tree(environ, start_response)
+    """ Run the web application with UWSGI
+    """
+    run_server()
+    return cherrypy.tree(environ, start_response)
 
 """ Run the web application without UWSGI
 """
 if __name__ == '__main__':
-	cherrypy.config.update({
-		'server.socket_host': '0.0.0.0',
-		'server.socket_port': config.PORT
-	})
+    cherrypy.config.update({
+        'server.socket_host': '0.0.0.0',
+        'server.socket_port': config.PORT
+    })
 
-	run_server()
-	cherrypy.engine.start()
+    run_server()
+    cherrypy.engine.start()
